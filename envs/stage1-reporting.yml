@@ -1,0 +1,7 @@
+name: minipig-stage1-reporting
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - matplotlib=3.10
+  - poppler
