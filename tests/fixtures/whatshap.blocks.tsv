@@ -1,0 +1,4 @@
+#sample	chromosome	phase_set	from	to	variants
+TEST	1	100	100	109	2
+TEST	1	200	200	200	1
+TEST	2	300	300	400	3
