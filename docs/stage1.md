@@ -40,6 +40,7 @@ The sample sheet is deliberately local and git-ignored because real file paths c
 | `results/phasing/{sample}.phased.wgs.honest.vcf.gz` | locally phased autosomal SNVs | primary deliverable |
 | `*.stats.tsv`, `*.blocks.tsv`, `*.summary.tsv` | phasing QC and block summaries | manuscript/QC evidence |
 | `*.used_reads.txt` | WhatsHap-selected phase-informative read entries | provenance/QC |
+| `results/qc/wgs/{sample}.het_dp_retention_qc.tsv` | pre-DP count, final DP-filtered count, and retention | manuscript/QC evidence |
 
 The phase-ready BAM does not need to remain on the compute server after successful phasing, provided the BAM and index are archived with checksums. It must be restored only when phasing is rerun or read-level phasing provenance is re-examined.
 
@@ -65,6 +66,57 @@ This reconstructs the QC files from the phased VCF and does not require the phas
 - WhatsHap `blocks` excludes singleton phase sets, while the block-list file can include singleton rows. Both are reported explicitly.
 
 The audited pilot run yielded approximately 40.7x autosomal mean depth, 8.19 million primary heterozygous SNVs, 98.04% phased SNVs, and a block-span N50 of 5,779 bp. These values are a reference for detecting gross drift, not hard-coded acceptance criteria for every sample.
+
+## Cohort reporting for the manuscript
+
+Stage 1 reporting is deliberately concise. The per-sample supplementary table contains only:
+
+- mean autosomal depth and the fraction of autosomal bases at >=10x;
+- primary mapping, properly paired, and duplicate fractions;
+- heterozygous-SNV count before DP filtering, final count at DP>=10, and retention fraction;
+- phased-SNV count and fraction; and
+- multi-variant phase-block count, block-span N50, and variants-per-block N50.
+
+GQ, allele balance, extra DP thresholds, and the full variant-filter waterfall remain internal sensitivity/QC outputs and are not placed in the manuscript table by default.
+
+### 1. Build the cohort table
+
+The collector reads existing sample-level QC files. With `--build-missing-dp-qc`, it additionally streams each DeepVariant VCF once to count PASS biallelic heterozygous SNVs before the DP cutoff. It does not call variants or phase reads again.
+
+```bash
+PROJECT=/disk4/1.Jungwon/minipig_ase_asm
+
+python3 scripts/stage1/collect_stage1_cohort_qc.py \
+  --project-dir "${PROJECT}" \
+  --sample-sheet "${PROJECT}/config/samples.tsv" \
+  --autosomes $(seq 1 18) \
+  --minimum-dp 10 \
+  --build-missing-dp-qc \
+  --output "${PROJECT}/results/qc/stage1_cohort_qc.tsv"
+```
+
+The collector stops if the final het-SNV count differs among the filtered VCF summary, DP-retention summary, and WhatsHap input summary.
+
+### 2. Generate supplementary outputs
+
+```bash
+mamba env create -f envs/stage1-reporting.yml
+mamba activate minipig-stage1-reporting
+
+python3 scripts/stage1/make_stage1_manuscript_outputs.py \
+  --cohort-qc "${PROJECT}/results/qc/stage1_cohort_qc.tsv" \
+  --output-dir "${PROJECT}/results/stage1_reporting"
+```
+
+This writes:
+
+- Supplementary Figure S1, the Stage 1 input-analysis-output workflow (`PDF`, `SVG`, and `PNG`);
+- Supplementary Figure S2, cohort depth/breadth, final het-SNV count, phased fraction, and phase-block N50 (`PDF`, `SVG`, and `PNG`);
+- Supplementary Table S1 as a TSV plus its metric dictionary;
+- cohort descriptive statistics; and
+- editable English figure and table legends.
+
+The SVG files are the preferred editable figure sources. The PDF files are vector manuscript exports; the 300-dpi PNG files are provided for preview and submission systems that require raster images.
 
 ## Interpretation limits
 
