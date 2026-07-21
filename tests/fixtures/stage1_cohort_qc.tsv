@@ -1,0 +1,4 @@
+sample	mean_autosome_depth	autosome_fraction_ge_10x	primary_mapped_fraction	properly_paired_fraction	duplicate_fraction	heterozygous_snv_before_dp10	final_heterozygous_snv_count	dp10_retention_fraction	phased_snv_count	phased_fraction	multi_variant_blocks	block_span_n50_bp	variants_per_block_n50
+TEST_A	40.736	0.9600	0.9964	0.9711	0.0736	8202257	8190054	0.998512	8029855	0.980439	112000	5779	70
+TEST_B	35.200	0.9410	0.9950	0.9650	0.0810	7900000	7875000	0.996835	7680000	0.975238	104000	5200	66
+TEST_C	44.800	0.9720	0.9970	0.9790	0.0680	8450000	8430000	0.997633	8290000	0.983393	118000	6100	74
