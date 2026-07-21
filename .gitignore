@@ -1,0 +1,30 @@
+# Local configuration and sample metadata
+config/stage1.env
+config/samples.tsv
+
+# Analysis data and outputs
+data/
+ref/
+results/
+logs/
+tmp/
+
+# Large sequencing files
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bai
+*.cram
+*.crai
+*.vcf.gz
+*.vcf.gz.tbi
+*.bcf
+*.bcf.csi
+
+# Runtime files
+*.log
+*.tmp
+__pycache__/
+*.py[cod]
