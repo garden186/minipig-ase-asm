@@ -34,6 +34,7 @@ for path in \
     "${QC_DIR}/${SAMPLE}.flagstat.txt" \
     "${QC_DIR}/${SAMPLE}.stage1_alignment_qc.tsv" \
     "${QC_DIR}/${SAMPLE}.het_snp_qc.tsv" \
+    "${QC_DIR}/${SAMPLE}.het_dp_retention_qc.tsv" \
     "${PHASED_PREFIX}.stats.tsv" \
     "${PHASED_PREFIX}.blocks.tsv" \
     "${PHASED_PREFIX}.summary.tsv"; do
