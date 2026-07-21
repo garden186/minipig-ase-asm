@@ -54,6 +54,28 @@ Stage 1 intentionally retains the filtering and phasing settings used for the an
 
 Detailed inputs, outputs, restart behavior, QC definitions, and interpretation limits are in [docs/stage1.md](docs/stage1.md).
 
+## Cohort QC and manuscript outputs
+
+After every sample has passed Stage 1 validation, build the concise cohort table:
+
+```bash
+python3 scripts/stage1/collect_stage1_cohort_qc.py \
+  --project-dir /path/to/minipig_ase_asm \
+  --sample-sheet /path/to/minipig_ase_asm/config/samples.tsv \
+  --build-missing-dp-qc \
+  --output /path/to/minipig_ase_asm/results/qc/stage1_cohort_qc.tsv
+```
+
+Generate the two supplementary figures, reporting table, data dictionary, descriptive statistics, and legends:
+
+```bash
+mamba env create -f envs/stage1-reporting.yml
+mamba activate minipig-stage1-reporting
+python3 scripts/stage1/make_stage1_manuscript_outputs.py \
+  --cohort-qc /path/to/minipig_ase_asm/results/qc/stage1_cohort_qc.tsv \
+  --output-dir /path/to/minipig_ase_asm/results/stage1_reporting
+```
+
 ## Repository layout
 
 ```text
