@@ -22,6 +22,7 @@ QC_DIR="${PROJECT_DIR}/results/qc/wgs"
 VCF_IN="${VCF_DIR}/${SAMPLE}.deepvariant.vcf.gz"
 VCF_OUT="${VCF_DIR}/${SAMPLE}.het.snp.vcf.gz"
 QC_OUT="${QC_DIR}/${SAMPLE}.het_snp_qc.tsv"
+DP_QC_OUT="${QC_DIR}/${SAMPLE}.het_dp_retention_qc.tsv"
 mkdir -p "${VCF_DIR}" "${QC_DIR}"
 vcf_is_valid "${VCF_IN}" || die "Input DeepVariant VCF is invalid: ${VCF_IN}"
 
@@ -55,5 +56,13 @@ python3 "${SCRIPT_DIR}/summarize_het_vcf.py" \
     --sample "${SAMPLE}" \
     --vcf "${VCF_OUT}" \
     --output "${QC_OUT}"
+
+python3 "${SCRIPT_DIR}/summarize_dp_retention.py" \
+    --sample "${SAMPLE}" \
+    --deepvariant-vcf "${VCF_IN}" \
+    --filtered-vcf "${VCF_OUT}" \
+    --autosomes ${AUTOSOMES} \
+    --minimum-dp "${MIN_HET_DP}" \
+    --output "${DP_QC_OUT}"
 
 note "Heterozygous-SNV preparation complete: ${VCF_OUT}"
