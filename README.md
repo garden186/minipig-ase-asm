@@ -1,6 +1,6 @@
 # Minipig ASE and ASM analysis scripts
 
-Analysis code for the Korean minipig study, reconstructed from the local analysis sources and adopted final-result implementations. This repository contains preprocessing, statistical analysis and table-join code. It does not contain sequencing data, figures, plotting code, manuscript documents or author-specific server paths.
+Analysis code for the Korean minipig study, reconstructed from the local analysis sources and adopted final-result implementations. This repository contains preprocessing, statistical analysis and table-join code.
 
 **Release: 0.2.0-rc2, a public code curation candidate.** Existing scientific kernels are retained wherever possible. New execution interfaces have been added. This is a collection of analysis scripts with documented input contracts, **not yet a verified single-command FASTQ-to-manuscript workflow**. See [validation and remaining boundaries](docs/VALIDATION.md).
 
