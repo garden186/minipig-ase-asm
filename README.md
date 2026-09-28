@@ -2,7 +2,7 @@
 
 Analysis code for the Korean minipig study, reconstructed from the local analysis sources and adopted final-result implementations. This repository contains preprocessing, statistical analysis and table-join code. It does not contain sequencing data, figures, plotting code, manuscript documents or author-specific server paths.
 
-**Release: 0.2.0-rc1, a public code curation candidate.** Existing scientific kernels are retained wherever possible. New execution interfaces have been added. This is a collection of analysis scripts with documented input contracts, **not yet a verified single-command FASTQ-to-manuscript workflow**. See [validation and remaining boundaries](docs/VALIDATION.md).
+**Release: 0.2.0-rc2, a public code curation candidate.** Existing scientific kernels are retained wherever possible. New execution interfaces have been added. This is a collection of analysis scripts with documented input contracts, **not yet a verified single-command FASTQ-to-manuscript workflow**. See [validation and remaining boundaries](docs/VALIDATION.md).
 
 ## Reference inputs
 
@@ -24,7 +24,7 @@ FASTA, GTF and downloaded PigGTEx/GO resources are external inputs. Filenames id
 | ASE follow-up | Recurrence, tissue enrichment, SNP-level analyses, independent GATK validation |
 | PigGTEx | Matched-tissue enrichment, exact ASE-site support, gene-eQTL and fine-mapping joins |
 | ASM | Original single-CpG fragment extraction, GQ20 reassignment, individual exact tests and complete BH families |
-| ASM follow-up | Common-anchor preparation, directional recurrence, paired tissue comparisons |
+| ASM follow-up | Original tested-count cache generation, common-anchor preparation, directional recurrence, paired tissue comparisons |
 | Annotation/GO | Ensembl115 transcript/promoter annotation and native clusterProfiler BP enrichment |
 | ASM–ASE integration | Same-animal/tissue/phase-set and same-transcript joins, signed effects |
 

@@ -806,8 +806,10 @@
     "source_release": "scripts",
     "source_file": "run_tests.py",
     "source_sha256": "259e0fb04c0c6592e1676f0de4c0b3918011f63c95d1f5cbe045d25295f26198",
-    "changes": [],
-    "release_sha256": "5787edf64eea1d4d846543b70444a12fb4509b692d2b837a21859da80c706c4d"
+    "changes": [
+      "Register original ASM cache interface/tests."
+    ],
+    "release_sha256": "19e72eced28ea01bc2a15d44737472f7eb37d05e0dae8ff7975893dd450677c1"
   },
   {
     "file": "scripts/verify_release.py",
@@ -1369,7 +1371,10 @@
   {
     "file": "scripts/run_analysis.py",
     "origin": "New public execution interface or test written during curation",
-    "release_sha256": "22286c311c18e3d489585b91099329e5e5bef2d700d1e0ba35c2f427ccde8a92"
+    "release_sha256": "20f60914fdf6079e5bb107d52e57fd4f7b65d585dc758a97e7f75b7ea3980b38",
+    "changes": [
+      "Register original ASM cache interface/tests."
+    ]
   },
   {
     "file": "tests/test_public_interfaces.py",
@@ -1425,5 +1430,31 @@
     "file": "analysis/integration/link.py",
     "origin": "New public execution interface or test written during curation",
     "release_sha256": "1bfe307b8f0f788ca0935a1a14726777980c2c7706a2d01fa90186d3d6c1d9d8"
+  },
+  {
+    "file": "analysis/asm_cache/cache.py",
+    "source_release": "asm_inference_prep_v0.1.0",
+    "source_file": "cache.py",
+    "source_sha256": "84d1b76c089e1e7b2fb32de1f7a9ccd221268a84186bfbd16bb68d9534c6b55b",
+    "release_sha256": "84d1b76c089e1e7b2fb32de1f7a9ccd221268a84186bfbd16bb68d9534c6b55b",
+    "changes": []
+  },
+  {
+    "file": "analysis/asm_cache/common.py",
+    "source_release": "asm_inference_prep_v0.1.0",
+    "source_file": "common.py",
+    "source_sha256": "a4be458aa744a591bc9790379d42a004b302d99f79912ba4fa0fca68c1798ff3",
+    "release_sha256": "a4be458aa744a591bc9790379d42a004b302d99f79912ba4fa0fca68c1798ff3",
+    "changes": []
+  },
+  {
+    "file": "analysis/asm_cache/run.py",
+    "origin": "New public cache-only interface or synthetic integration test",
+    "release_sha256": "2cb186553daeb12873e11ef08e3a22288e882c3b3cf11a6696655507ac6e5fcc"
+  },
+  {
+    "file": "analysis/asm_cache/test_cache.py",
+    "origin": "New public cache-only interface or synthetic integration test",
+    "release_sha256": "d287b3d4fa99356113a75167446175422a3cfd9d3d54786bd60ae8d306a5904b"
   }
 ]

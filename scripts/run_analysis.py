@@ -27,6 +27,7 @@ COMMANDS={
  'asm-count':'analysis/asm_counting/count.py',
  'asm-gq20':'analysis/asm_counting/filter_gq20.py',
  'asm-individual':'analysis/asm_individual/infer.py',
+ 'asm-cache':'analysis/asm_cache/run.py',
  'asm-anchors':'analysis/asm_allele_prep/run.py',
  'asm-recurrence':'analysis/asm_directional/run.py',
  'asm-tissues':'analysis/asm_tissue_comparison/run.py',
