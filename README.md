@@ -1,4 +1,4 @@
-# Minipig ASE and ASM analysis scripts
+# Minipig ASE and ASM analysis
 
 Scripts for sequencing data preprocessing and allele-specific expression (ASE) and methylation (ASM) analyses in Korean minipigs.
 
