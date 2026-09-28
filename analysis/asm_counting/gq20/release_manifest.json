@@ -1,0 +1,9 @@
+{
+  "version": "portable-0.2.0-rc1",
+  "sha256": {
+    "bootstrap.py": "175994133cb2cfa8033fb3f7e0c004e0d3a1a88ee1b5f3f5db43d27417ec7af5",
+    "depth.py": "ad6b85cc58e0678b760bfd3c8937def1b7bb9d3bfe704d8ced27328cda3ce430",
+    "recount.py": "60f5b032d591c409ff3cf7bebda3c300000927c32808c901bb6da5adb832640e",
+    "validation.py": "8ab4f2bb4e64ed9b1ee8222d0549bcd55e849578143654a9a908fe76761339fc"
+  }
+}

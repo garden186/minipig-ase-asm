@@ -1,0 +1,215 @@
+{
+  "status": "PASS_SCOPED_LOCAL_CHECKS",
+  "date": "2026-09-28",
+  "tests_run": 158,
+  "passed": 157,
+  "skipped": 1,
+  "failures": 0,
+  "suites": [
+    {
+      "suite": "portability",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_reclassification",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_recurrence",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_tissue_enrichment",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "piggtex",
+      "run": 4,
+      "passed": 4,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_snp_recurrence",
+      "run": 3,
+      "passed": 3,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_fragment_logic",
+      "run": 4,
+      "passed": 4,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_fragment_candidates",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_cohort",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "asm_fragment_evidence",
+      "run": 50,
+      "passed": 49,
+      "skipped": 1,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_snp_level",
+      "run": 1,
+      "passed": 1,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_snp_loci",
+      "run": 1,
+      "passed": 1,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_snp_annotation",
+      "run": 1,
+      "passed": 1,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_gatk_calls",
+      "run": 3,
+      "passed": 3,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_gatk_recurrence",
+      "run": 2,
+      "passed": 2,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "ase_gatk_blocks",
+      "run": 2,
+      "passed": 2,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "piggtex_sites",
+      "run": 2,
+      "passed": 2,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "piggtex_eqtl",
+      "run": 2,
+      "passed": 2,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "piggtex_pair_support",
+      "run": 3,
+      "passed": 3,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "piggtex_evidence",
+      "run": 4,
+      "passed": 4,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "asm_allele_prep",
+      "run": 10,
+      "passed": 10,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "asm_directional",
+      "run": 12,
+      "passed": 12,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "suite": "asm_tissue_comparison",
+      "run": 12,
+      "passed": 12,
+      "skipped": 0,
+      "exit_code": 0
+    }
+  ],
+  "python_files_parsed": 128,
+  "command_help_checked": 32,
+  "preprocessing_command_syntax": {
+    "reference": {
+      "exit_code": 0,
+      "commands": 7
+    },
+    "wgs": {
+      "exit_code": 0,
+      "commands": 16
+    },
+    "rna": {
+      "exit_code": 0,
+      "commands": 11
+    },
+    "phaser": {
+      "exit_code": 0,
+      "commands": 5
+    },
+    "wgbs": {
+      "exit_code": 0,
+      "commands": 10
+    }
+  },
+  "original_integration_replay": {
+    "block_links": 12,
+    "matching_shared_fields": 612,
+    "excluded_metadata": [
+      "phase_evidence"
+    ],
+    "status": "PASS"
+  },
+  "piggtex_multilayer_replay": {
+    "rows": 39,
+    "byte_identical": true,
+    "sha256": "d4757f5dc30012c6e309cf5f33c156d92715466a8a702f9ad8b05b81094abd2f"
+  },
+  "private_path_and_secret_pattern_scan": "PASS",
+  "limitations": [
+    "One real SAMtools/BCFtools integration test skipped: tools unavailable locally.",
+    "No full Linux preprocessing or genome-wide execution of the new interfaces.",
+    "Native ASM frozen biological fixtures were external private inputs; not bundled.",
+    "R/GO interface not rerun."
+  ]
+}

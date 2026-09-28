@@ -1,0 +1,1429 @@
+[
+  {
+    "file": "analysis/ase_cohort/build_ase_v026_cohort.py",
+    "source_release": "ase_cohort",
+    "source_file": "build_ase_v026_cohort.py",
+    "source_sha256": "3fa275f96a8940103ff1941e59901df27ba2c6324b2380c48f89290c2f574561",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
+      "source_filename": "build_ase_v026_cohort.py",
+      "source_sha256": "3fa275f96a8940103ff1941e59901df27ba2c6324b2380c48f89290c2f574561",
+      "changes": []
+    },
+    "release_sha256": "3fa275f96a8940103ff1941e59901df27ba2c6324b2380c48f89290c2f574561"
+  },
+  {
+    "file": "analysis/ase_cohort/test_ase_v026_cohort.py",
+    "source_release": "ase_cohort",
+    "source_file": "test_ase_v026_cohort.py",
+    "source_sha256": "fe9e4793174441ed98a28a3080d96e1743100aa75a5a716b92fbc7f66c70f085",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
+      "source_filename": "test_ase_v026_cohort.py",
+      "source_sha256": "fe9e4793174441ed98a28a3080d96e1743100aa75a5a716b92fbc7f66c70f085",
+      "changes": []
+    },
+    "release_sha256": "a0a2e7f149ab7f5d37abd22e5b4972d7ead5bad9e7bcd7b893d492094ba86d67"
+  },
+  {
+    "file": "analysis/ase_cohort/validate_ase_v026_cohort.py",
+    "source_release": "ase_cohort",
+    "source_file": "validate_ase_v026_cohort.py",
+    "source_sha256": "24bc43581bec68075bb9578b22d10b598ccab7f156af163eb4ce763cac354e92",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
+      "source_filename": "validate_ase_v026_cohort.py",
+      "source_sha256": "24bc43581bec68075bb9578b22d10b598ccab7f156af163eb4ce763cac354e92",
+      "changes": []
+    },
+    "release_sha256": "ec54ebd59b70ada3d7daf6e1148f944eca33f50e2c3c37387fe603f6babbc5c6"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/call_phaser_ase_candidates.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "call_phaser_ase_candidates.py",
+    "source_sha256": "9770421ddec814e4bf2c2bebd836e45e0e446f6116e4bf450e5902728a90dcff",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "call_phaser_ase_candidates.py",
+      "source_sha256": "9770421ddec814e4bf2c2bebd836e45e0e446f6116e4bf450e5902728a90dcff",
+      "changes": []
+    },
+    "release_sha256": "9770421ddec814e4bf2c2bebd836e45e0e446f6116e4bf450e5902728a90dcff"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/strand_bam_engine.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "strand_bam_engine.py",
+    "source_sha256": "6f46c644ab396669096c3fc42342e4f3314cef9a949a88877462fc156033c549",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "strand_bam_engine.py",
+      "source_sha256": "6f46c644ab396669096c3fc42342e4f3314cef9a949a88877462fc156033c549",
+      "changes": []
+    },
+    "release_sha256": "6f46c644ab396669096c3fc42342e4f3314cef9a949a88877462fc156033c549"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/test_call_phaser_ase_candidates.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "test_call_phaser_ase_candidates.py",
+    "source_sha256": "6d468655e01bb98ae2302cfa7592972f920c18a0fdfa8fc8bbd3963562468878",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "test_call_phaser_ase_candidates.py",
+      "source_sha256": "6d468655e01bb98ae2302cfa7592972f920c18a0fdfa8fc8bbd3963562468878",
+      "changes": []
+    },
+    "release_sha256": "6d468655e01bb98ae2302cfa7592972f920c18a0fdfa8fc8bbd3963562468878"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/test_v025_bam_integration.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "test_v025_bam_integration.py",
+    "source_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "test_v025_bam_integration.py",
+      "source_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c",
+      "changes": []
+    },
+    "release_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/test_v025_logic.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "test_v025_logic.py",
+    "source_sha256": "f75abfdc5631f41feaf9499dd76724cfeb4340b42b2216af0e42eba003544d73",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "test_v025_logic.py",
+      "source_sha256": "f75abfdc5631f41feaf9499dd76724cfeb4340b42b2216af0e42eba003544d73",
+      "changes": []
+    },
+    "release_sha256": "f75abfdc5631f41feaf9499dd76724cfeb4340b42b2216af0e42eba003544d73"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/validate_v025_outputs.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "validate_v025_outputs.py",
+    "source_sha256": "97a4912cede3220bf8c6abfb90a022ecdc559d5f8b97825222eb18a03d25bda4",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "validate_v025_outputs.py",
+      "source_sha256": "97a4912cede3220bf8c6abfb90a022ecdc559d5f8b97825222eb18a03d25bda4",
+      "changes": []
+    },
+    "release_sha256": "97a4912cede3220bf8c6abfb90a022ecdc559d5f8b97825222eb18a03d25bda4"
+  },
+  {
+    "file": "analysis/ase_fragment_counts/wgs_snp_qc.py",
+    "source_release": "ase_fragment_counts",
+    "source_file": "wgs_snp_qc.py",
+    "source_sha256": "b15e633d32472c2bd5e721a1d7a32d044a6f110e4c7b2274155646c7d2b84a8b",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "phaser_ase_standalone_v0.2.5",
+      "source_filename": "wgs_snp_qc.py",
+      "source_sha256": "b15e633d32472c2bd5e721a1d7a32d044a6f110e4c7b2274155646c7d2b84a8b",
+      "changes": []
+    },
+    "release_sha256": "b15e633d32472c2bd5e721a1d7a32d044a6f110e4c7b2274155646c7d2b84a8b"
+  },
+  {
+    "file": "analysis/ase_reclassification/reclassify_ase_v026.py",
+    "source_release": "ase_reclassification",
+    "source_file": "reclassify_ase_v026.py",
+    "source_sha256": "a8be2ff457a03a969542524322fa6152723560f390d2fcadf231025999325b45",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_reclassifier",
+      "source_filename": "reclassify_ase_v026.py",
+      "source_sha256": "a8be2ff457a03a969542524322fa6152723560f390d2fcadf231025999325b45",
+      "changes": []
+    },
+    "release_sha256": "a8be2ff457a03a969542524322fa6152723560f390d2fcadf231025999325b45"
+  },
+  {
+    "file": "analysis/ase_reclassification/test_reclassify_ase_v026.py",
+    "source_release": "ase_reclassification",
+    "source_file": "test_reclassify_ase_v026.py",
+    "source_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_reclassifier",
+      "source_filename": "test_reclassify_ase_v026.py",
+      "source_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126",
+      "changes": []
+    },
+    "release_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126"
+  },
+  {
+    "file": "analysis/ase_reclassification/validate_ase_v026_outputs.py",
+    "source_release": "ase_reclassification",
+    "source_file": "validate_ase_v026_outputs.py",
+    "source_sha256": "c3586204d7751bc1a837f05d2bd55acda967d59eef2c756ca2a30556ae968908",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_candidates_v0.2.6_reclassifier",
+      "source_filename": "validate_ase_v026_outputs.py",
+      "source_sha256": "c3586204d7751bc1a837f05d2bd55acda967d59eef2c756ca2a30556ae968908",
+      "changes": []
+    },
+    "release_sha256": "c3586204d7751bc1a837f05d2bd55acda967d59eef2c756ca2a30556ae968908"
+  },
+  {
+    "file": "analysis/ase_recurrence/core_eligible_recurrence.py",
+    "source_release": "ase_recurrence",
+    "source_file": "core_eligible_recurrence.py",
+    "source_sha256": "a9067bcb9b27ee88760755c615b82834b1339d33ef5dbb36368321632dbc86c9",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_core_eligible_recurrence_v0.1.0",
+      "source_filename": "core_eligible_recurrence.py",
+      "source_sha256": "a9067bcb9b27ee88760755c615b82834b1339d33ef5dbb36368321632dbc86c9",
+      "changes": []
+    },
+    "release_sha256": "a9067bcb9b27ee88760755c615b82834b1339d33ef5dbb36368321632dbc86c9"
+  },
+  {
+    "file": "analysis/ase_recurrence/test_core_eligible_recurrence.py",
+    "source_release": "ase_recurrence",
+    "source_file": "test_core_eligible_recurrence.py",
+    "source_sha256": "316f460e11de5ed252e90ad0df58ea0c1b7cd6c923896861d03384ba832ded24",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_core_eligible_recurrence_v0.1.0",
+      "source_filename": "test_core_eligible_recurrence.py",
+      "source_sha256": "316f460e11de5ed252e90ad0df58ea0c1b7cd6c923896861d03384ba832ded24",
+      "changes": []
+    },
+    "release_sha256": "316f460e11de5ed252e90ad0df58ea0c1b7cd6c923896861d03384ba832ded24"
+  },
+  {
+    "file": "analysis/ase_recurrence/validate_outputs.py",
+    "source_release": "ase_recurrence",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "790d4049df17baaec1ab9feb1f69f99e0c5e35a925f85fb4a89e74207bbd5b70",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_core_eligible_recurrence_v0.1.0",
+      "source_filename": "validate_outputs.py",
+      "source_sha256": "790d4049df17baaec1ab9feb1f69f99e0c5e35a925f85fb4a89e74207bbd5b70",
+      "changes": []
+    },
+    "release_sha256": "790d4049df17baaec1ab9feb1f69f99e0c5e35a925f85fb4a89e74207bbd5b70"
+  },
+  {
+    "file": "analysis/ase_snp_recurrence/call_snp_recurrence.py",
+    "source_release": "ase_snp_recurrence",
+    "source_file": "call_snp_recurrence.py",
+    "source_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_snp_recurrence_v0.1.0",
+      "source_filename": "call_snp_recurrence.py",
+      "source_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2",
+      "changes": []
+    },
+    "release_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2"
+  },
+  {
+    "file": "analysis/ase_snp_recurrence/test_snp_recurrence.py",
+    "source_release": "ase_snp_recurrence",
+    "source_file": "test_snp_recurrence.py",
+    "source_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_snp_recurrence_v0.1.0",
+      "source_filename": "test_snp_recurrence.py",
+      "source_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b",
+      "changes": []
+    },
+    "release_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b"
+  },
+  {
+    "file": "analysis/ase_snp_recurrence/validate_outputs.py",
+    "source_release": "ase_snp_recurrence",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_snp_recurrence_v0.1.0",
+      "source_filename": "validate_outputs.py",
+      "source_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304",
+      "changes": []
+    },
+    "release_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304"
+  },
+  {
+    "file": "analysis/ase_tissue_enrichment/ase_tissue_specificity.py",
+    "source_release": "ase_tissue_enrichment",
+    "source_file": "ase_tissue_specificity.py",
+    "source_sha256": "7da60aa6e378b4b1da71fa57e4658fe75204b60b34da13b9a5bd4abf2bd74360",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_tissue_specificity_v0.1.0",
+      "source_filename": "ase_tissue_specificity.py",
+      "source_sha256": "7da60aa6e378b4b1da71fa57e4658fe75204b60b34da13b9a5bd4abf2bd74360",
+      "changes": []
+    },
+    "release_sha256": "7da60aa6e378b4b1da71fa57e4658fe75204b60b34da13b9a5bd4abf2bd74360"
+  },
+  {
+    "file": "analysis/ase_tissue_enrichment/test_ase_tissue_specificity.py",
+    "source_release": "ase_tissue_enrichment",
+    "source_file": "test_ase_tissue_specificity.py",
+    "source_sha256": "82452396b9d3cd912ee7341c34ad6c94468408405bf54aa8763716888e970453",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_tissue_specificity_v0.1.0",
+      "source_filename": "test_ase_tissue_specificity.py",
+      "source_sha256": "82452396b9d3cd912ee7341c34ad6c94468408405bf54aa8763716888e970453",
+      "changes": []
+    },
+    "release_sha256": "82452396b9d3cd912ee7341c34ad6c94468408405bf54aa8763716888e970453"
+  },
+  {
+    "file": "analysis/ase_tissue_enrichment/validate_outputs.py",
+    "source_release": "ase_tissue_enrichment",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "e35a5e57332d6b848b739fa4e0e6ce6d30d395a9331ac2237d94776d015b7daa",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_tissue_specificity_v0.1.0",
+      "source_filename": "validate_outputs.py",
+      "source_sha256": "e35a5e57332d6b848b739fa4e0e6ce6d30d395a9331ac2237d94776d015b7daa",
+      "changes": []
+    },
+    "release_sha256": "e35a5e57332d6b848b739fa4e0e6ce6d30d395a9331ac2237d94776d015b7daa"
+  },
+  {
+    "file": "analysis/asm_allele_prep/assets_manifest.json",
+    "source_release": "asm_allele_prep",
+    "source_file": "assets_manifest.json",
+    "source_sha256": "2d415fd6deab52dd9a317556174ccdd31435216bb6e51b13fd48615650d38de3",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "647f30fe1dc87e1c4573a12a85360ba1a2ae9d0a8256176b20843a77ccf7a23b"
+  },
+  {
+    "file": "analysis/asm_allele_prep/common.py",
+    "source_release": "asm_allele_prep",
+    "source_file": "common.py",
+    "source_sha256": "28813de384e5dc35ecec1a1537d00a69d6da0a4c3d776ce9ceaf4ef6ed7eff76",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_allele_prep_v0.1.0",
+      "source_filename": "common.py",
+      "source_sha256": "95819ce71867df3f917d981557a85bc3da050a103e615fc08d1746715f6c7c8a",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "583adf5173a36832a535de022c478958736d1ec63bbc1da60d069dfd6af676ee"
+  },
+  {
+    "file": "analysis/asm_allele_prep/indexing.py",
+    "source_release": "asm_allele_prep",
+    "source_file": "indexing.py",
+    "source_sha256": "1f76b4d52f894abd78c314113d11d22b79a029113d0fc74bce2a8fbab41878ed",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_allele_prep_v0.1.0",
+      "source_filename": "indexing.py",
+      "source_sha256": "86fcd5efdd2d0f6249e9966f3ac0ad21978bceeeff94bcc9340c1bfbc9710247",
+      "changes": []
+    },
+    "release_sha256": "86fcd5efdd2d0f6249e9966f3ac0ad21978bceeeff94bcc9340c1bfbc9710247"
+  },
+  {
+    "file": "analysis/asm_allele_prep/pilot.py",
+    "source_release": "asm_allele_prep",
+    "source_file": "pilot.py",
+    "source_sha256": "1dc6adfd6b2bebd92bb7df47fecf3650aa879c060a565307cd91fb157ce02082",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_allele_prep_v0.1.0",
+      "source_filename": "pilot.py",
+      "source_sha256": "b65f617a3d10ece735b658fba9fc867b96dfda25ee87a696a18c479c2bccbf12",
+      "changes": []
+    },
+    "release_sha256": "b65f617a3d10ece735b658fba9fc867b96dfda25ee87a696a18c479c2bccbf12"
+  },
+  {
+    "file": "analysis/asm_allele_prep/release.json",
+    "source_release": "asm_allele_prep",
+    "source_file": "release.json",
+    "source_sha256": "b0400b274d154284962d86ec506dba52836509617148893a6824d73b040f95cd",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "db6d857d0717b0d764f5676caa156bf5464401abe98080b5f79490f4407e9c01"
+  },
+  {
+    "file": "analysis/asm_allele_prep/run.py",
+    "source_release": "asm_allele_prep",
+    "source_file": "run.py",
+    "source_sha256": "9b4e05e77550f2d3097385b6d54bc886c4de8bb2108079061d3842374b3693c7",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_allele_prep_v0.1.0",
+      "source_filename": "run.py",
+      "source_sha256": "0a30653400928d6b251b0c1a5a0d5265adef2b3ebef5f617cf92d63c59e98769",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "426662d9833be7d2070c1bb45175a687e6e1e0d6ea0198610bc3a11089297ee5"
+  },
+  {
+    "file": "analysis/asm_allele_prep/selftest.py",
+    "source_release": "asm_allele_prep",
+    "source_file": "selftest.py",
+    "source_sha256": "97296ed7086223b0328182d2a0e59863097e73b16d1a14c9a24d1e81b8fd596c",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_allele_prep_v0.1.0",
+      "source_filename": "selftest.py",
+      "source_sha256": "5c173b27bd8d5c0d8eaf5a36ea5d0a0f756231a036aeabdc306206d32e454896",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "3ee9eaaf1b6a9ae0748bf7985c91e56898eda079b5da6e0896d36de41b6d6887"
+  },
+  {
+    "file": "analysis/asm_directional/anchors.py",
+    "source_release": "asm_directional",
+    "source_file": "anchors.py",
+    "source_sha256": "f4c81e8cdbd326e016455ea42573526930074405e8cacd57721d28ac01be14d2",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "anchors.py",
+      "source_sha256": "3777a5b823f9b7ea1788a24d83178ac54f1cb1295954eb196d1aa41df568336d",
+      "changes": []
+    },
+    "release_sha256": "3777a5b823f9b7ea1788a24d83178ac54f1cb1295954eb196d1aa41df568336d"
+  },
+  {
+    "file": "analysis/asm_directional/assets_manifest.json",
+    "source_release": "asm_directional",
+    "source_file": "assets_manifest.json",
+    "source_sha256": "d30c949238973e6316dc372072ee6c3a20683ded76543ecae35ec81079fed46e",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "b8c9ae3357466c77a611faf77fb9bbfe36a06c9b79e5565636c534b13a230781"
+  },
+  {
+    "file": "analysis/asm_directional/common.py",
+    "source_release": "asm_directional",
+    "source_file": "common.py",
+    "source_sha256": "c1e02363357059a569afcdcc7a681d3524a8883b4e85ddd8ae9cf764ad5b2a84",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "common.py",
+      "source_sha256": "f43db31b283b44025988f65c66ccadba5b382c112bcb19c2012033151fb33656",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "480fdc881d3b3044ebfe1208bdfa225d7b05b20a354a47814f6cfad21475d5ce"
+  },
+  {
+    "file": "analysis/asm_directional/pipeline.py",
+    "source_release": "asm_directional",
+    "source_file": "pipeline.py",
+    "source_sha256": "34661d9c6723e7c3e1c9a11b6cc4d77672b9db9f8a8346d38dc25b03024ebd97",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "pipeline.py",
+      "source_sha256": "ee47a825b40d9b61f1e6cd2ccb256e3f1c3a57398fad6516c4fdeacaa2fb6400",
+      "changes": []
+    },
+    "release_sha256": "ee47a825b40d9b61f1e6cd2ccb256e3f1c3a57398fad6516c4fdeacaa2fb6400"
+  },
+  {
+    "file": "analysis/asm_directional/release.json",
+    "source_release": "asm_directional",
+    "source_file": "release.json",
+    "source_sha256": "de187a8d7a19e08288fe0342a9ad78c1d6de2dab092e08dd65d508b7af311020",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "684139843658dfdac0cd2be1fe1a994aac32ef996e9b955d9e1ece41e9d988c3"
+  },
+  {
+    "file": "analysis/asm_directional/reporting.py",
+    "source_release": "asm_directional",
+    "source_file": "reporting.py",
+    "source_sha256": "0ed6eb916881ae920d3cf7179de631126197f12e36b9274584f48a2ecc9af959",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "reporting.py",
+      "source_sha256": "f75eab41e6bf4830c95937d866ab69183707f5295709d2bb651bc7974b9be34b",
+      "changes": []
+    },
+    "release_sha256": "f75eab41e6bf4830c95937d866ab69183707f5295709d2bb651bc7974b9be34b"
+  },
+  {
+    "file": "analysis/asm_directional/run.py",
+    "source_release": "asm_directional",
+    "source_file": "run.py",
+    "source_sha256": "bf8729a644279916cf1ce55a0206b93d30c2677b1e05573b4f91421cd4a4d1c6",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "run.py",
+      "source_sha256": "0afd41cb98acef13b97e59b7893a540dbd3979fec82e07813c7689fd7ea8b36e",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "ad06e349ce307ce9d7502995788d8c4a47b1d8ca320865272f06f6b80bfa19f4"
+  },
+  {
+    "file": "analysis/asm_directional/selftest.py",
+    "source_release": "asm_directional",
+    "source_file": "selftest.py",
+    "source_sha256": "d2625c26afacdfb7dbc2be073d71b0234bb5122630e53f1b63bbf38c401e8577",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "selftest.py",
+      "source_sha256": "2ea9f48480b3f1f01caa32fd46dfc59d65c91e296d9a944fdd2aff6f7dae9f1d",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "aeecc8b06de5d2a178ac5d3a901c98836bd6efbb518e545eabd149fb6f5f0ebd"
+  },
+  {
+    "file": "analysis/asm_directional/stats.py",
+    "source_release": "asm_directional",
+    "source_file": "stats.py",
+    "source_sha256": "247b7346bc9351de01b5fbf6a0e5767528f03600210723305d0f3297eeabebea",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_directional_v0.1.0",
+      "source_filename": "stats.py",
+      "source_sha256": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366",
+      "changes": []
+    },
+    "release_sha256": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/assets_manifest.json",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "assets_manifest.json",
+    "source_sha256": "8c5bff1b9be78d4e35f66e85fffeab9e28395c13b8524f6a87ea7f058188fc86",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "b64afdc046e8f486744c9ed0dae4cd29b6ea26f45de8cd4475aa1122ac38d48e"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/common.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "common.py",
+    "source_sha256": "05e8417c9f22b063186acaa6308cb42bc443c7c09dbb80bf8c71f136f7c3a2b9",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "common.py",
+      "source_sha256": "4c1f417765b9e5de79b1169d3c4c2af7a636c4b4ac5fed3fe771d18adb15e4cf",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "eead8451f71fcf458f25541613f01076786a717281f3b88e4dbb22985a1ac707"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/data.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "data.py",
+    "source_sha256": "d4cbd4341428357ca635fb6e868cba3aaacf7949dedd269ea39c2acf9b39b799",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "data.py",
+      "source_sha256": "9290f1c5ae2d931099fdf2096b9403afa4dcf92fe98b3bd551e47b10ae5c723a",
+      "changes": []
+    },
+    "release_sha256": "9290f1c5ae2d931099fdf2096b9403afa4dcf92fe98b3bd551e47b10ae5c723a"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/exact.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "exact.py",
+    "source_sha256": "9a70ca1790c1bc4d92ca0cddce6b5ca8186b9fea0448f1a8167930cd470ea15d",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "exact.py",
+      "source_sha256": "bc4a503c81147d8199223da9a4cfa0c34b2585aadef76d79ada7d7dfbd6bc622",
+      "changes": []
+    },
+    "release_sha256": "961395f745381983493ddefdec9ad11df0b81a1ed42527667b0bd5f20870010c"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/pipeline.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "pipeline.py",
+    "source_sha256": "056871a7fa5adfc6b77ef2a352d040d0ba2d5fafe6a74cc3066654fc8303f6fb",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "pipeline.py",
+      "source_sha256": "79a1c03a75fc48f952e939ec8a529447acb841261a5cf9d4d4313067a3567fb0",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "e2b52cb6cf6579b896d1b960f81a4c5da978eee6f8fa3b560a7f73bf322ab288"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/policy.json",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "policy.json",
+    "source_sha256": "09128e44f8aac914eff96a6d1c225fad9fa2e8bdd70ea5b5e793759e41e3fb55",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "31ab2713ad70fd7d0b2d0cdce36cbf953948614453fd9156a87decc85104a804"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/release.json",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "release.json",
+    "source_sha256": "ab88a8d847691448487df9f49f289cbd0568229f800fed361d72d2cdb79e2cae",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "601e8fc99caa945bd146cbda45b204510f7d7f7cf8d430090a21ab86c7f8d2fc"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/reporting.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "reporting.py",
+    "source_sha256": "b99f6c9abf2f88cb4c3c2296c5af986321b315c324251ab41768a316d50b002b",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "reporting.py",
+      "source_sha256": "5f6a891801f1d4eae2eb46ba90ab229443d8fab462d47f86f2298b9135da4bd7",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "adbd106d882db86d0d35d9b662e41612988b0a2554f55e8c25793d0a0b30df0d"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/run.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "run.py",
+    "source_sha256": "86da9b684565448e7f4ee63a156a2fe100d365759452c951037f3a61d0d282f6",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "run.py",
+      "source_sha256": "ff77fbceacc007bfebdea2758c1abbd8c3172afc6b3bba6b9733eb8db6a41fae",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "b9d7558336c51f6d31048b4797996147d8f081ad5179ebc447a7f18f955f9824"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/schema.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "schema.py",
+    "source_sha256": "f5340626f37b9eb21272287fa112b2d21529b1280d5a4a117741facd7e7d454e",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "schema.py",
+      "source_sha256": "8de6bfc4f6b8d9da689d8216138092db679cf0cf697ed4003e9814f6f3a54d03",
+      "changes": []
+    },
+    "release_sha256": "8de6bfc4f6b8d9da689d8216138092db679cf0cf697ed4003e9814f6f3a54d03"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/selftest.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "selftest.py",
+    "source_sha256": "726f1f20e435b9a9501a5cd69f7f897e815be75894bc5c174accb6b09e4baecf",
+    "changes": [
+      "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+    ],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "selftest.py",
+      "source_sha256": "21a7495fa371f94d472922d0596b0606def7be054fd961e42a9ce2c53708026b",
+      "changes": [
+        "Remove machine output default; externalize input/fixture locations; keep source hashes, complete-family statistics and selftest gate."
+      ]
+    },
+    "release_sha256": "8d13a64e96ef28f8f939149dffad09f603cde97926735116c3f188c038aeb21a"
+  },
+  {
+    "file": "analysis/asm_tissue_comparison/stats.py",
+    "source_release": "asm_tissue_comparison",
+    "source_file": "stats.py",
+    "source_sha256": "247b7346bc9351de01b5fbf6a0e5767528f03600210723305d0f3297eeabebea",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "asm_tissue_aligned_v0.1.0",
+      "source_filename": "stats.py",
+      "source_sha256": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366",
+      "changes": []
+    },
+    "release_sha256": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366"
+  },
+  {
+    "file": "analysis/go/common.R",
+    "source_release": "go",
+    "source_file": "common.R",
+    "source_sha256": "b3943a5b07aaf017e338050844e87cbad198af97e06ddfba766cd9ab8743c2b9",
+    "changes": [
+      "Retain original GO numerical validator and shared IO; remove unadopted OrgDb-specific analysis functions/imports."
+    ],
+    "original_lineage": {
+      "source_release": "asm_go_clusterprofiler_v0.1.0",
+      "source_filename": "common.R",
+      "source_sha256": "b3943a5b07aaf017e338050844e87cbad198af97e06ddfba766cd9ab8743c2b9",
+      "changes": []
+    },
+    "release_sha256": "87710359dd5c1e2d3955cbbc88ecd3c1cca51fa380ef9bbd6ab420723303415e"
+  },
+  {
+    "file": "analysis/piggtex/piggtex_validation.py",
+    "source_release": "piggtex",
+    "source_file": "piggtex_validation.py",
+    "source_sha256": "658c1eaf5cbdd45c7ea23ec91ed789d24be13cf67d27210c5cc075a5e81fdb5d",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_piggtex_validation_v0.1.0",
+      "source_filename": "piggtex_validation.py",
+      "source_sha256": "658c1eaf5cbdd45c7ea23ec91ed789d24be13cf67d27210c5cc075a5e81fdb5d",
+      "changes": []
+    },
+    "release_sha256": "658c1eaf5cbdd45c7ea23ec91ed789d24be13cf67d27210c5cc075a5e81fdb5d"
+  },
+  {
+    "file": "analysis/piggtex/test_piggtex_validation.py",
+    "source_release": "piggtex",
+    "source_file": "test_piggtex_validation.py",
+    "source_sha256": "c0a6cc988f1f5725a1eb4614486d0a323442b2393de5a8cf5c7d003279a01fff",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_piggtex_validation_v0.1.0",
+      "source_filename": "test_piggtex_validation.py",
+      "source_sha256": "c0a6cc988f1f5725a1eb4614486d0a323442b2393de5a8cf5c7d003279a01fff",
+      "changes": []
+    },
+    "release_sha256": "c0a6cc988f1f5725a1eb4614486d0a323442b2393de5a8cf5c7d003279a01fff"
+  },
+  {
+    "file": "analysis/piggtex/validate_outputs.py",
+    "source_release": "piggtex",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "e11b69fe04fbea7438fcbef411a87174e881e14a7664f649a4ac10014a782c6b",
+    "changes": [],
+    "original_lineage": {
+      "source_release": "ase_piggtex_validation_v0.1.0",
+      "source_filename": "validate_outputs.py",
+      "source_sha256": "e11b69fe04fbea7438fcbef411a87174e881e14a7664f649a4ac10014a782c6b",
+      "changes": []
+    },
+    "release_sha256": "e11b69fe04fbea7438fcbef411a87174e881e14a7664f649a4ac10014a782c6b"
+  },
+  {
+    "file": "environments/go-linux-64.explicit.txt",
+    "source_release": "environments",
+    "source_file": "go-linux-64.explicit.txt",
+    "source_sha256": "8772ddfb48b3c899db338f3a93675a64684b9f18ed73b1218d00a7901a1df39e",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "8772ddfb48b3c899db338f3a93675a64684b9f18ed73b1218d00a7901a1df39e"
+  },
+  {
+    "file": "environments/requirements-portable-tested.txt",
+    "source_release": "environments",
+    "source_file": "requirements-portable-tested.txt",
+    "source_sha256": "fa691c69e922c9a47fac5fcc8c0a310b63bdd8cc1891bf077817321d35f38e50",
+    "changes": [
+      "Reuse previous curated analysis-only candidate."
+    ],
+    "release_sha256": "fa691c69e922c9a47fac5fcc8c0a310b63bdd8cc1891bf077817321d35f38e50"
+  },
+  {
+    "file": "scripts/select_primary_tissue_pairs.py",
+    "source_release": "scripts",
+    "source_file": "select_primary_tissue_pairs.py",
+    "source_sha256": "4107ae3cafaac9a2abe233ef0700e2b2a44d91eac145d0f0ca8aefce91f2ac19",
+    "changes": [],
+    "release_sha256": "4107ae3cafaac9a2abe233ef0700e2b2a44d91eac145d0f0ca8aefce91f2ac19"
+  },
+  {
+    "file": "scripts/run_tests.py",
+    "source_release": "scripts",
+    "source_file": "run_tests.py",
+    "source_sha256": "259e0fb04c0c6592e1676f0de4c0b3918011f63c95d1f5cbe045d25295f26198",
+    "changes": [],
+    "release_sha256": "5787edf64eea1d4d846543b70444a12fb4509b692d2b837a21859da80c706c4d"
+  },
+  {
+    "file": "scripts/verify_release.py",
+    "source_release": "scripts",
+    "source_file": "verify_release.py",
+    "source_sha256": "ee6289d71f13f3e63fd56ae144da7f168c9f2a4053e1812efaba9309fa2b6d2e",
+    "changes": [],
+    "release_sha256": "ee6289d71f13f3e63fd56ae144da7f168c9f2a4053e1812efaba9309fa2b6d2e"
+  },
+  {
+    "file": "analysis/ase_snp_level/call_snp_level_ase.py",
+    "source_release": "ase_snp_level_v0.1.0",
+    "source_file": "call_snp_level_ase.py",
+    "source_sha256": "eac5113e94eb01edd248ab4a78e8a4c5cb8fc0de423a250a28d80f86641dd677",
+    "changes": [],
+    "release_sha256": "eac5113e94eb01edd248ab4a78e8a4c5cb8fc0de423a250a28d80f86641dd677"
+  },
+  {
+    "file": "analysis/ase_snp_level/test_call_snp_level_ase.py",
+    "source_release": "ase_snp_level_v0.1.0",
+    "source_file": "test_call_snp_level_ase.py",
+    "source_sha256": "ec0ffa1cc03cbc1f57897db5290d327dd02a0a527e52666564ea57ba291e320a",
+    "changes": [],
+    "release_sha256": "ec0ffa1cc03cbc1f57897db5290d327dd02a0a527e52666564ea57ba291e320a"
+  },
+  {
+    "file": "analysis/ase_snp_loci/collapse_recurrent_snp_loci.py",
+    "source_release": "ase_snp_locus_collapse_v0.1.0",
+    "source_file": "collapse_recurrent_snp_loci.py",
+    "source_sha256": "84d8c57d61c09a98d4c63dec151b7a9833b82584b743e70a8f2082bad85aac6c",
+    "changes": [],
+    "release_sha256": "84d8c57d61c09a98d4c63dec151b7a9833b82584b743e70a8f2082bad85aac6c"
+  },
+  {
+    "file": "analysis/ase_snp_loci/test_collapse_recurrent_snp_loci.py",
+    "source_release": "ase_snp_locus_collapse_v0.1.0",
+    "source_file": "test_collapse_recurrent_snp_loci.py",
+    "source_sha256": "b80a6f11cff78f505ef807df9394d8096cedcab7166d78f63bdfdea7e3cd3035",
+    "changes": [],
+    "release_sha256": "b80a6f11cff78f505ef807df9394d8096cedcab7166d78f63bdfdea7e3cd3035"
+  },
+  {
+    "file": "analysis/ase_snp_loci/validate_outputs.py",
+    "source_release": "ase_snp_locus_collapse_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "7a2b8144e08e6c4d9c6a7aeb937f7c38efb8396075338078a191e21ec63218e5",
+    "changes": [],
+    "release_sha256": "7a2b8144e08e6c4d9c6a7aeb937f7c38efb8396075338078a191e21ec63218e5"
+  },
+  {
+    "file": "analysis/ase_snp_annotation/annotate_snp_features.py",
+    "source_release": "ase_snp_feature_annotation_v0.1.0",
+    "source_file": "annotate_snp_features.py",
+    "source_sha256": "799e2f68165845e9e55013cffd376401cc7d4b233622e0ba2be91eb25f5a64bf",
+    "changes": [],
+    "release_sha256": "799e2f68165845e9e55013cffd376401cc7d4b233622e0ba2be91eb25f5a64bf"
+  },
+  {
+    "file": "analysis/ase_snp_annotation/test_annotate_snp_features.py",
+    "source_release": "ase_snp_feature_annotation_v0.1.0",
+    "source_file": "test_annotate_snp_features.py",
+    "source_sha256": "e4921e611fb07ad605728634e127471ced0b76fa0546914acf3b367e9ee71e1c",
+    "changes": [],
+    "release_sha256": "e4921e611fb07ad605728634e127471ced0b76fa0546914acf3b367e9ee71e1c"
+  },
+  {
+    "file": "analysis/ase_snp_annotation/validate_outputs.py",
+    "source_release": "ase_snp_feature_annotation_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "aa10b9789d29031335449baae0cf5a7a5ac060cf49ea0460eceefddb15cc48f4",
+    "changes": [],
+    "release_sha256": "aa10b9789d29031335449baae0cf5a7a5ac060cf49ea0460eceefddb15cc48f4"
+  },
+  {
+    "file": "analysis/ase_gatk_calls/call_gatk_snp_level_ase.py",
+    "source_release": "ase_snp_level_gatk_v0.1.0",
+    "source_file": "call_gatk_snp_level_ase.py",
+    "source_sha256": "dae59527d8a042d5244a9dc2a367350ea40640887729232a5f348d08899a5bce",
+    "changes": [],
+    "release_sha256": "dae59527d8a042d5244a9dc2a367350ea40640887729232a5f348d08899a5bce"
+  },
+  {
+    "file": "analysis/ase_gatk_calls/test_call_gatk_snp_level_ase.py",
+    "source_release": "ase_snp_level_gatk_v0.1.0",
+    "source_file": "test_call_gatk_snp_level_ase.py",
+    "source_sha256": "09fef263ca8d0b2c5fb6aeda11ac8385f047ff70dc2005497d84e414642a97ed",
+    "changes": [],
+    "release_sha256": "09fef263ca8d0b2c5fb6aeda11ac8385f047ff70dc2005497d84e414642a97ed"
+  },
+  {
+    "file": "analysis/ase_gatk_calls/validate_outputs.py",
+    "source_release": "ase_snp_level_gatk_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "91f2e3792e979753bdac3c82f223beb33f624e1a85117d7ff442152cfdbee1b1",
+    "changes": [],
+    "release_sha256": "91f2e3792e979753bdac3c82f223beb33f624e1a85117d7ff442152cfdbee1b1"
+  },
+  {
+    "file": "analysis/ase_gatk_recurrence/call_gatk_snp_recurrence.py",
+    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
+    "source_file": "call_gatk_snp_recurrence.py",
+    "source_sha256": "0a7a3f4930e2034fc9cb634908092767e73707ae8d2d6f0c0bc19dec00519696",
+    "changes": [],
+    "release_sha256": "0a7a3f4930e2034fc9cb634908092767e73707ae8d2d6f0c0bc19dec00519696"
+  },
+  {
+    "file": "analysis/ase_gatk_recurrence/test_call_gatk_snp_recurrence.py",
+    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
+    "source_file": "test_call_gatk_snp_recurrence.py",
+    "source_sha256": "fc01a255634a458a84a78cf117a77a673b98a60f32680f58969ca38056367c25",
+    "changes": [],
+    "release_sha256": "fc01a255634a458a84a78cf117a77a673b98a60f32680f58969ca38056367c25"
+  },
+  {
+    "file": "analysis/ase_gatk_recurrence/validate_outputs.py",
+    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "b068c8a71d72dc5886dbf44ae504eb1368f327b35d8f6b30a8010d04b2a9ae84",
+    "changes": [],
+    "release_sha256": "b068c8a71d72dc5886dbf44ae504eb1368f327b35d8f6b30a8010d04b2a9ae84"
+  },
+  {
+    "file": "analysis/ase_gatk_blocks/test_primary_block_validation.py",
+    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
+    "source_file": "test_primary_block_validation.py",
+    "source_sha256": "27cec516c3c44d6b30cbc86cbc9961fec4c01d42a80e1f3e549ff251d66f3f01",
+    "changes": [],
+    "release_sha256": "27cec516c3c44d6b30cbc86cbc9961fec4c01d42a80e1f3e549ff251d66f3f01"
+  },
+  {
+    "file": "analysis/ase_gatk_blocks/validate_gatk_against_primary_blocks.py",
+    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
+    "source_file": "validate_gatk_against_primary_blocks.py",
+    "source_sha256": "aa24d6bf7591d2df91cd30858b7a9055887ae9e08046ae50e6c7090878b0d688",
+    "changes": [],
+    "release_sha256": "aa24d6bf7591d2df91cd30858b7a9055887ae9e08046ae50e6c7090878b0d688"
+  },
+  {
+    "file": "analysis/ase_gatk_blocks/validate_outputs.py",
+    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "5512e1f1aaa862118858c5d35412b0765044561b587eb0cbdf3ba1f2df12578e",
+    "changes": [],
+    "release_sha256": "5512e1f1aaa862118858c5d35412b0765044561b587eb0cbdf3ba1f2df12578e"
+  },
+  {
+    "file": "analysis/piggtex_sites/integrate_gatk_with_piggtex_sites.py",
+    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
+    "source_file": "integrate_gatk_with_piggtex_sites.py",
+    "source_sha256": "4155e858025e3497e664fe0563a728e77250a93f0cd99bb0a226ee2f81e81067",
+    "changes": [],
+    "release_sha256": "4155e858025e3497e664fe0563a728e77250a93f0cd99bb0a226ee2f81e81067"
+  },
+  {
+    "file": "analysis/piggtex_sites/test_piggtex_site_integration.py",
+    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
+    "source_file": "test_piggtex_site_integration.py",
+    "source_sha256": "30b1c1e02c82faeabff92ce5bf232b9da29b756cf216584344c6c19c0c9df279",
+    "changes": [],
+    "release_sha256": "30b1c1e02c82faeabff92ce5bf232b9da29b756cf216584344c6c19c0c9df279"
+  },
+  {
+    "file": "analysis/piggtex_sites/validate_outputs.py",
+    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
+    "source_file": "validate_outputs.py",
+    "source_sha256": "050bb599ccec84b7b9aa96eedbd27d10652bcb812a82e4410ee7da0611dad1ee",
+    "changes": [],
+    "release_sha256": "050bb599ccec84b7b9aa96eedbd27d10652bcb812a82e4410ee7da0611dad1ee"
+  },
+  {
+    "file": "analysis/piggtex_eqtl/audit_full_gene_eqtl_finemap.py",
+    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
+    "source_file": "audit_full_gene_eqtl_finemap.py",
+    "source_sha256": "8eb3a95fc14914d567794bc87d61a534512af14c2faa553f068580f4f9f86d3c",
+    "changes": [],
+    "release_sha256": "8eb3a95fc14914d567794bc87d61a534512af14c2faa553f068580f4f9f86d3c"
+  },
+  {
+    "file": "analysis/piggtex_eqtl/prepare_full_universe.py",
+    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
+    "source_file": "prepare_full_universe.py",
+    "source_sha256": "533dd5226444a4f97e7f27e40380661b82bc885bd6ba6aeb630232ac209a1c3b",
+    "changes": [],
+    "release_sha256": "533dd5226444a4f97e7f27e40380661b82bc885bd6ba6aeb630232ac209a1c3b"
+  },
+  {
+    "file": "analysis/piggtex_eqtl/test_full_audit.py",
+    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
+    "source_file": "test_full_audit.py",
+    "source_sha256": "d56bc59d7cc7de065aa3f80d1ef89d3ac137a86e10661260bf8d63b3308f4b97",
+    "changes": [],
+    "release_sha256": "d56bc59d7cc7de065aa3f80d1ef89d3ac137a86e10661260bf8d63b3308f4b97"
+  },
+  {
+    "file": "analysis/piggtex_eqtl/test_helpers.py",
+    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
+    "source_file": "test_helpers.py",
+    "source_sha256": "5d97ce7282cbaab055b27ef7b8a5dbf51c4d3e7d01942247a679c846aa3682fd",
+    "changes": [],
+    "release_sha256": "5d97ce7282cbaab055b27ef7b8a5dbf51c4d3e7d01942247a679c846aa3682fd"
+  },
+  {
+    "file": "analysis/piggtex_eqtl/validate_preflight.py",
+    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
+    "source_file": "validate_preflight.py",
+    "source_sha256": "226e1cc062ffc6bf14330161fc05ad5697768d58a2083dbaa32aa39cf27c9a88",
+    "changes": [],
+    "release_sha256": "226e1cc062ffc6bf14330161fc05ad5697768d58a2083dbaa32aa39cf27c9a88"
+  },
+  {
+    "file": "analysis/asm_counting/engine/asm_test.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "asm_test.py",
+    "source_sha256": "8b1212db965fe846470608c426a2e2759156f60b3892011ec505d6a84b593ff8",
+    "changes": [],
+    "release_sha256": "4b830458eda67b8e7c8264b0317af70c83dd758ccd29e46bd23b904df936c9c0"
+  },
+  {
+    "file": "analysis/asm_counting/engine/check_asm_inputs.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "check_asm_inputs.py",
+    "source_sha256": "ceeb2596a0abc4191945edb0f66d3f0a8882593503a9d1dce2abc63556687acb",
+    "changes": [],
+    "release_sha256": "ceeb2596a0abc4191945edb0f66d3f0a8882593503a9d1dce2abc63556687acb"
+  },
+  {
+    "file": "analysis/asm_counting/engine/common.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "common.py",
+    "source_sha256": "61617d2532977327af055258be1193b07a740a9af8e96e6c5fa98f12235fe277",
+    "changes": [],
+    "release_sha256": "c1ebe0eb751774ed223c76f4b6226555bfc2c1e49a0ed00e5c091c36b737d506"
+  },
+  {
+    "file": "analysis/asm_counting/engine/evidence.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "evidence.py",
+    "source_sha256": "6d2eba5c76474074f55b9a6615e3e59d87a91a18669db7e277c837262371f2e6",
+    "changes": [],
+    "release_sha256": "6d2eba5c76474074f55b9a6615e3e59d87a91a18669db7e277c837262371f2e6"
+  },
+  {
+    "file": "analysis/asm_counting/engine/genome_support.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "genome_support.py",
+    "source_sha256": "80baa8864e783fa58d9fe235c596f61dc5681cb4f2b4d8857de25c198e6af8dc",
+    "changes": [],
+    "release_sha256": "002dfb8d84a5ffb568b3c270ed1e953ca73df1ff5076fb1d3cfde7ceaee90d1a"
+  },
+  {
+    "file": "analysis/asm_counting/engine/profile.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "profile.py",
+    "source_sha256": "10c0d2efd25689c2724095e7147db819071eb6fef62dede39e45a50d2de83c7d",
+    "changes": [],
+    "release_sha256": "003f38988390a40da8bf7fc4be6fd06345b318ac7a2159c978f999ea190b8967"
+  },
+  {
+    "file": "analysis/asm_counting/engine/reassign.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "reassign.py",
+    "source_sha256": "6195587eb1a9a740b1c0cf1e39e5284a3d12af79d1d66d7d5bf2580d363f48ba",
+    "changes": [],
+    "release_sha256": "e532780374dfeb34ad5b81acfb2075186febb5b91f0ea57b8de505673264149b"
+  },
+  {
+    "file": "analysis/asm_counting/engine/run.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "run.py",
+    "source_sha256": "12bd7d5ab8859e5e784b0020c38fb3b891083499c114a10e733efb7f171125db",
+    "changes": [],
+    "release_sha256": "f27d276d887d4524742688674ee1c6ab2cce63a9fb4a1e6a72f8810579f39462"
+  },
+  {
+    "file": "analysis/asm_counting/engine/scheduler.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "scheduler.py",
+    "source_sha256": "b3d4e5fe3913517e965d5f3380110a18ce884d1a7786a0c6044b502540ad6450",
+    "changes": [],
+    "release_sha256": "610a8df0a5cace98aafcb56b28ad838b1f197930465f34d1f5c43bd673a1d6bd"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/engine.py",
+    "source_release": "upstream",
+    "source_file": "engine.py",
+    "source_sha256": "d2cb51861442f620013f994debcf7cbfced3ca48a624b49dcb11986b499590d4",
+    "changes": [],
+    "release_sha256": "d2cb51861442f620013f994debcf7cbfced3ca48a624b49dcb11986b499590d4"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/support.py",
+    "source_release": "upstream",
+    "source_file": "support.py",
+    "source_sha256": "db5a07c0e9e2c2b1fc3991f2938533933b30964833cbedb225c98e9a80b22ca5",
+    "changes": [],
+    "release_sha256": "db5a07c0e9e2c2b1fc3991f2938533933b30964833cbedb225c98e9a80b22ca5"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/vendor/bimodal_fragment_asm.py",
+    "source_release": "vendor",
+    "source_file": "bimodal_fragment_asm.py",
+    "source_sha256": "a55578e1b855bfac5913d0f4c11a761ea7aa0e3e98771aa63e6d4c58beb2b2a0",
+    "changes": [],
+    "release_sha256": "a55578e1b855bfac5913d0f4c11a761ea7aa0e3e98771aa63e6d4c58beb2b2a0"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/vendor/count_exact_cpgk.py",
+    "source_release": "vendor",
+    "source_file": "count_exact_cpgk.py",
+    "source_sha256": "e373b8c2dada5ce9df20a10c360d941e43315aff6c853339e6f90e0220e3d551",
+    "changes": [],
+    "release_sha256": "e373b8c2dada5ce9df20a10c360d941e43315aff6c853339e6f90e0220e3d551"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/vendor/cpgk_common.py",
+    "source_release": "vendor",
+    "source_file": "cpgk_common.py",
+    "source_sha256": "97ad270a0a19f5830f399d9fe87104a21dc418f22ddfdaff0e4086fe2e804dc4",
+    "changes": [],
+    "release_sha256": "97ad270a0a19f5830f399d9fe87104a21dc418f22ddfdaff0e4086fe2e804dc4"
+  },
+  {
+    "file": "analysis/asm_counting/engine/upstream/vendor/cpgk_scan_helpers.py",
+    "source_release": "vendor",
+    "source_file": "cpgk_scan_helpers.py",
+    "source_sha256": "2b84aad6fc0166d6743a0277402870cd5a843317d8e4b1719bc347fd759fed11",
+    "changes": [],
+    "release_sha256": "2b84aad6fc0166d6743a0277402870cd5a843317d8e4b1719bc347fd759fed11"
+  },
+  {
+    "file": "analysis/asm_counting/engine/validate.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "validate.py",
+    "source_sha256": "6f3906cd8d8ea2c262c8d25e5fe3c3fe2a0e131dcfe3527dd08a4f47e9f88cc8",
+    "changes": [],
+    "release_sha256": "05807a09838b2ed964128f4ed36650b619811d33513496103108cafbf49ad3c2"
+  },
+  {
+    "file": "analysis/asm_counting/engine/worker.py",
+    "source_release": "wgbs_cpg_assignment_profile_v0.3.0",
+    "source_file": "worker.py",
+    "source_sha256": "829a1ae54af6993b572ace502c3ab60d9f9d1e3f7a49e35a4eaf0efb9fea82f6",
+    "changes": [],
+    "release_sha256": "2ea93da195e2fbb5251d7816f8ac3536ba33ebc60f8e8cd05b0747d220d7c20b"
+  },
+  {
+    "file": "analysis/asm_counting/gq20/bootstrap.py",
+    "source_release": "cpg_gq20_depth_v0.1.0",
+    "source_file": "bootstrap.py",
+    "source_sha256": "9cf82778f8c546e1277d2301a5d1d67a893333420e66d6d35e129f2014524558",
+    "changes": [],
+    "release_sha256": "175994133cb2cfa8033fb3f7e0c004e0d3a1a88ee1b5f3f5db43d27417ec7af5"
+  },
+  {
+    "file": "analysis/asm_counting/gq20/depth.py",
+    "source_release": "cpg_gq20_depth_v0.1.0",
+    "source_file": "depth.py",
+    "source_sha256": "ad6b85cc58e0678b760bfd3c8937def1b7bb9d3bfe704d8ced27328cda3ce430",
+    "changes": [],
+    "release_sha256": "ad6b85cc58e0678b760bfd3c8937def1b7bb9d3bfe704d8ced27328cda3ce430"
+  },
+  {
+    "file": "analysis/asm_counting/gq20/recount.py",
+    "source_release": "cpg_gq20_depth_v0.1.0",
+    "source_file": "recount.py",
+    "source_sha256": "60f5b032d591c409ff3cf7bebda3c300000927c32808c901bb6da5adb832640e",
+    "changes": [],
+    "release_sha256": "60f5b032d591c409ff3cf7bebda3c300000927c32808c901bb6da5adb832640e"
+  },
+  {
+    "file": "analysis/asm_counting/gq20/validation.py",
+    "source_release": "cpg_gq20_depth_v0.1.0",
+    "source_file": "validation.py",
+    "source_sha256": "8ab4f2bb4e64ed9b1ee8222d0549bcd55e849578143654a9a908fe76761339fc",
+    "changes": [],
+    "release_sha256": "8ab4f2bb4e64ed9b1ee8222d0549bcd55e849578143654a9a908fe76761339fc"
+  },
+  {
+    "file": "analysis/asm_individual/statistics_core.py",
+    "source_release": "cpg_heart_host_post_v0.1.0",
+    "source_file": "statistics_core.py",
+    "source_sha256": "d29318dc47d03263a5719b5ea25cfd706d1490c4797fc5ef55a27b776a8b271e",
+    "changes": [],
+    "release_sha256": "d29318dc47d03263a5719b5ea25cfd706d1490c4797fc5ef55a27b776a8b271e"
+  },
+  {
+    "file": "preprocessing/helpers/stage4_phased_vcf_to_snpsplit.py",
+    "source_release": "preproc",
+    "source_file": "stage4_phased_vcf_to_snpsplit.py",
+    "source_sha256": "b60999a90ec89d2b1293a052205db9255acf26f06dab24841691d6698bc2967e",
+    "changes": [],
+    "release_sha256": "8b43869d4068cab81344def01c144308975ab62d808b0c1d8aeec924fdf4fa4b"
+  },
+  {
+    "file": "preprocessing/helpers/stage4_generate_nmasked_reference.py",
+    "source_release": "preproc",
+    "source_file": "stage4_generate_nmasked_reference.py",
+    "source_sha256": "35f9e99de7096e81270d4da3cb2c48dca5ca78b367d53dfd23e078ba0e68ff2c",
+    "changes": [],
+    "release_sha256": "35f9e99de7096e81270d4da3cb2c48dca5ca78b367d53dfd23e078ba0e68ff2c"
+  },
+  {
+    "file": "preprocessing/helpers/stage2_qc_collect.py",
+    "source_release": "preproc",
+    "source_file": "stage2_qc_collect.py",
+    "source_sha256": "d7c8b6223ef70a342fd1f7b1d6382e4ffc3ce9430297708a097478d2c06eb856",
+    "changes": [],
+    "release_sha256": "76e942b49153a5ad18b9cd5c271a5428fd12490c532b9de7e5050fe5871c304f"
+  },
+  {
+    "file": "analysis/integration/phase_helpers.py",
+    "source_file": "inspect_Heart_promoter_ASM_ASE_PS_v0.3.0.py",
+    "source_sha256": "6505bee10fbf8ee52a61ef4dc7bd6af3935ba026ccfd146370ad579d651f4c99",
+    "changes": [
+      "Extract original functions: require, sha, js, save_json, rows, write_rows, split, phase_ok, orient, variant_alleles, effects, self_test; new module imports; historical launch code excluded."
+    ],
+    "release_sha256": "92c57491ed89794525c1aa5cbd18787368543eb24583b58b8fe7898aa78bdd25"
+  },
+  {
+    "file": "analysis/integration/link_engine.py",
+    "source_file": "promoter_ASE_link_v0.1.0.py",
+    "source_sha256": "80f9b95300466d5baec8e84225f8c642921c26fb2d5abc8e8e2d649fde4fd754",
+    "changes": [
+      "Extract original functions: cpgkey, significant_block, ranking_fields, join; new module imports; historical launch code excluded."
+    ],
+    "release_sha256": "716709bbca28977debe5124f08e0399d6f0573d6054994dd1aaef95d6ab7eb94"
+  },
+  {
+    "file": "analysis/annotation/common.py",
+    "source_file": "common.py",
+    "source_sha256": "b5336e96abc2f14544c8a5eb6acd26c0c13594204c89e1e556da069c53591f4c",
+    "changes": [],
+    "release_sha256": "b5336e96abc2f14544c8a5eb6acd26c0c13594204c89e1e556da069c53591f4c"
+  },
+  {
+    "file": "analysis/annotation/reference.py",
+    "source_file": "reference.py",
+    "source_sha256": "c11dbce5c39bf2ef8dd80a61dc1c1533de2881d34f48acf0d6820703288692f7",
+    "changes": [],
+    "release_sha256": "c11dbce5c39bf2ef8dd80a61dc1c1533de2881d34f48acf0d6820703288692f7"
+  },
+  {
+    "file": "analysis/annotation/vendor/legacy_v033_annotation.py",
+    "source_file": "legacy_v033_annotation.py",
+    "source_sha256": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09",
+    "changes": [],
+    "release_sha256": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09"
+  },
+  {
+    "file": "analysis/asm_individual/eligibility.py",
+    "source_file": "post_common.py",
+    "source_sha256": "c97700c271f94333eb016bfdeda9992c10f52b64cf39760175deae0f661b5e16",
+    "changes": [
+      "Extract original functions: parse; new module imports; historical launch code excluded."
+    ],
+    "release_sha256": "5694dcc7413f7006f2606ce2fd94ff58ce4b03d7b5c8b3b851a36b8b289b6f61"
+  },
+  {
+    "file": "analysis/piggtex_evidence/build_evidence_audit.py",
+    "source_file": "build_evidence_audit.py",
+    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
+    "source_sha256": "2c2b5bebb0e7b2e0284c31ce4944c55f9d7a3bda94bbb60497e0b02b79806500",
+    "changes": [],
+    "release_sha256": "2c2b5bebb0e7b2e0284c31ce4944c55f9d7a3bda94bbb60497e0b02b79806500"
+  },
+  {
+    "file": "analysis/piggtex_evidence/test_build_evidence_audit.py",
+    "source_file": "test_build_evidence_audit.py",
+    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
+    "source_sha256": "85e349f974ca54e1dff6f06d91ae87b7c5881d043fe0ce23c33c1e2e5159013e",
+    "changes": [],
+    "release_sha256": "85e349f974ca54e1dff6f06d91ae87b7c5881d043fe0ce23c33c1e2e5159013e"
+  },
+  {
+    "file": "analysis/piggtex_evidence/validate_outputs.py",
+    "source_file": "validate_outputs.py",
+    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
+    "source_sha256": "48f69923818b6cb2b4a05ac492ae1b8be88826f7d7d6d4014bc9cd43007ebd31",
+    "changes": [],
+    "release_sha256": "48f69923818b6cb2b4a05ac492ae1b8be88826f7d7d6d4014bc9cd43007ebd31"
+  },
+  {
+    "file": "analysis/piggtex_pair_support/summarize_pair_support.py",
+    "source_file": "summarize_pair_support.py",
+    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
+    "source_sha256": "4f895c70967ed345f73f63d5259f1e0fd6b2e431b7cbf07416f7e2ec9368f3c4",
+    "changes": [],
+    "release_sha256": "4f895c70967ed345f73f63d5259f1e0fd6b2e431b7cbf07416f7e2ec9368f3c4"
+  },
+  {
+    "file": "analysis/piggtex_pair_support/test_support_logic.py",
+    "source_file": "test_support_logic.py",
+    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
+    "source_sha256": "2ffdea61f42e32ffb5e810b750e8abc4cb68d05e6f039d6248debc16386b0fa7",
+    "changes": [],
+    "release_sha256": "2ffdea61f42e32ffb5e810b750e8abc4cb68d05e6f039d6248debc16386b0fa7"
+  },
+  {
+    "file": "analysis/piggtex_pair_support/validate_outputs.py",
+    "source_file": "validate_outputs.py",
+    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
+    "source_sha256": "cae42dab5d569ead6270609a390c53dc96328a386e38fbcc014141ebb14bd82b",
+    "changes": [],
+    "release_sha256": "cae42dab5d569ead6270609a390c53dc96328a386e38fbcc014141ebb14bd82b"
+  },
+  {
+    "file": "analysis/piggtex_multilayer/build_multilayer.py",
+    "source_file": "build_multilayer.py",
+    "source_release": "ase_tissue_enriched_piggtex_multilayer_v0.1.0",
+    "source_sha256": "14605e86cc3e327818c479dbee39e8713647143f316fccc00a078afec140b307",
+    "changes": [
+      "Replace fixed project layout with explicit --inputs JSON and --output; retain study-specific 39-pair checks."
+    ],
+    "release_sha256": "d737efd7acd58a16687db26296c1c944e426ef27181e710b0bdcc3d769d14346"
+  },
+  {
+    "file": "analysis/piggtex_multilayer/validate_outputs.py",
+    "source_file": "validate_outputs.py",
+    "source_release": "ase_tissue_enriched_piggtex_multilayer_v0.1.0",
+    "source_sha256": "e48ea90333c22d506bb4222c42e84ba985ff9057de63d4a52c22bd3a084801c3",
+    "changes": [],
+    "release_sha256": "e48ea90333c22d506bb4222c42e84ba985ff9057de63d4a52c22bd3a084801c3"
+  },
+  {
+    "file": "analysis/annotation/vendor/asm_annotation_common.py",
+    "source_file": "asm_annotation_common.py",
+    "source_release": "vendor",
+    "source_sha256": "3286a54782c50573d06e7d563651d79925012f99c7db28f6ae4c579174e67d71",
+    "release_sha256": "3286a54782c50573d06e7d563651d79925012f99c7db28f6ae4c579174e67d71",
+    "changes": [
+      "LF line endings normalized if needed."
+    ]
+  },
+  {
+    "file": "analysis/asm_counting/engine/tests/test_profile.py",
+    "source_file": "test_profile.py",
+    "source_release": "tests",
+    "source_sha256": "34123784addc14e8e9f4e236ff9187aa7d0dd3fb5132f40f378f4e17b984ed15",
+    "release_sha256": "cd6ab2bdded11d6f62352475e089772f62195f9d4a4667178456c4c5a7690056",
+    "changes": [
+      "LF line endings normalized if needed."
+    ]
+  },
+  {
+    "file": "analysis/asm_counting/engine/tests/test_evidence.py",
+    "source_file": "test_evidence.py",
+    "source_release": "tests",
+    "source_sha256": "fe3355820d0a08fe443b952009ab68279e1db227345e145a7e814b07d0318050",
+    "release_sha256": "fe3355820d0a08fe443b952009ab68279e1db227345e145a7e814b07d0318050",
+    "changes": [
+      "LF line endings normalized if needed."
+    ]
+  },
+  {
+    "file": "preprocessing/run.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "1bece2479986acc17ffdbd3b7a82dd1672ac590b3cc6d22676cebd476691769a"
+  },
+  {
+    "file": "scripts/run_analysis.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "22286c311c18e3d489585b91099329e5e5bef2d700d1e0ba35c2f427ccde8a92"
+  },
+  {
+    "file": "tests/test_public_interfaces.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "825aa898741ae13f087a05fd4d9b81153fc5f5438f5caca9ae1a441a67b41034"
+  },
+  {
+    "file": "analysis/annotation/annotate_table.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "adee07ac6021cdbc99898acd5a8b68d2a00ab516caff5cec3732733cd9353597"
+  },
+  {
+    "file": "analysis/annotation/build_index.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "2b3dc186e567e82a50baad576ad998277035806637460fe41887192e7ffcd215"
+  },
+  {
+    "file": "analysis/annotation/individual_composition.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "9c8b519a5539648acfc10d53dcbf04aceaab9c335dc2902808bde1a4234073fd"
+  },
+  {
+    "file": "analysis/ase_gatk_calls/count_reads.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "08ff94e17b5a0f3bd4297bb80f122886926962fc2a2974736c0c8ccc6b394095"
+  },
+  {
+    "file": "analysis/asm_counting/count.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "bf17e522f9346064c08a8783a93f1ede0591e12aad27b3ac0de627d860d92305"
+  },
+  {
+    "file": "analysis/asm_counting/filter_gq20.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "f54d3a7bfafc9bf675f3d75767f768023e3a07f9efcacfc0bdc22c4a3ff76a73"
+  },
+  {
+    "file": "analysis/asm_individual/infer.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "88745b2b694c9d35d74709b105263a0a3cbdd9a1765695854bd23654bdd3c6c7"
+  },
+  {
+    "file": "analysis/external_overlap/point_overlap.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "ae955467b65f6f3f1dc1095996a11505f7dbb4dbd5aea3d45e54dbfd7a2c57cc"
+  },
+  {
+    "file": "analysis/go/enrich_final.R",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "8af8c8a785fdce07bcd4a02893239b041adfeb2abb6c08c0650b6dd58987451d"
+  },
+  {
+    "file": "analysis/integration/link.py",
+    "origin": "New public execution interface or test written during curation",
+    "release_sha256": "1bfe307b8f0f788ca0935a1a14726777980c2c7706a2d01fa90186d3d6c1d9d8"
+  }
+]

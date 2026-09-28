@@ -1,4 +1,0 @@
-#sample	chromosome	file_name	variants	phased	unphased	singletons	blocks
-TEST	1	phased.vcf.gz	3	3	0	1	1
-TEST	2	phased.vcf.gz	3	3	0	0	1
-TEST	ALL	phased.vcf.gz	6	6	0	1	2

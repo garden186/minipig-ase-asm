@@ -1,0 +1,14 @@
+{
+  "version": "portable-0.2.0-rc1",
+  "original_release": "asm_directional_v0.1.0",
+  "sha256": {
+    "anchors.py": "3777a5b823f9b7ea1788a24d83178ac54f1cb1295954eb196d1aa41df568336d",
+    "assets_manifest.json": "b8c9ae3357466c77a611faf77fb9bbfe36a06c9b79e5565636c534b13a230781",
+    "common.py": "480fdc881d3b3044ebfe1208bdfa225d7b05b20a354a47814f6cfad21475d5ce",
+    "pipeline.py": "ee47a825b40d9b61f1e6cd2ccb256e3f1c3a57398fad6516c4fdeacaa2fb6400",
+    "reporting.py": "f75eab41e6bf4830c95937d866ab69183707f5295709d2bb651bc7974b9be34b",
+    "run.py": "ad06e349ce307ce9d7502995788d8c4a47b1d8ca320865272f06f6b80bfa19f4",
+    "selftest.py": "aeecc8b06de5d2a178ac5d3a901c98836bd6efbb518e545eabd149fb6f5f0ebd",
+    "stats.py": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366"
+  }
+}
