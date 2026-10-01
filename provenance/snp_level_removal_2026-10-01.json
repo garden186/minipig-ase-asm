@@ -1,0 +1,200 @@
+{
+  "status": "PASS_SNP_LEVEL_ANALYSIS_REMOVAL",
+  "date": "2026-10-01",
+  "base_commit": "ed1c0c22dd430f1ed2e7a81bd7e0e5a1a1b6e2a9",
+  "removed_module_count": 12,
+  "removed_code_files": [
+    "analysis/ase_gatk_blocks/test_primary_block_validation.py",
+    "analysis/ase_gatk_blocks/validate_gatk_against_primary_blocks.py",
+    "analysis/ase_gatk_blocks/validate_outputs.py",
+    "analysis/ase_gatk_calls/call_gatk_snp_level_ase.py",
+    "analysis/ase_gatk_calls/count_reads.py",
+    "analysis/ase_gatk_calls/test_call_gatk_snp_level_ase.py",
+    "analysis/ase_gatk_calls/validate_outputs.py",
+    "analysis/ase_gatk_recurrence/call_gatk_snp_recurrence.py",
+    "analysis/ase_gatk_recurrence/test_call_gatk_snp_recurrence.py",
+    "analysis/ase_gatk_recurrence/validate_outputs.py",
+    "analysis/ase_snp_annotation/annotate_snp_features.py",
+    "analysis/ase_snp_annotation/test_annotate_snp_features.py",
+    "analysis/ase_snp_annotation/validate_outputs.py",
+    "analysis/ase_snp_level/call_snp_level_ase.py",
+    "analysis/ase_snp_level/test_call_snp_level_ase.py",
+    "analysis/ase_snp_loci/collapse_recurrent_snp_loci.py",
+    "analysis/ase_snp_loci/test_collapse_recurrent_snp_loci.py",
+    "analysis/ase_snp_loci/validate_outputs.py",
+    "analysis/ase_snp_recurrence/call_snp_recurrence.py",
+    "analysis/ase_snp_recurrence/test_snp_recurrence.py",
+    "analysis/ase_snp_recurrence/validate_outputs.py",
+    "analysis/piggtex_eqtl/audit_full_gene_eqtl_finemap.py",
+    "analysis/piggtex_eqtl/prepare_full_universe.py",
+    "analysis/piggtex_eqtl/test_full_audit.py",
+    "analysis/piggtex_eqtl/test_helpers.py",
+    "analysis/piggtex_eqtl/validate_preflight.py",
+    "analysis/piggtex_evidence/build_evidence_audit.py",
+    "analysis/piggtex_evidence/test_build_evidence_audit.py",
+    "analysis/piggtex_evidence/validate_outputs.py",
+    "analysis/piggtex_multilayer/build_multilayer.py",
+    "analysis/piggtex_multilayer/validate_outputs.py",
+    "analysis/piggtex_pair_support/summarize_pair_support.py",
+    "analysis/piggtex_pair_support/test_support_logic.py",
+    "analysis/piggtex_pair_support/validate_outputs.py",
+    "analysis/piggtex_sites/integrate_gatk_with_piggtex_sites.py",
+    "analysis/piggtex_sites/test_piggtex_site_integration.py",
+    "analysis/piggtex_sites/validate_outputs.py"
+  ],
+  "removed_commands": [
+    "ase-site-annotation",
+    "ase-site-loci",
+    "ase-site-recurrence",
+    "ase-sites",
+    "gatk-ase",
+    "gatk-blocks",
+    "gatk-count",
+    "gatk-recurrence",
+    "piggtex-eqtl",
+    "piggtex-eqtl-universe",
+    "piggtex-evidence",
+    "piggtex-multilayer",
+    "piggtex-pair-support",
+    "piggtex-sites"
+  ],
+  "retained_commands": [
+    "ase-count",
+    "ase-classify",
+    "ase-cohort",
+    "ase-recurrence",
+    "ase-tissues",
+    "ase-select-tissues",
+    "piggtex",
+    "asm-count",
+    "asm-gq20",
+    "asm-individual",
+    "asm-cache",
+    "asm-anchors",
+    "asm-recurrence",
+    "asm-tissues",
+    "annotation",
+    "annotate-cpgs",
+    "asm-composition",
+    "external-overlap",
+    "integration"
+  ],
+  "python_files_parsed": 96,
+  "command_help_checked": 19,
+  "removed_commands_rejected": 14,
+  "retained_scientific_and_preprocessing_files_byte_identical": 101,
+  "tests_run": 110,
+  "passed": 109,
+  "skipped": 1,
+  "failures": 0,
+  "suites": [
+    {
+      "suite": "portability",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_reclassification",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_recurrence",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_tissue_enrichment",
+      "run": 8,
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "piggtex",
+      "run": 4,
+      "passed": 4,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_fragment_logic",
+      "run": 4,
+      "passed": 4,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_fragment_candidates",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0
+    },
+    {
+      "suite": "ase_cohort",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0
+    },
+    {
+      "suite": "asm_fragment_evidence",
+      "run": 50,
+      "passed": 49,
+      "skipped": 1
+    },
+    {
+      "suite": "asm_cache",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0
+    },
+    {
+      "suite": "integration",
+      "run": 5,
+      "passed": 5,
+      "skipped": 0
+    }
+  ],
+  "integration_replay": {
+    "minimal_coverage_columns": [
+      "sample",
+      "tissue",
+      "chrom",
+      "position",
+      "variant_id",
+      "all_parent_block_ids",
+      "matched_promoter_gene_ids",
+      "total_informative_fragments"
+    ],
+    "coverage_rows": 731,
+    "outputs": {
+      "block_links.tsv": {
+        "rows": 12,
+        "byte_identical": true,
+        "sha256": "8bdcf3478d1b64381f93771e0a9f9e853548501bd457ed95d12f8ecc2d972a02"
+      },
+      "cpg_audit.tsv": {
+        "rows": 206,
+        "byte_identical": true,
+        "sha256": "e453cfa6dcbe085bbcca83299fd86d1ff31fffd2e2cbd9157758301b56bc83a7"
+      },
+      "block_attempts.tsv": {
+        "rows": 340,
+        "byte_identical": true,
+        "sha256": "22881e6876a8066bb48897f171a782459f1b49212e5b5d2300ee865c963a759a"
+      }
+    },
+    "site_level_output_absent": true
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "psutil": "7.2.2"
+  },
+  "limitations": [
+    "One real SAMtools/BCFtools integration test skipped because those tools are unavailable.",
+    "No full sequencing-data or whole-genome rerun; unchanged native ASM suites requiring private assets were not rerun.",
+    "RNA coverage and parent-block/gene evidence must still be supplied for transcript support."
+  ]
+}

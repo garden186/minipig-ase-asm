@@ -224,48 +224,6 @@
     "release_sha256": "790d4049df17baaec1ab9feb1f69f99e0c5e35a925f85fb4a89e74207bbd5b70"
   },
   {
-    "file": "analysis/ase_snp_recurrence/call_snp_recurrence.py",
-    "source_release": "ase_snp_recurrence",
-    "source_file": "call_snp_recurrence.py",
-    "source_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2",
-    "changes": [],
-    "original_lineage": {
-      "source_release": "ase_snp_recurrence_v0.1.0",
-      "source_filename": "call_snp_recurrence.py",
-      "source_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2",
-      "changes": []
-    },
-    "release_sha256": "e5c920cd2b21527559f862a865b803336ce8fad3f6522d437ce4b1fcc8d51eb2"
-  },
-  {
-    "file": "analysis/ase_snp_recurrence/test_snp_recurrence.py",
-    "source_release": "ase_snp_recurrence",
-    "source_file": "test_snp_recurrence.py",
-    "source_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b",
-    "changes": [],
-    "original_lineage": {
-      "source_release": "ase_snp_recurrence_v0.1.0",
-      "source_filename": "test_snp_recurrence.py",
-      "source_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b",
-      "changes": []
-    },
-    "release_sha256": "c061feb99d69d611586052e374f3f0e5c35240d08d375ce39d7fa478680c292b"
-  },
-  {
-    "file": "analysis/ase_snp_recurrence/validate_outputs.py",
-    "source_release": "ase_snp_recurrence",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304",
-    "changes": [],
-    "original_lineage": {
-      "source_release": "ase_snp_recurrence_v0.1.0",
-      "source_filename": "validate_outputs.py",
-      "source_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304",
-      "changes": []
-    },
-    "release_sha256": "7f67ced305c44c4c20681b6a26705111aeeb818a71ab95d36a9561759ad7e304"
-  },
-  {
     "file": "analysis/ase_tissue_enrichment/ase_tissue_specificity.py",
     "source_release": "ase_tissue_enrichment",
     "source_file": "ase_tissue_specificity.py",
@@ -807,9 +765,10 @@
     "source_file": "run_tests.py",
     "source_sha256": "259e0fb04c0c6592e1676f0de4c0b3918011f63c95d1f5cbe045d25295f26198",
     "changes": [
-      "Register original ASM cache interface/tests."
+      "Register original ASM cache interface/tests.",
+      "2026-10-01: Remove obsolete SNP-level suites and run block-integration coverage tests."
     ],
-    "release_sha256": "19e72eced28ea01bc2a15d44737472f7eb37d05e0dae8ff7975893dd450677c1"
+    "release_sha256": "97eb933971fabe9d3108ea51411fbd644c04679e3b1c1350388edf5c454ad96d"
   },
   {
     "file": "scripts/verify_release.py",
@@ -818,206 +777,6 @@
     "source_sha256": "ee6289d71f13f3e63fd56ae144da7f168c9f2a4053e1812efaba9309fa2b6d2e",
     "changes": [],
     "release_sha256": "ee6289d71f13f3e63fd56ae144da7f168c9f2a4053e1812efaba9309fa2b6d2e"
-  },
-  {
-    "file": "analysis/ase_snp_level/call_snp_level_ase.py",
-    "source_release": "ase_snp_level_v0.1.0",
-    "source_file": "call_snp_level_ase.py",
-    "source_sha256": "eac5113e94eb01edd248ab4a78e8a4c5cb8fc0de423a250a28d80f86641dd677",
-    "changes": [],
-    "release_sha256": "eac5113e94eb01edd248ab4a78e8a4c5cb8fc0de423a250a28d80f86641dd677"
-  },
-  {
-    "file": "analysis/ase_snp_level/test_call_snp_level_ase.py",
-    "source_release": "ase_snp_level_v0.1.0",
-    "source_file": "test_call_snp_level_ase.py",
-    "source_sha256": "ec0ffa1cc03cbc1f57897db5290d327dd02a0a527e52666564ea57ba291e320a",
-    "changes": [],
-    "release_sha256": "ec0ffa1cc03cbc1f57897db5290d327dd02a0a527e52666564ea57ba291e320a"
-  },
-  {
-    "file": "analysis/ase_snp_loci/collapse_recurrent_snp_loci.py",
-    "source_release": "ase_snp_locus_collapse_v0.1.0",
-    "source_file": "collapse_recurrent_snp_loci.py",
-    "source_sha256": "84d8c57d61c09a98d4c63dec151b7a9833b82584b743e70a8f2082bad85aac6c",
-    "changes": [],
-    "release_sha256": "84d8c57d61c09a98d4c63dec151b7a9833b82584b743e70a8f2082bad85aac6c"
-  },
-  {
-    "file": "analysis/ase_snp_loci/test_collapse_recurrent_snp_loci.py",
-    "source_release": "ase_snp_locus_collapse_v0.1.0",
-    "source_file": "test_collapse_recurrent_snp_loci.py",
-    "source_sha256": "b80a6f11cff78f505ef807df9394d8096cedcab7166d78f63bdfdea7e3cd3035",
-    "changes": [],
-    "release_sha256": "b80a6f11cff78f505ef807df9394d8096cedcab7166d78f63bdfdea7e3cd3035"
-  },
-  {
-    "file": "analysis/ase_snp_loci/validate_outputs.py",
-    "source_release": "ase_snp_locus_collapse_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "7a2b8144e08e6c4d9c6a7aeb937f7c38efb8396075338078a191e21ec63218e5",
-    "changes": [],
-    "release_sha256": "7a2b8144e08e6c4d9c6a7aeb937f7c38efb8396075338078a191e21ec63218e5"
-  },
-  {
-    "file": "analysis/ase_snp_annotation/annotate_snp_features.py",
-    "source_release": "ase_snp_feature_annotation_v0.1.0",
-    "source_file": "annotate_snp_features.py",
-    "source_sha256": "799e2f68165845e9e55013cffd376401cc7d4b233622e0ba2be91eb25f5a64bf",
-    "changes": [],
-    "release_sha256": "799e2f68165845e9e55013cffd376401cc7d4b233622e0ba2be91eb25f5a64bf"
-  },
-  {
-    "file": "analysis/ase_snp_annotation/test_annotate_snp_features.py",
-    "source_release": "ase_snp_feature_annotation_v0.1.0",
-    "source_file": "test_annotate_snp_features.py",
-    "source_sha256": "e4921e611fb07ad605728634e127471ced0b76fa0546914acf3b367e9ee71e1c",
-    "changes": [],
-    "release_sha256": "e4921e611fb07ad605728634e127471ced0b76fa0546914acf3b367e9ee71e1c"
-  },
-  {
-    "file": "analysis/ase_snp_annotation/validate_outputs.py",
-    "source_release": "ase_snp_feature_annotation_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "aa10b9789d29031335449baae0cf5a7a5ac060cf49ea0460eceefddb15cc48f4",
-    "changes": [],
-    "release_sha256": "aa10b9789d29031335449baae0cf5a7a5ac060cf49ea0460eceefddb15cc48f4"
-  },
-  {
-    "file": "analysis/ase_gatk_calls/call_gatk_snp_level_ase.py",
-    "source_release": "ase_snp_level_gatk_v0.1.0",
-    "source_file": "call_gatk_snp_level_ase.py",
-    "source_sha256": "dae59527d8a042d5244a9dc2a367350ea40640887729232a5f348d08899a5bce",
-    "changes": [],
-    "release_sha256": "dae59527d8a042d5244a9dc2a367350ea40640887729232a5f348d08899a5bce"
-  },
-  {
-    "file": "analysis/ase_gatk_calls/test_call_gatk_snp_level_ase.py",
-    "source_release": "ase_snp_level_gatk_v0.1.0",
-    "source_file": "test_call_gatk_snp_level_ase.py",
-    "source_sha256": "09fef263ca8d0b2c5fb6aeda11ac8385f047ff70dc2005497d84e414642a97ed",
-    "changes": [],
-    "release_sha256": "09fef263ca8d0b2c5fb6aeda11ac8385f047ff70dc2005497d84e414642a97ed"
-  },
-  {
-    "file": "analysis/ase_gatk_calls/validate_outputs.py",
-    "source_release": "ase_snp_level_gatk_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "91f2e3792e979753bdac3c82f223beb33f624e1a85117d7ff442152cfdbee1b1",
-    "changes": [],
-    "release_sha256": "91f2e3792e979753bdac3c82f223beb33f624e1a85117d7ff442152cfdbee1b1"
-  },
-  {
-    "file": "analysis/ase_gatk_recurrence/call_gatk_snp_recurrence.py",
-    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
-    "source_file": "call_gatk_snp_recurrence.py",
-    "source_sha256": "0a7a3f4930e2034fc9cb634908092767e73707ae8d2d6f0c0bc19dec00519696",
-    "changes": [],
-    "release_sha256": "0a7a3f4930e2034fc9cb634908092767e73707ae8d2d6f0c0bc19dec00519696"
-  },
-  {
-    "file": "analysis/ase_gatk_recurrence/test_call_gatk_snp_recurrence.py",
-    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
-    "source_file": "test_call_gatk_snp_recurrence.py",
-    "source_sha256": "fc01a255634a458a84a78cf117a77a673b98a60f32680f58969ca38056367c25",
-    "changes": [],
-    "release_sha256": "fc01a255634a458a84a78cf117a77a673b98a60f32680f58969ca38056367c25"
-  },
-  {
-    "file": "analysis/ase_gatk_recurrence/validate_outputs.py",
-    "source_release": "ase_gatk_snp_recurrence_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "b068c8a71d72dc5886dbf44ae504eb1368f327b35d8f6b30a8010d04b2a9ae84",
-    "changes": [],
-    "release_sha256": "b068c8a71d72dc5886dbf44ae504eb1368f327b35d8f6b30a8010d04b2a9ae84"
-  },
-  {
-    "file": "analysis/ase_gatk_blocks/test_primary_block_validation.py",
-    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
-    "source_file": "test_primary_block_validation.py",
-    "source_sha256": "27cec516c3c44d6b30cbc86cbc9961fec4c01d42a80e1f3e549ff251d66f3f01",
-    "changes": [],
-    "release_sha256": "27cec516c3c44d6b30cbc86cbc9961fec4c01d42a80e1f3e549ff251d66f3f01"
-  },
-  {
-    "file": "analysis/ase_gatk_blocks/validate_gatk_against_primary_blocks.py",
-    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
-    "source_file": "validate_gatk_against_primary_blocks.py",
-    "source_sha256": "aa24d6bf7591d2df91cd30858b7a9055887ae9e08046ae50e6c7090878b0d688",
-    "changes": [],
-    "release_sha256": "aa24d6bf7591d2df91cd30858b7a9055887ae9e08046ae50e6c7090878b0d688"
-  },
-  {
-    "file": "analysis/ase_gatk_blocks/validate_outputs.py",
-    "source_release": "ase_gatk_primary_block_validation_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "5512e1f1aaa862118858c5d35412b0765044561b587eb0cbdf3ba1f2df12578e",
-    "changes": [],
-    "release_sha256": "5512e1f1aaa862118858c5d35412b0765044561b587eb0cbdf3ba1f2df12578e"
-  },
-  {
-    "file": "analysis/piggtex_sites/integrate_gatk_with_piggtex_sites.py",
-    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
-    "source_file": "integrate_gatk_with_piggtex_sites.py",
-    "source_sha256": "4155e858025e3497e664fe0563a728e77250a93f0cd99bb0a226ee2f81e81067",
-    "changes": [],
-    "release_sha256": "4155e858025e3497e664fe0563a728e77250a93f0cd99bb0a226ee2f81e81067"
-  },
-  {
-    "file": "analysis/piggtex_sites/test_piggtex_site_integration.py",
-    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
-    "source_file": "test_piggtex_site_integration.py",
-    "source_sha256": "30b1c1e02c82faeabff92ce5bf232b9da29b756cf216584344c6c19c0c9df279",
-    "changes": [],
-    "release_sha256": "30b1c1e02c82faeabff92ce5bf232b9da29b756cf216584344c6c19c0c9df279"
-  },
-  {
-    "file": "analysis/piggtex_sites/validate_outputs.py",
-    "source_release": "ase_gatk_piggtex_site_integration_v0.1.0",
-    "source_file": "validate_outputs.py",
-    "source_sha256": "050bb599ccec84b7b9aa96eedbd27d10652bcb812a82e4410ee7da0611dad1ee",
-    "changes": [],
-    "release_sha256": "050bb599ccec84b7b9aa96eedbd27d10652bcb812a82e4410ee7da0611dad1ee"
-  },
-  {
-    "file": "analysis/piggtex_eqtl/audit_full_gene_eqtl_finemap.py",
-    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
-    "source_file": "audit_full_gene_eqtl_finemap.py",
-    "source_sha256": "8eb3a95fc14914d567794bc87d61a534512af14c2faa553f068580f4f9f86d3c",
-    "changes": [],
-    "release_sha256": "8eb3a95fc14914d567794bc87d61a534512af14c2faa553f068580f4f9f86d3c"
-  },
-  {
-    "file": "analysis/piggtex_eqtl/prepare_full_universe.py",
-    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
-    "source_file": "prepare_full_universe.py",
-    "source_sha256": "533dd5226444a4f97e7f27e40380661b82bc885bd6ba6aeb630232ac209a1c3b",
-    "changes": [],
-    "release_sha256": "533dd5226444a4f97e7f27e40380661b82bc885bd6ba6aeb630232ac209a1c3b"
-  },
-  {
-    "file": "analysis/piggtex_eqtl/test_full_audit.py",
-    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
-    "source_file": "test_full_audit.py",
-    "source_sha256": "d56bc59d7cc7de065aa3f80d1ef89d3ac137a86e10661260bf8d63b3308f4b97",
-    "changes": [],
-    "release_sha256": "d56bc59d7cc7de065aa3f80d1ef89d3ac137a86e10661260bf8d63b3308f4b97"
-  },
-  {
-    "file": "analysis/piggtex_eqtl/test_helpers.py",
-    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
-    "source_file": "test_helpers.py",
-    "source_sha256": "5d97ce7282cbaab055b27ef7b8a5dbf51c4d3e7d01942247a679c846aa3682fd",
-    "changes": [],
-    "release_sha256": "5d97ce7282cbaab055b27ef7b8a5dbf51c4d3e7d01942247a679c846aa3682fd"
-  },
-  {
-    "file": "analysis/piggtex_eqtl/validate_preflight.py",
-    "source_release": "ase_gatk_recurrent_snp_piggtex_eqtl_full_universe_v0.1.0",
-    "source_file": "validate_preflight.py",
-    "source_sha256": "226e1cc062ffc6bf14330161fc05ad5697768d58a2083dbaa32aa39cf27c9a88",
-    "changes": [],
-    "release_sha256": "226e1cc062ffc6bf14330161fc05ad5697768d58a2083dbaa32aa39cf27c9a88"
   },
   {
     "file": "analysis/asm_counting/engine/asm_test.py",
@@ -1233,9 +992,10 @@
     "source_file": "promoter_ASE_link_v0.1.0.py",
     "source_sha256": "80f9b95300466d5baec8e84225f8c642921c26fb2d5abc8e8e2d649fde4fd754",
     "changes": [
-      "Extract original functions: cpgkey, significant_block, ranking_fields, join; new module imports; historical launch code excluded."
+      "Extract original functions: cpgkey, significant_block, ranking_fields, join; new module imports; historical launch code excluded.",
+      "2026-10-01: Remove SNP-level effects and output while preserving block phase, transcript support and effect calculations."
     ],
-    "release_sha256": "716709bbca28977debe5124f08e0399d6f0573d6054994dd1aaef95d6ab7eb94"
+    "release_sha256": "5e578c267516899e5cadc64fa9fa95434183648a263b037c7f072403594fa6d0"
   },
   {
     "file": "analysis/annotation/common.py",
@@ -1266,72 +1026,6 @@
       "Extract original functions: parse; new module imports; historical launch code excluded."
     ],
     "release_sha256": "5694dcc7413f7006f2606ce2fd94ff58ce4b03d7b5c8b3b851a36b8b289b6f61"
-  },
-  {
-    "file": "analysis/piggtex_evidence/build_evidence_audit.py",
-    "source_file": "build_evidence_audit.py",
-    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
-    "source_sha256": "2c2b5bebb0e7b2e0284c31ce4944c55f9d7a3bda94bbb60497e0b02b79806500",
-    "changes": [],
-    "release_sha256": "2c2b5bebb0e7b2e0284c31ce4944c55f9d7a3bda94bbb60497e0b02b79806500"
-  },
-  {
-    "file": "analysis/piggtex_evidence/test_build_evidence_audit.py",
-    "source_file": "test_build_evidence_audit.py",
-    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
-    "source_sha256": "85e349f974ca54e1dff6f06d91ae87b7c5881d043fe0ce23c33c1e2e5159013e",
-    "changes": [],
-    "release_sha256": "85e349f974ca54e1dff6f06d91ae87b7c5881d043fe0ce23c33c1e2e5159013e"
-  },
-  {
-    "file": "analysis/piggtex_evidence/validate_outputs.py",
-    "source_file": "validate_outputs.py",
-    "source_release": "ase_canonical_snp_piggtex_evidence_v0.1.0",
-    "source_sha256": "48f69923818b6cb2b4a05ac492ae1b8be88826f7d7d6d4014bc9cd43007ebd31",
-    "changes": [],
-    "release_sha256": "48f69923818b6cb2b4a05ac492ae1b8be88826f7d7d6d4014bc9cd43007ebd31"
-  },
-  {
-    "file": "analysis/piggtex_pair_support/summarize_pair_support.py",
-    "source_file": "summarize_pair_support.py",
-    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
-    "source_sha256": "4f895c70967ed345f73f63d5259f1e0fd6b2e431b7cbf07416f7e2ec9368f3c4",
-    "changes": [],
-    "release_sha256": "4f895c70967ed345f73f63d5259f1e0fd6b2e431b7cbf07416f7e2ec9368f3c4"
-  },
-  {
-    "file": "analysis/piggtex_pair_support/test_support_logic.py",
-    "source_file": "test_support_logic.py",
-    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
-    "source_sha256": "2ffdea61f42e32ffb5e810b750e8abc4cb68d05e6f039d6248debc16386b0fa7",
-    "changes": [],
-    "release_sha256": "2ffdea61f42e32ffb5e810b750e8abc4cb68d05e6f039d6248debc16386b0fa7"
-  },
-  {
-    "file": "analysis/piggtex_pair_support/validate_outputs.py",
-    "source_file": "validate_outputs.py",
-    "source_release": "ase_tissue_enriched_gatk_snp_support_v0.1.0",
-    "source_sha256": "cae42dab5d569ead6270609a390c53dc96328a386e38fbcc014141ebb14bd82b",
-    "changes": [],
-    "release_sha256": "cae42dab5d569ead6270609a390c53dc96328a386e38fbcc014141ebb14bd82b"
-  },
-  {
-    "file": "analysis/piggtex_multilayer/build_multilayer.py",
-    "source_file": "build_multilayer.py",
-    "source_release": "ase_tissue_enriched_piggtex_multilayer_v0.1.0",
-    "source_sha256": "14605e86cc3e327818c479dbee39e8713647143f316fccc00a078afec140b307",
-    "changes": [
-      "Replace fixed project layout with explicit --inputs JSON and --output; retain study-specific 39-pair checks."
-    ],
-    "release_sha256": "d737efd7acd58a16687db26296c1c944e426ef27181e710b0bdcc3d769d14346"
-  },
-  {
-    "file": "analysis/piggtex_multilayer/validate_outputs.py",
-    "source_file": "validate_outputs.py",
-    "source_release": "ase_tissue_enriched_piggtex_multilayer_v0.1.0",
-    "source_sha256": "e48ea90333c22d506bb4222c42e84ba985ff9057de63d4a52c22bd3a084801c3",
-    "changes": [],
-    "release_sha256": "e48ea90333c22d506bb4222c42e84ba985ff9057de63d4a52c22bd3a084801c3"
   },
   {
     "file": "analysis/annotation/vendor/asm_annotation_common.py",
@@ -1371,9 +1065,10 @@
   {
     "file": "scripts/run_analysis.py",
     "origin": "New public execution interface or test written during curation",
-    "release_sha256": "20f60914fdf6079e5bb107d52e57fd4f7b65d585dc758a97e7f75b7ea3980b38",
+    "release_sha256": "309d54a1eeeabf6e2df1b9c5071ad0cc378cf065f44f29a31f3d1fb70f7fb2f3",
     "changes": [
-      "Register original ASM cache interface/tests."
+      "Register original ASM cache interface/tests.",
+      "2026-10-01: Remove standalone SNP-level ASE commands and dependent PigGTEx commands."
     ]
   },
   {
@@ -1395,11 +1090,6 @@
     "file": "analysis/annotation/individual_composition.py",
     "origin": "New public execution interface or test written during curation",
     "release_sha256": "9c8b519a5539648acfc10d53dcbf04aceaab9c335dc2902808bde1a4234073fd"
-  },
-  {
-    "file": "analysis/ase_gatk_calls/count_reads.py",
-    "origin": "New public execution interface or test written during curation",
-    "release_sha256": "08ff94e17b5a0f3bd4297bb80f122886926962fc2a2974736c0c8ccc6b394095"
   },
   {
     "file": "analysis/asm_counting/count.py",
@@ -1429,7 +1119,10 @@
   {
     "file": "analysis/integration/link.py",
     "origin": "New public execution interface or test written during curation",
-    "release_sha256": "1bfe307b8f0f788ca0935a1a14726777980c2c7706a2d01fa90186d3d6c1d9d8"
+    "release_sha256": "0470196790344257075b62a9193194c847647526f7ccbd076ec55ab25d34125f",
+    "changes": [
+      "2026-10-01: Remove SNP-level output and accept coverage evidence without site-level statistical fields."
+    ]
   },
   {
     "file": "analysis/asm_cache/cache.py",
@@ -1456,5 +1149,13 @@
     "file": "analysis/asm_cache/test_cache.py",
     "origin": "New public cache-only interface or synthetic integration test",
     "release_sha256": "d287b3d4fa99356113a75167446175422a3cfd9d3d54786bd60ae8d306a5904b"
+  },
+  {
+    "file": "analysis/integration/test_block_integration.py",
+    "origin": "Public interface or focused regression test",
+    "release_sha256": "05b7ca8611c37eac1f7dc25bcfbd9086fe88f3b88fef32791f35e50d51e15562",
+    "changes": [
+      "2026-10-01: Test count-only evidence, block effects, parent membership, transcript support and phase/QC rejection."
+    ]
   }
 ]

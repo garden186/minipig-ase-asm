@@ -26,13 +26,3 @@ After reviewing commands, append `--execute`. Build the shared reference once, t
 - WGBS writes the per-animal allele list and N-masked genome, then `work/wgbs/SAMPLE/TISSUE/asm_input.bam` and its index. This is the unsplit deduplicated BAM for custom CpG counting. SNPsplit BAM separation and per-haplotype methylation extraction are not part of this final path.
 
 These are **new interface output names**, not claims about historical server filenames. The portable WGBS interface explicitly coordinate-sorts the deduplicated BAM; recovering the old `.srt.bam` filename or original sorting shell command is unnecessary.
-
-## Independent GATK counts
-
-Create a TSV with `sample`, `tissue`, `bam`, `vcf`. Supply phase-ready RNA BAMs and the matching heterozygous WGS SNV VCFs. Paths in this interface are explicit paths (relative to the working directory or absolute).
-
-```sh
-python analysis/ase_gatk_calls/count_reads.py --manifest gatk_inputs.tsv --reference reference.fa --output new_gatk_run
-```
-
-Append `--execute` after command review. This reproduces the original BQ10/MAPQ255/proper-pair/fragment-length and overlapping-mate counting options. Its `input_manifest.tsv` and `counts/` feed `ase_gatk_calls/call_gatk_snp_level_ase.py`. Statistical calling remains a separate step.

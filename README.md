@@ -5,7 +5,7 @@ Scripts for sequencing data preprocessing and allele-specific expression (ASE) a
 ## Analyses
 
 - WGS, RNA-seq and WGBS preprocessing
-- ASE: haplotype counting, recurrence, tissue enrichment and PigGTEx comparisons
+- ASE: haplotype counting, recurrence, tissue enrichment and gene-level PigGTEx comparisons
 - ASM: single-CpG testing, common-anchor alignment, directional recurrence and tissue comparisons
 - Gene annotation, GO enrichment and ASM–ASE integration
 

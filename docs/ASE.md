@@ -26,12 +26,12 @@ python scripts/run_analysis.py ase-select-tissues \
 
 The wrapper explicitly applies threshold 15, ≥5 informative animals, ≥2 informative target-core animals and FDR 0.05. The selector uses pair-level global BH and primary recurrence, with no gene-omnibus gate. The adopted original result has 39 pairs and 37 genes. The recurrence result has 646 gene–tissue pairs and 439 genes. These numbers are regression expectations for the original inputs, not enforced outcomes for other datasets.
 
-## SNP and PigGTEx analyses
+## PigGTEx gene-level comparisons
 
-`ase_snp_level` → `ase_snp_recurrence` → `ase_snp_loci`/`ase_snp_annotation` provides block-linked SNP support. `ase_gatk_calls/count_reads.py` → `ase_gatk_calls/call_gatk_snp_level_ase.py` → `ase_gatk_recurrence` provides the independent GATK route; `ase_gatk_blocks` checks correspondence to primary blocks.
+`piggtex/piggtex_validation.py` handles matched-tissue gene support and enrichment against PigGTEx ASE and cis-eQTL resources, using the complete internal recurrence hypothesis universe as the background.
 
-`piggtex` handles gene/tissue enrichment; `piggtex_sites` handles exact position/allele matching. `piggtex_pair_support` summarizes independent SNP support for tissue-enriched pairs. `piggtex_multilayer` joins that support with primary pairs, the tissue map and PigGTEx gene profiles. Its `--inputs` JSON maps the four keys `primary_39`, `tissue_map`, `piggtex_gene_profiles`, `independent_snp_support` to input TSVs; `--output` supplies a new directory. Its original study-specific 39-pair checks remain intentional.
+External inputs must include the study's PigGTEx release, tissue and gene mappings, significant ASE catalogue and permutation cis-eQTL tables. These datasets are not included. Missing entries in significant-only resources mean no observed positive evidence. Retain the complete tested gene background for enrichment.
 
-`piggtex_eqtl/prepare_full_universe.py` and `audit_full_gene_eqtl_finemap.py` handle the full candidate universe and external archives. `piggtex_evidence/build_evidence_audit.py` joins canonical recurrent SNP, GATK and external evidence. The argument name `server-*` in this preserved module identifies an input table role; it does not initiate a server connection.
+## Analysis scope
 
-External inputs must include the same PigGTEx release, tissue mapping, gene mapping, significant ASE sites, gene-eQTL and fine-mapping archives used in the study. These datasets are not included. Missing entries in significant-only resources mean no observed positive evidence, not a tested negative. Retain the complete tested gene background for enrichment.
+The public workflow uses haplotype-block ASE. Standalone SNP-level ASE testing, recurrence, locus annotation, GATK ASEReadCounter validation and their dependent PigGTEx comparisons were removed on 2026-10-01. WGS variant preparation, SNP balance QC, fragment assignment and phase/transcript evidence remain necessary inputs to haplotype ASE and ASM.

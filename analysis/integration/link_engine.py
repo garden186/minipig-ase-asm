@@ -1,4 +1,4 @@
-"""Original same-animal/tissue/PS and same-transcript join."""
+"""Haplotype-block join with original phase and transcript-support rules."""
 from collections import defaultdict
 import phase_helpers as L
 require=L.require
@@ -20,7 +20,7 @@ def join(cpgs,blocks,sites,idx,genes):
     for b in blocks:bg[b['sample'],b['tissue'],b['gene_id']].append(b)
     for s in sites:
         for gene in L.split(s['matched_promoter_gene_ids']):sg[s['sample'],s['tissue'],gene].append(s)
-    blocks_out=[];sites_out=[];audit=[];attempts=[]
+    blocks_out=[];audit=[];attempts=[]
     exon_cache={}
     def base(c,b):
         return dict(sample=c['sample'],tissue=c['tissue'],minimum_depth_each_haplotype=3,gene_id=c['annotation_gene_id'],gene_name=c['annotation_gene_name'],
@@ -59,15 +59,9 @@ def join(cpgs,blocks,sites,idx,genes):
                 bid=b['haplotype_block_id']
                 if bid not in L.split(s['all_parent_block_ids']):continue
                 require(s['variant_id'] in L.split(b['wgs_balanced_gene_snps']),'RNA SNP absent from balanced gene evidence')
-                h1allele,h2allele=L.variant_alleles(b,s['variant_id'])
-                counts={s['ref']:int(s['ref_fragment_count']),s['alt']:int(s['alt_fragment_count'])}
+                L.variant_alleles(b,s['variant_id'])
                 for tid in sorted(common):
-                    t=promoters[tid];r=base(c,b)
-                    r.update(dict(transcript_id=tid,is_ensembl_canonical=t['is_ensembl_canonical'],transcript_tss_1based=t['transcript_tss_1based'],
-                        CpG_transcript_features=t['features'],RNA_SNP_features=exons[tid]['features'],variant_id=s['variant_id'],SNP_pos1=s['position'],
-                        ref=s['ref'],alt=s['alt'],ref_count=s['ref_fragment_count'],alt_count=s['alt_fragment_count'],RNA_H1_allele=h1allele,RNA_H2_allele=h2allele,
-                        ASE_site_P=s['site_p_exact'],ASE_site_q=s['site_q_bh'],ASE_site_testable=s['site_testable'],ASE_site_signal=s['site_level_ase_signal']))
-                    r.update({f'nominal_ge_{d}':c[f'nominal_ge_{d}'] for d in (3,5,8,10)});r.update(ranking_fields(float(c['delta_M']),counts[h1allele],counts[h2allele]));sites_out.append(r)
+                    t=promoters[tid]
                     if int(s['total_informative_fragments'])>0:
                         support[bid].add(s['variant_id']);transcripts[bid].add(tid)
                         if int(t['is_ensembl_canonical']):canonical[bid].add(s['variant_id'])
@@ -84,4 +78,4 @@ def join(cpgs,blocks,sites,idx,genes):
             n_local_phase_PASS_same_transcript_blocks=sum(bool(support[b['haplotype_block_id']]) and b['local_phase_status']=='PASS' for b in linked),
             status='NO_MATCHED_RNA_SAMPLE' if (c['sample'],c['tissue'])==('0309','Liver') else 'SAME_PS_BLOCK' if linked else 'NO_SOURCE_BLOCK' if not relevant else 'NO_RESOLVED_SAME_PS_BLOCK',
             **{f'nominal_ge_{d}':c[f'nominal_ge_{d}'] for d in (3,5,8,10)}))
-    return blocks_out,sites_out,audit,attempts
+    return blocks_out,audit,attempts
