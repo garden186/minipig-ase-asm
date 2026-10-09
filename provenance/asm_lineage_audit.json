@@ -1,0 +1,46 @@
+{
+  "status": "PASS_FINAL_ASM_LINEAGE_AUDIT",
+  "errors": [],
+  "checks": {
+    "prep_source_manifest_matches_delivered_manifest": 1,
+    "prep_source_manifest_matches_server_execution": 1,
+    "prep_original_file_hashes": 9,
+    "cache_gate_bound_to_anchor_input": 30,
+    "cache_summary_bound_to_anchor_input": 30,
+    "cache_payload_hash_registry_matches": 600,
+    "annotated_table_bound_to_cache_source": 30,
+    "unit_row_totals_match": 30,
+    "complete_original_cohort30": 1,
+    "anchor_to_directional_identity": 1,
+    "anchor_to_directional_gate": 1,
+    "directional_embeds_exact_anchor_source_registry": 1,
+    "anchor_root_payload_hashes": 4,
+    "directional_to_paired_identity": 1,
+    "directional_root_payload_hashes": 6,
+    "paired_tile_received_metadata_hashes": 472,
+    "paired_tile_array_registry_matches": 472,
+    "completed_receipt_review_pass": 4,
+    "completed_server_gate_pass": 4,
+    "adopted_directional_r2_totals": 1
+  },
+  "original_tested_rows": 59071985,
+  "units": 30,
+  "directional_r2": {
+    "Heart": 977,
+    "Kidney": 1084,
+    "Liver": 1451
+  },
+  "unique_directional_r2_CpGs": 2197,
+  "paired_tiles": 236,
+  "missing_public_stage_in_rc1": "asm_inference_prep_v0.1.0/cache.py",
+  "source_release_sha256": "d895ceb56659c2e23c9bf1fc94c079adf48881dee81dd5d6c65495b16ea56ac9",
+  "source_files": {
+    "cache.py": "84d1b76c089e1e7b2fb32de1f7a9ccd221268a84186bfbd16bb68d9534c6b55b",
+    "common.py": "a4be458aa744a591bc9790379d42a004b302d99f79912ba4fa0fca68c1798ff3"
+  },
+  "limits": [
+    "Uses locally received authenticated server receipts; no live server access or full genome rerun.",
+    "Large cache arrays absent from compact receipts: compared their registered hashes, not their bytes.",
+    "Public interface validation is separate from the historical final-result lineage."
+  ]
+}

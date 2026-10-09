@@ -1,0 +1,4 @@
+sample	assay	tissue	read1	read2	optical_duplicate_distance
+S01	WGS	WGS	../reads/S01_WGS_R1.fastq.gz	../reads/S01_WGS_R2.fastq.gz	2500
+S01	RNA	Heart	../reads/S01_Heart_RNA_R1.fastq.gz	../reads/S01_Heart_RNA_R2.fastq.gz	2500
+S01	WGBS	Heart	../reads/S01_Heart_WGBS_R1.fastq.gz	../reads/S01_Heart_WGBS_R2.fastq.gz	NA
