@@ -1,10 +1,12 @@
 [
   {
-    "file": "analysis/ase_cohort/build_ase_v026_cohort.py",
+    "file": "analysis/ase_cohort/build_ase_cohort.py",
     "source_release": "ase_cohort",
     "source_file": "build_ase_v026_cohort.py",
     "source_sha256": "3fa275f96a8940103ff1941e59901df27ba2c6324b2380c48f89290c2f574561",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_cohort/build_ase_v026_cohort.py to analysis/ase_cohort/build_ase_cohort.py; historical source identifiers retained."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
       "source_filename": "build_ase_v026_cohort.py",
@@ -14,32 +16,38 @@
     "release_sha256": "3fa275f96a8940103ff1941e59901df27ba2c6324b2380c48f89290c2f574561"
   },
   {
-    "file": "analysis/ase_cohort/test_ase_v026_cohort.py",
+    "file": "analysis/ase_cohort/test_ase_cohort.py",
     "source_release": "ase_cohort",
     "source_file": "test_ase_v026_cohort.py",
     "source_sha256": "fe9e4793174441ed98a28a3080d96e1743100aa75a5a716b92fbc7f66c70f085",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_cohort/test_ase_v026_cohort.py to analysis/ase_cohort/test_ase_cohort.py; historical source identifiers retained.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
       "source_filename": "test_ase_v026_cohort.py",
       "source_sha256": "fe9e4793174441ed98a28a3080d96e1743100aa75a5a716b92fbc7f66c70f085",
       "changes": []
     },
-    "release_sha256": "a0a2e7f149ab7f5d37abd22e5b4972d7ead5bad9e7bcd7b893d492094ba86d67"
+    "release_sha256": "7198cfb4f1042b689851627b832a60a97cec871b2d3aac19a0b04eedafa5ee91"
   },
   {
-    "file": "analysis/ase_cohort/validate_ase_v026_cohort.py",
+    "file": "analysis/ase_cohort/validate_ase_cohort.py",
     "source_release": "ase_cohort",
     "source_file": "validate_ase_v026_cohort.py",
     "source_sha256": "24bc43581bec68075bb9578b22d10b598ccab7f156af163eb4ce763cac354e92",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_cohort/validate_ase_v026_cohort.py to analysis/ase_cohort/validate_ase_cohort.py; historical source identifiers retained.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_cohort_v0.3.0",
       "source_filename": "validate_ase_v026_cohort.py",
       "source_sha256": "24bc43581bec68075bb9578b22d10b598ccab7f156af163eb4ce763cac354e92",
       "changes": []
     },
-    "release_sha256": "ec54ebd59b70ada3d7daf6e1148f944eca33f50e2c3c37387fe603f6babbc5c6"
+    "release_sha256": "94cc8d3805efb97d1cf45f446e6c29a09f0239a522d3cebefc9a41a8a0c01cef"
   },
   {
     "file": "analysis/ase_fragment_counts/call_phaser_ase_candidates.py",
@@ -84,25 +92,30 @@
     "release_sha256": "6d468655e01bb98ae2302cfa7592972f920c18a0fdfa8fc8bbd3963562468878"
   },
   {
-    "file": "analysis/ase_fragment_counts/test_v025_bam_integration.py",
+    "file": "analysis/ase_fragment_counts/test_fragment_bam_integration.py",
     "source_release": "ase_fragment_counts",
     "source_file": "test_v025_bam_integration.py",
     "source_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_fragment_counts/test_v025_bam_integration.py to analysis/ase_fragment_counts/test_fragment_bam_integration.py; historical source identifiers retained.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
+    ],
     "original_lineage": {
       "source_release": "phaser_ase_standalone_v0.2.5",
       "source_filename": "test_v025_bam_integration.py",
       "source_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c",
       "changes": []
     },
-    "release_sha256": "d41bb334011c92b96e47541e4841ca4b1617d38b67399c8a341dd860da30502c"
+    "release_sha256": "d396245a613992b52c502d25aa707630479e4a1e1a945cdf705c7363f918cb30"
   },
   {
-    "file": "analysis/ase_fragment_counts/test_v025_logic.py",
+    "file": "analysis/ase_fragment_counts/test_fragment_logic.py",
     "source_release": "ase_fragment_counts",
     "source_file": "test_v025_logic.py",
     "source_sha256": "f75abfdc5631f41feaf9499dd76724cfeb4340b42b2216af0e42eba003544d73",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_fragment_counts/test_v025_logic.py to analysis/ase_fragment_counts/test_fragment_logic.py; historical source identifiers retained."
+    ],
     "original_lineage": {
       "source_release": "phaser_ase_standalone_v0.2.5",
       "source_filename": "test_v025_logic.py",
@@ -112,11 +125,13 @@
     "release_sha256": "f75abfdc5631f41feaf9499dd76724cfeb4340b42b2216af0e42eba003544d73"
   },
   {
-    "file": "analysis/ase_fragment_counts/validate_v025_outputs.py",
+    "file": "analysis/ase_fragment_counts/validate_fragment_outputs.py",
     "source_release": "ase_fragment_counts",
     "source_file": "validate_v025_outputs.py",
     "source_sha256": "97a4912cede3220bf8c6abfb90a022ecdc559d5f8b97825222eb18a03d25bda4",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_fragment_counts/validate_v025_outputs.py to analysis/ase_fragment_counts/validate_fragment_outputs.py; historical source identifiers retained."
+    ],
     "original_lineage": {
       "source_release": "phaser_ase_standalone_v0.2.5",
       "source_filename": "validate_v025_outputs.py",
@@ -140,11 +155,13 @@
     "release_sha256": "b15e633d32472c2bd5e721a1d7a32d044a6f110e4c7b2274155646c7d2b84a8b"
   },
   {
-    "file": "analysis/ase_reclassification/reclassify_ase_v026.py",
+    "file": "analysis/ase_reclassification/reclassify_ase.py",
     "source_release": "ase_reclassification",
     "source_file": "reclassify_ase_v026.py",
     "source_sha256": "a8be2ff457a03a969542524322fa6152723560f390d2fcadf231025999325b45",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_reclassification/reclassify_ase_v026.py to analysis/ase_reclassification/reclassify_ase.py; historical source identifiers retained."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_reclassifier",
       "source_filename": "reclassify_ase_v026.py",
@@ -154,25 +171,30 @@
     "release_sha256": "a8be2ff457a03a969542524322fa6152723560f390d2fcadf231025999325b45"
   },
   {
-    "file": "analysis/ase_reclassification/test_reclassify_ase_v026.py",
+    "file": "analysis/ase_reclassification/test_reclassify_ase.py",
     "source_release": "ase_reclassification",
     "source_file": "test_reclassify_ase_v026.py",
     "source_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_reclassification/test_reclassify_ase_v026.py to analysis/ase_reclassification/test_reclassify_ase.py; historical source identifiers retained.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_reclassifier",
       "source_filename": "test_reclassify_ase_v026.py",
       "source_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126",
       "changes": []
     },
-    "release_sha256": "4db1f2aabba296c93743a432973a6ce56de0771b2c1326bff29b742b58205126"
+    "release_sha256": "a7eac89219d5c699f85548bd75f1bdb1750e86d90a334f6898add4ab1e84b8d2"
   },
   {
-    "file": "analysis/ase_reclassification/validate_ase_v026_outputs.py",
+    "file": "analysis/ase_reclassification/validate_ase_outputs.py",
     "source_release": "ase_reclassification",
     "source_file": "validate_ase_v026_outputs.py",
     "source_sha256": "c3586204d7751bc1a837f05d2bd55acda967d59eef2c756ca2a30556ae968908",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/ase_reclassification/validate_ase_v026_outputs.py to analysis/ase_reclassification/validate_ase_outputs.py; historical source identifiers retained."
+    ],
     "original_lineage": {
       "source_release": "ase_candidates_v0.2.6_reclassifier",
       "source_filename": "validate_ase_v026_outputs.py",
@@ -766,9 +788,10 @@
     "source_sha256": "259e0fb04c0c6592e1676f0de4c0b3918011f63c95d1f5cbe045d25295f26198",
     "changes": [
       "Register original ASM cache interface/tests.",
-      "2026-10-01: Remove obsolete SNP-level suites and run block-integration coverage tests."
+      "2026-10-01: Remove obsolete SNP-level suites and run block-integration coverage tests.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
     ],
-    "release_sha256": "97eb933971fabe9d3108ea51411fbd644c04679e3b1c1350388edf5c454ad96d"
+    "release_sha256": "a71ba5ef4688fd0548f898c24d71740a5f422aae5f646e9af553cd4087c09062"
   },
   {
     "file": "scripts/verify_release.py",
@@ -1008,14 +1031,18 @@
     "file": "analysis/annotation/reference.py",
     "source_file": "reference.py",
     "source_sha256": "c11dbce5c39bf2ef8dd80a61dc1c1533de2881d34f48acf0d6820703288692f7",
-    "changes": [],
-    "release_sha256": "c11dbce5c39bf2ef8dd80a61dc1c1533de2881d34f48acf0d6820703288692f7"
+    "changes": [
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
+    ],
+    "release_sha256": "829b79cc0f200c3343dafff2f8c4b77d0ee95df40c58ad1fc1054a75a634508c"
   },
   {
-    "file": "analysis/annotation/vendor/legacy_v033_annotation.py",
+    "file": "analysis/annotation/vendor/annotate_cpg_windows.py",
     "source_file": "legacy_v033_annotation.py",
     "source_sha256": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09",
-    "changes": [],
+    "changes": [
+      "Renamed public code path from analysis/annotation/vendor/legacy_v033_annotation.py to analysis/annotation/vendor/annotate_cpg_windows.py; historical source identifiers retained."
+    ],
     "release_sha256": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09"
   },
   {
@@ -1065,10 +1092,11 @@
   {
     "file": "scripts/run_analysis.py",
     "origin": "New public execution interface or test written during curation",
-    "release_sha256": "309d54a1eeeabf6e2df1b9c5071ad0cc378cf065f44f29a31f3d1fb70f7fb2f3",
+    "release_sha256": "250a995fdde08b5f652d91906f0753d3460ad1948ffa3656e1c7a206ac26db49",
     "changes": [
       "Register original ASM cache interface/tests.",
-      "2026-10-01: Remove standalone SNP-level ASE commands and dependent PigGTEx commands."
+      "2026-10-01: Remove standalone SNP-level ASE commands and dependent PigGTEx commands.",
+      "Updated code-path references for version-free public filenames; analysis and data contracts unchanged."
     ]
   },
   {

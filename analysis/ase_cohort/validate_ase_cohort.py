@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Mapping, Sequence
 
-from build_ase_v026_cohort import (
+from build_ase_cohort import (
     DEFAULT_SAMPLES,
     DEFAULT_TISSUE_ALIASES,
     OUTPUT_SPECS,

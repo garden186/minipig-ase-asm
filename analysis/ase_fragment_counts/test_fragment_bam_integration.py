@@ -17,7 +17,7 @@ sys.path.insert(0, HERE)
 SPEC = importlib.util.spec_from_file_location("caller_v025", SCRIPT)
 CALLER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CALLER)
-import validate_v025_outputs as VALIDATOR
+import validate_fragment_outputs as VALIDATOR
 PROJECT_TMP = os.path.abspath(
     os.environ.get("ASE_PROJECT_TMP", os.path.join(HERE, "tmp"))
 )

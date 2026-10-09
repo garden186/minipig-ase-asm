@@ -5,8 +5,8 @@
     "build_index.py": "2b3dc186e567e82a50baad576ad998277035806637460fe41887192e7ffcd215",
     "common.py": "b5336e96abc2f14544c8a5eb6acd26c0c13594204c89e1e556da069c53591f4c",
     "individual_composition.py": "9c8b519a5539648acfc10d53dcbf04aceaab9c335dc2902808bde1a4234073fd",
-    "reference.py": "c11dbce5c39bf2ef8dd80a61dc1c1533de2881d34f48acf0d6820703288692f7",
+    "reference.py": "829b79cc0f200c3343dafff2f8c4b77d0ee95df40c58ad1fc1054a75a634508c",
     "vendor/asm_annotation_common.py": "3286a54782c50573d06e7d563651d79925012f99c7db28f6ae4c579174e67d71",
-    "vendor/legacy_v033_annotation.py": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09"
+    "vendor/annotate_cpg_windows.py": "337e52d3cbe1eeb5235ce6f01598975dc3f735ba3f5d4ae10bb1463c1b511a09"
   }
 }

@@ -7,8 +7,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--asm-config',type=Path);a=p.parse_args()
     a.output=a.output.resolve();a.output.mkdir(parents=True,exist_ok=False)
     suites=[('portability',ROOT/'tests','test_*.py')]
-    for name,pattern in [('ase_reclassification','test_reclassify_ase_v026.py'),('ase_recurrence','test_core_eligible_recurrence.py'),('ase_tissue_enrichment','test_ase_tissue_specificity.py'),('piggtex','test_piggtex_validation.py')]:suites.append((name,ROOT/'analysis'/name,pattern))
-    suites.extend([('ase_fragment_logic',ROOT/'analysis/ase_fragment_counts','test_v025_logic.py'),('ase_fragment_candidates',ROOT/'analysis/ase_fragment_counts','test_call_phaser_ase_candidates.py'),('ase_cohort',ROOT/'analysis/ase_cohort','test_ase_v026_cohort.py')])
+    for name,pattern in [('ase_reclassification','test_reclassify_ase.py'),('ase_recurrence','test_core_eligible_recurrence.py'),('ase_tissue_enrichment','test_ase_tissue_specificity.py'),('piggtex','test_piggtex_validation.py')]:suites.append((name,ROOT/'analysis'/name,pattern))
+    suites.extend([('ase_fragment_logic',ROOT/'analysis/ase_fragment_counts','test_fragment_logic.py'),('ase_fragment_candidates',ROOT/'analysis/ase_fragment_counts','test_call_phaser_ase_candidates.py'),('ase_cohort',ROOT/'analysis/ase_cohort','test_ase_cohort.py')])
     suites.append(('asm_fragment_evidence',ROOT/'analysis/asm_counting/engine/tests','test_*.py'))
     suites.append(('asm_cache',ROOT/'analysis/asm_cache','test_cache.py'))
     suites.append(('integration',ROOT/'analysis/integration','test_*.py'))

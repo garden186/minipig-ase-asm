@@ -12,8 +12,8 @@ PKG_DIR = Path(__file__).resolve().parent
 if str(PKG_DIR) not in sys.path:
     sys.path.insert(0, str(PKG_DIR))
 
-import build_ase_v026_cohort as builder
-import validate_ase_v026_cohort as validator
+import build_ase_cohort as builder
+import validate_ase_cohort as validator
 
 
 def gene_row(sample, tissue, gene_id, status):

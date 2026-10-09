@@ -5,8 +5,8 @@ Run entry points as separate processes. Their native `common`/validator module n
 ## Dependencies and order
 
 1. `ase_fragment_counts/call_phaser_ase_candidates.py`: joint phASER variant connections, haplotypes and haplotypic counts; matching phased WGS VCF; WGS-only phASER allelic counts; annotation GTF; RNA BAM manifest. The caller recounts distinct QNAME fragments instead of summing per-SNP counts.
-2. `ase_reclassification/reclassify_ase_v026.py`: saved block results and original QC/validation metadata. Preserve technical conflict and local-phase QC fields.
-3. `ase_cohort/build_ase_v026_cohort.py`: all reclassified animal outputs. Exclude Cranial as in the final cohort; expected study scope is 103 animal–tissue units and 11 tissues.
+2. `ase_reclassification/reclassify_ase.py`: saved block results and original QC/validation metadata. Preserve technical conflict and local-phase QC fields.
+3. `ase_cohort/build_ase_cohort.py`: all reclassified animal outputs. Exclude Cranial as in the final cohort; expected study scope is 103 animal–tissue units and 11 tissues.
 4. `ase_recurrence/core_eligible_recurrence.py`: complete eligible cohort and canonical cohort core/recurrent outputs, using the primary fragment threshold 15. The additional threshold options in the original source are not required for the primary release.
 5. `ase_tissue_enrichment/ase_tissue_specificity.py`, followed by the primary pair selector below.
 

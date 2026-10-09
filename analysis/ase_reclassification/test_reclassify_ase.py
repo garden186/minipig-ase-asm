@@ -13,8 +13,8 @@ PKG_DIR = Path(__file__).resolve().parent
 if str(PKG_DIR) not in sys.path:
     sys.path.insert(0, str(PKG_DIR))
 
-import reclassify_ase_v026 as reclassifier
-import validate_ase_v026_outputs as validator
+import reclassify_ase as reclassifier
+import validate_ase_outputs as validator
 
 
 SOURCE_FIELDS = sorted(reclassifier.REQUIRED_BLOCK_FIELDS)

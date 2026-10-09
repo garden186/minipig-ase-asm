@@ -10,7 +10,7 @@ import time
 
 from common import ROOT,VERSION,POLICY,GTF_SHA256,Guard,digest,sha,read_json,write_json,writer,rows
 sys.path.insert(0,str(ROOT/'vendor'))
-from legacy_v033_annotation import load_gtf,annotate_gene,Window,DEFAULT_CANONICAL_TAG,promoter_interval
+from annotate_cpg_windows import load_gtf,annotate_gene,Window,DEFAULT_CANONICAL_TAG,promoter_interval
 
 GENE_REMOVE={'chrom','k','window_id','first_cpg_index','last_cpg_index','cpg_positions_1based','start0','end0','span_bp'}
 TX_REMOVE={'chrom','k','window_id','cpg_positions_1based','start0','end0'}
@@ -65,7 +65,7 @@ def build(gtf,out,expected_hash=GTF_SHA256,chromosomes=None,max_gib=8,min_free_g
     out.mkdir(parents=True,exist_ok=False);guard=Guard(out,max_gib,min_free_gib)
     genes,qc=load_gtf(gtf,set(chromosomes or [str(i) for i in range(1,19)]),DEFAULT_CANONICAL_TAG,2000,500)
     contract=dict(version=VERSION,policy=POLICY,gtf_sha256=expected_hash,chromosomes=sorted(genes,key=int),
-        historical_engine_sha256=sha(ROOT/'vendor'/'legacy_v033_annotation.py'))
+        historical_engine_sha256=sha(ROOT/'vendor'/'annotate_cpg_windows.py'))
     db=sqlite3.connect(out/'profiles.sqlite');db.execute('CREATE TABLE profiles (id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
     sf,sw=writer(out/'segments.tsv.gz',['chrom','start0','end0','annotation_profile_id'])
     seen=set();n=0;tx_n=0;gene_n=0;gh=th=None
@@ -113,7 +113,7 @@ class Index:
         self.directory=Path(directory);self.meta=read_json(self.directory/'validation.json')
         if self.meta.get('status')!='PASS_REFERENCE_ANNOTATION_INDEX' or self.meta.get('errors')!=[]:raise ValueError('Reference index is incomplete')
         if (self.meta['contract']['policy']!=POLICY or self.meta['contract'].get('version')!=VERSION or
-                self.meta['contract'].get('historical_engine_sha256')!=sha(ROOT/'vendor'/'legacy_v033_annotation.py')):
+                self.meta['contract'].get('historical_engine_sha256')!=sha(ROOT/'vendor'/'annotate_cpg_windows.py')):
             raise ValueError('Reference annotation policy/engine differs')
         if verify:
             for name,h in self.meta['sha256'].items():

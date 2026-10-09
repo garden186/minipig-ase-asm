@@ -4,8 +4,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 COMMANDS={
  'ase-count':'analysis/ase_fragment_counts/call_phaser_ase_candidates.py',
- 'ase-classify':'analysis/ase_reclassification/reclassify_ase_v026.py',
- 'ase-cohort':'analysis/ase_cohort/build_ase_v026_cohort.py',
+ 'ase-classify':'analysis/ase_reclassification/reclassify_ase.py',
+ 'ase-cohort':'analysis/ase_cohort/build_ase_cohort.py',
  'ase-recurrence':'analysis/ase_recurrence/core_eligible_recurrence.py',
  'ase-tissues':'analysis/ase_tissue_enrichment/ase_tissue_specificity.py',
  'ase-select-tissues':'scripts/select_primary_tissue_pairs.py',
