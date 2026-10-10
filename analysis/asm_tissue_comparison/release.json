@@ -1,0 +1,17 @@
+{
+  "version": "portable-0.2.0-rc1",
+  "original_release": "asm_tissue_aligned_v0.1.0",
+  "sha256": {
+    "assets_manifest.json": "b64afdc046e8f486744c9ed0dae4cd29b6ea26f45de8cd4475aa1122ac38d48e",
+    "common.py": "eead8451f71fcf458f25541613f01076786a717281f3b88e4dbb22985a1ac707",
+    "data.py": "9290f1c5ae2d931099fdf2096b9403afa4dcf92fe98b3bd551e47b10ae5c723a",
+    "exact.py": "961395f745381983493ddefdec9ad11df0b81a1ed42527667b0bd5f20870010c",
+    "pipeline.py": "e2b52cb6cf6579b896d1b960f81a4c5da978eee6f8fa3b560a7f73bf322ab288",
+    "policy.json": "31ab2713ad70fd7d0b2d0cdce36cbf953948614453fd9156a87decc85104a804",
+    "reporting.py": "adbd106d882db86d0d35d9b662e41612988b0a2554f55e8c25793d0a0b30df0d",
+    "run.py": "b9d7558336c51f6d31048b4797996147d8f081ad5179ebc447a7f18f955f9824",
+    "schema.py": "8de6bfc4f6b8d9da689d8216138092db679cf0cf697ed4003e9814f6f3a54d03",
+    "selftest.py": "8d13a64e96ef28f8f939149dffad09f603cde97926735116c3f188c038aeb21a",
+    "stats.py": "d4146be4ccb855f863acd5b35a028801dbdc236456f995a3f8d34a3aff67b366"
+  }
+}

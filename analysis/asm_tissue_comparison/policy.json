@@ -1,0 +1,23 @@
+{
+  "minimum_paired_N": 2,
+  "r": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "eligibility": "Whole authenticated aligned stage2 universe; paired exact anchor PS and inherited depth QC. No observed-sign, tie, effect-size, individual-ASM, recurrence, GO or historical-hit selection.",
+  "individual_test": "Two-sided exact equal-OR conditional test with probability ordering over the full fixed-margin support. No sign conditioning, pseudocount or mid-P.",
+  "recurrence": "Fisher partial conjunction of all paired-animal OR P values, r=2..N, separately for each of three tissue pairs.",
+  "primary_q": "BH over the entire eligible N>=r CpG family for each tissue pair and r. Cross-CpG independence/appropriate positive-dependence assumptions remain.",
+  "robust_q": "BY over the same complete family, reported as a separate dependence sensitivity. Do not choose the smaller correction.",
+  "effect": "ALT-minus-REF fraction at one common SNP anchor, paired first-minus-second signed difference. Mean and median are descriptive, not the OR-test estimand.",
+  "missing": "Unaligned or absent is unavailable, never zero. Keep all aligned paired animals, including zero and opposing effects. No PS pooling.",
+  "resource": "All allowed CPUs subject to job RAM estimates; reserve 2 percent total RAM plus 2 GiB, disk 20 GiB, native math threads 1.",
+  "families": "27 separate pair-by-r families. No union/max-r FDR, no ALL3 test, no general minimum-N validation."
+}

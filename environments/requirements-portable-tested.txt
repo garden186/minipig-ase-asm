@@ -1,0 +1,4 @@
+# Validation environment for this analysis-only candidate; not historical preprocessing evidence.
+numpy==2.5.2
+scipy==1.18.1
+psutil==7.2.2

@@ -1,0 +1,24 @@
+{
+  "version": "portable-0.2.0-rc1",
+  "sha256": {
+    "asm_test.py": "4b830458eda67b8e7c8264b0317af70c83dd758ccd29e46bd23b904df936c9c0",
+    "check_asm_inputs.py": "ceeb2596a0abc4191945edb0f66d3f0a8882593503a9d1dce2abc63556687acb",
+    "common.py": "c1ebe0eb751774ed223c76f4b6226555bfc2c1e49a0ed00e5c091c36b737d506",
+    "evidence.py": "6d2eba5c76474074f55b9a6615e3e59d87a91a18669db7e277c837262371f2e6",
+    "genome_support.py": "002dfb8d84a5ffb568b3c270ed1e953ca73df1ff5076fb1d3cfde7ceaee90d1a",
+    "profile.py": "003f38988390a40da8bf7fc4be6fd06345b318ac7a2159c978f999ea190b8967",
+    "reassign.py": "e532780374dfeb34ad5b81acfb2075186febb5b91f0ea57b8de505673264149b",
+    "run.py": "f27d276d887d4524742688674ee1c6ab2cce63a9fb4a1e6a72f8810579f39462",
+    "scheduler.py": "610a8df0a5cace98aafcb56b28ad838b1f197930465f34d1f5c43bd673a1d6bd",
+    "tests/test_evidence.py": "fe3355820d0a08fe443b952009ab68279e1db227345e145a7e814b07d0318050",
+    "tests/test_profile.py": "cd6ab2bdded11d6f62352475e089772f62195f9d4a4667178456c4c5a7690056",
+    "upstream/engine.py": "d2cb51861442f620013f994debcf7cbfced3ca48a624b49dcb11986b499590d4",
+    "upstream/support.py": "db5a07c0e9e2c2b1fc3991f2938533933b30964833cbedb225c98e9a80b22ca5",
+    "upstream/vendor/bimodal_fragment_asm.py": "a55578e1b855bfac5913d0f4c11a761ea7aa0e3e98771aa63e6d4c58beb2b2a0",
+    "upstream/vendor/count_exact_cpgk.py": "e373b8c2dada5ce9df20a10c360d941e43315aff6c853339e6f90e0220e3d551",
+    "upstream/vendor/cpgk_common.py": "97ad270a0a19f5830f399d9fe87104a21dc418f22ddfdaff0e4086fe2e804dc4",
+    "upstream/vendor/cpgk_scan_helpers.py": "2b84aad6fc0166d6743a0277402870cd5a843317d8e4b1719bc347fd759fed11",
+    "validate.py": "05807a09838b2ed964128f4ed36650b619811d33513496103108cafbf49ad3c2",
+    "worker.py": "2ea93da195e2fbb5251d7816f8ac3536ba33ebc60f8e8cd05b0747d220d7c20b"
+  }
+}

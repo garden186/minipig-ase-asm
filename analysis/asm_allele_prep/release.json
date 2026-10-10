@@ -1,0 +1,12 @@
+{
+  "version": "portable-0.2.0-rc1",
+  "original_release": "asm_allele_prep_v0.1.0",
+  "sha256": {
+    "assets_manifest.json": "647f30fe1dc87e1c4573a12a85360ba1a2ae9d0a8256176b20843a77ccf7a23b",
+    "common.py": "583adf5173a36832a535de022c478958736d1ec63bbc1da60d069dfd6af676ee",
+    "indexing.py": "86fcd5efdd2d0f6249e9966f3ac0ad21978bceeeff94bcc9340c1bfbc9710247",
+    "pilot.py": "b65f617a3d10ece735b658fba9fc867b96dfda25ee87a696a18c479c2bccbf12",
+    "run.py": "426662d9833be7d2070c1bb45175a687e6e1e0d6ea0198610bc3a11089297ee5",
+    "selftest.py": "3ee9eaaf1b6a9ae0748bf7985c91e56898eda079b5da6e0896d36de41b6d6887"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "portable-cache-0.2.0-rc2",
+  "sha256": {
+    "cache.py": "84d1b76c089e1e7b2fb32de1f7a9ccd221268a84186bfbd16bb68d9534c6b55b",
+    "common.py": "a4be458aa744a591bc9790379d42a004b302d99f79912ba4fa0fca68c1798ff3",
+    "run.py": "2cb186553daeb12873e11ef08e3a22288e882c3b3cf11a6696655507ac6e5fcc",
+    "test_cache.py": "d287b3d4fa99356113a75167446175422a3cfd9d3d54786bd60ae8d306a5904b"
+  }
+}

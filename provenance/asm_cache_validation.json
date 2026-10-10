@@ -1,0 +1,14 @@
+{
+  "status": "PASS_SCOPED_CACHE_CHECKS",
+  "date": "2026-09-28",
+  "tests_run": 5,
+  "passed": 5,
+  "skipped": 0,
+  "failures": 0,
+  "native_anchor_indexer_consumed_exported_cache": true,
+  "original_cache_and_common_bytes_preserved": true,
+  "scope": "Synthetic cache interface and native consumer; no full-genome rerun",
+  "test_code_sha256": "d287b3d4fa99356113a75167446175422a3cfd9d3d54786bd60ae8d306a5904b",
+  "test_log_sha256": "90fec93ace72af2d7a4ef1ebef9c7c36a0f068873cc75f14f3b72d44cc16cf22",
+  "cli_help": "PASS"
+}

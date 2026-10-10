@@ -1,0 +1,57 @@
+{
+  "status": "PASS_SCOPED_LOCAL_CHECKS",
+  "date": "2026-10-10",
+  "scope": "Data-free tests, synthetic BAM integration, Python syntax, CLI help and file identities",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Windows"
+  },
+  "default_test_suites": 11,
+  "default_tests_run": 110,
+  "default_tests_passed": 109,
+  "default_tests_skipped": 1,
+  "additional_fragment_bam_integration_tests_passed": 1,
+  "python_files_parsed": 96,
+  "cli_help_checks_passed": 10,
+  "annotation_manifest": "PASS",
+  "integration_replay": {
+    "date": "2026-10-01",
+    "minimal_coverage_columns": [
+      "sample",
+      "tissue",
+      "chrom",
+      "position",
+      "variant_id",
+      "all_parent_block_ids",
+      "matched_promoter_gene_ids",
+      "total_informative_fragments"
+    ],
+    "coverage_rows": 731,
+    "outputs": {
+      "block_links.tsv": {
+        "rows": 12,
+        "byte_identical": true,
+        "sha256": "8bdcf3478d1b64381f93771e0a9f9e853548501bd457ed95d12f8ecc2d972a02"
+      },
+      "cpg_audit.tsv": {
+        "rows": 206,
+        "byte_identical": true,
+        "sha256": "e453cfa6dcbe085bbcca83299fd86d1ff31fffd2e2cbd9157758301b56bc83a7"
+      },
+      "block_attempts.tsv": {
+        "rows": 340,
+        "byte_identical": true,
+        "sha256": "22881e6876a8066bb48897f171a782459f1b49212e5b5d2300ee865c963a759a"
+      }
+    },
+    "site_level_output_absent": true
+  },
+  "limitations": [
+    "Real samtools/bcftools test requires external server tools.",
+    "No full sequencing-data, Linux preprocessing or whole-genome rerun.",
+    "Optional native ASM regression suites require external assets and were not rerun on this date.",
+    "R/GO execution was not included in these local checks."
+  ]
+}
