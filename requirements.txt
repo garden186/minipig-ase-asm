@@ -1,0 +1,4 @@
+numpy==2.5.2
+scipy==1.18.1
+psutil==7.2.2
+pysam>=0.22,<0.24; platform_system == "Linux"

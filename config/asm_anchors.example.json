@@ -1,0 +1,91 @@
+{
+  "ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10"
+  ],
+  "tissues": [
+    "Heart",
+    "Kidney",
+    "Liver"
+  ],
+  "chromosomes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "pilot_per_stratum": 20,
+  "units": [
+    {
+      "sample": "S01",
+      "tissue": "Heart",
+      "raw": {
+        "path": "../inputs/S01_Heart.raw.tsv.gz",
+        "sha256": "SUPPLY_CURRENT_FILE_SHA256",
+        "rows": 0
+      },
+      "annotated": {
+        "sample": "S01",
+        "tissue": "Heart",
+        "path": "../inputs/S01_Heart.tested.annotated.tsv.gz",
+        "sha256": "SUPPLY_CURRENT_FILE_SHA256",
+        "rows": 0
+      },
+      "cache": {
+        "path": "../results/cache/S01-Heart",
+        "gate": "../results/cache/S01-Heart/validation.json",
+        "gate_sha256": "SUPPLY_CURRENT_GATE_SHA256",
+        "sha256": {}
+      }
+    }
+  ],
+  "wgs": [
+    {
+      "sample": "S01",
+      "phased": {
+        "path": "../inputs/S01.phased.vcf.gz",
+        "sha256": "SUPPLY_CURRENT_FILE_SHA256"
+      },
+      "genotype": {
+        "path": "../inputs/S01.genotype.vcf.gz",
+        "sha256": "SUPPLY_CURRENT_FILE_SHA256"
+      },
+      "snpsplit": {
+        "path": "../inputs/S01.snpsplit.txt",
+        "sha256": "SUPPLY_CURRENT_FILE_SHA256"
+      }
+    }
+  ],
+  "reference": {
+    "path": "../references/reference.fa",
+    "sha256": "SUPPLY_CURRENT_FILE_SHA256",
+    "index_path": "../references/reference.fa.fai",
+    "index_sha256": "SUPPLY_CURRENT_INDEX_SHA256"
+  },
+  "expected": {
+    "raw_rows": 0,
+    "tested_rows": 0
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "gene_universe": "one_tissue_gene_universe.tsv",
+  "go_annotation": "Ensembl115_GO_BP.tsv.gz",
+  "output": "new_GO_output"
+}

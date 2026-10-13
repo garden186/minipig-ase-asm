@@ -1,0 +1,9 @@
+{
+  "version": "current",
+  "sha256": {
+    "bootstrap.py": "bf64da309264a1bc38f1b87e637373f44d53210cda6fcd84626fda94da9eebbb",
+    "depth.py": "ad6b85cc58e0678b760bfd3c8937def1b7bb9d3bfe704d8ced27328cda3ce430",
+    "recount.py": "627bf4757c7d682e37ed32de9c5bb8a11257efece974b40006e39e69b0e2115c",
+    "validation.py": "8ab4f2bb4e64ed9b1ee8222d0549bcd55e849578143654a9a908fe76761339fc"
+  }
+}

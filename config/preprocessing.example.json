@@ -1,0 +1,11 @@
+{
+  "work_dir": "../work",
+  "reference_fasta": "../references/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa",
+  "annotation_gtf": "../references/Sus_scrofa.Sscrofa11.1.115.gtf",
+  "phaser_script": "../software/phaser/phaser.py",
+  "threads": 16,
+  "phaser_threads": 2,
+  "bismark_parallel": 4,
+  "deepvariant_image": "google/deepvariant:1.10.0",
+  "tools": {"python": "python3"}
+}

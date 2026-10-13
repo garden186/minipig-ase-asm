@@ -1,0 +1,2 @@
+sample	tissue	bam	phased_vcf	genotype_vcf	snpsplit_snps	reference
+S01	Heart	../work/wgbs/S01/Heart/asm_input.bam	../work/wgs/S01/phased.vcf.gz	../work/wgs/S01/variants.vcf.gz	../work/wgbs/S01/alleles.tsv	../work/reference/reference.fa
