@@ -1,4 +1,4 @@
-# Final Ensembl115 BP analysis, using the original validated native enricher path.
+# Final Ensembl115 BP analysis, using the clusterProfiler enricher.
 args <- commandArgs(TRUE)
 if (length(args)!=1) stop("Usage: Rscript enrich_final.R specification.json")
 script <- sub("^--file=", "", grep("^--file=",commandArgs(),value=TRUE)[1])

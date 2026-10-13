@@ -11,7 +11,6 @@
     "S09",
     "S10"
   ],
-  "fixture": false,
   "stage2_root": "../results/directional",
   "stage2_identity": "FROM_RUN_IDENTITY",
   "root_checks": {},
@@ -21,29 +20,6 @@
     "sites": 0,
     "profiles": 0,
     "aligned": 0
-  },
-  "policy": {
-    "minimum_paired_N": 2,
-    "r": [
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
-    "eligibility": "Whole authenticated aligned stage2 universe; paired exact anchor PS and inherited depth QC. No observed-sign, tie, effect-size, individual-ASM, recurrence, GO or preselected-hit selection.",
-    "individual_test": "Two-sided exact equal-OR conditional test with probability ordering over the full fixed-margin support. No sign conditioning, pseudocount or mid-P.",
-    "recurrence": "Fisher partial conjunction of all paired-animal OR P values, r=2..N, separately for each of three tissue pairs.",
-    "primary_q": "BH over the entire eligible N>=r CpG family for each tissue pair and r. Cross-CpG independence/appropriate positive-dependence assumptions remain.",
-    "robust_q": "BY over the same complete family, reported as a separate dependence sensitivity. Do not choose the smaller correction.",
-    "effect": "ALT-minus-REF fraction at one common SNP anchor, paired first-minus-second signed difference. Mean and median are descriptive, not the OR-test estimand.",
-    "missing": "Unaligned or absent is unavailable, never zero. Keep all aligned paired animals, including zero and opposing effects. No PS pooling.",
-    "resource": "All allowed CPUs subject to job RAM estimates; reserve 2 percent total RAM plus 2 GiB, disk 20 GiB, native math threads 1.",
-    "families": "27 separate pair-by-r families. No union/max-r FDR, no ALL3 test, no general minimum-N validation."
   },
   "assets": {
     "genes": "../inputs/genes.json",
@@ -66,5 +42,35 @@
     "annotation_chr16": "../inputs/chr16.primary.npy",
     "annotation_chr17": "../inputs/chr17.primary.npy",
     "annotation_chr18": "../inputs/chr18.primary.npy"
+  },
+  "settings": {
+    "minimum_paired_N": 2,
+    "r": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "eligibility": "aligned_paired_anchor_ps",
+    "minimum_haplotype_depth": 3,
+    "minimum_total_depth": 10,
+    "sign_filter": false,
+    "individual_test": "two_sided_exact_equal_OR",
+    "probability_ordering": true,
+    "support": "full_fixed_margin",
+    "pseudocount": 0,
+    "mid_p": false,
+    "recurrence": "fisher_partial_conjunction",
+    "primary_q": "BH",
+    "sensitivity_q": "BY",
+    "family": "tissue_pair_by_r",
+    "effect": "ALT_minus_REF_first_minus_second",
+    "missing": "unavailable",
+    "pool_phase_sets": false
   }
 }

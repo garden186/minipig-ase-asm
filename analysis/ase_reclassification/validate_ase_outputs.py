@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent structural and numerical validator for ASE classified-ASE outputs."""
+"""Independent structural and numerical validator for classified ASE outputs."""
 
 import argparse
 import csv
@@ -11,7 +11,6 @@ import sys
 import tempfile
 from collections import Counter
 from pathlib import Path
-
 
 CORE_CLASSES = {"ASE_CORE_ROBUST", "ASE_CORE_SUPPORTED"}
 SUPPORTED_CLASSES = {
@@ -180,11 +179,8 @@ def create_db(path):
     connection = sqlite3.connect(str(path))
     connection.execute("PRAGMA journal_mode=OFF")
     connection.execute("PRAGMA synchronous=OFF")
-    connection.execute(
-        "CREATE TABLE block_keys (key TEXT PRIMARY KEY, evidence TEXT NOT NULL)"
-    )
-    connection.execute(
-        """
+    connection.execute("CREATE TABLE block_keys (key TEXT PRIMARY KEY, evidence TEXT NOT NULL)")
+    connection.execute("""
         CREATE TABLE measurement_obs (
             measurement_id TEXT,
             sample TEXT,
@@ -193,8 +189,7 @@ def create_db(path):
             qvalue REAL,
             UNIQUE(measurement_id,sample,tissue,pvalue,qvalue)
         )
-        """
-    )
+        """)
     connection.execute(
         "CREATE TABLE gene_rows (gene_key TEXT, evidence TEXT, test_status TEXT, technical_status TEXT)"
     )
@@ -218,23 +213,19 @@ def read_subset_keys(path, expected_classes, errors):
             if row.get("classified_evidence_class") not in expected_classes:
                 add_error(
                     errors,
-                    "invalid_subset_class:{}:{}".format(
-                        key, row.get("classified_evidence_class")
-                    ),
+                    "invalid_subset_class:{}:{}".format(key, row.get("classified_evidence_class")),
                 )
     return keys
 
 
 def validate_bh(connection, errors, tolerance):
-    conflicts = connection.execute(
-        """
+    conflicts = connection.execute("""
         SELECT measurement_id,COUNT(*)
         FROM measurement_obs
         GROUP BY measurement_id
         HAVING COUNT(*) > 1
         LIMIT 100
-        """
-    ).fetchall()
+        """).fetchall()
     for measurement_id, count in conflicts:
         add_error(
             errors,
@@ -268,9 +259,7 @@ def validate_bh(connection, errors, tolerance):
             if observed is None or abs(observed - expected) > tolerance:
                 add_error(
                     errors,
-                    "bh_qvalue_mismatch:{}:{}:{}".format(
-                        measurement_id, observed, expected
-                    ),
+                    "bh_qvalue_mismatch:{}:{}:{}".format(measurement_id, observed, expected),
                 )
     return n_measurements
 
@@ -280,9 +269,7 @@ def expected_gene_status(classes, has_clean_tested):
         return "ASE_GENE_CORE"
     if "ASE_SUPPORTED_SINGLE_SNP" in classes:
         return "ASE_GENE_SUPPORTED_SINGLE_SNP"
-    if classes.intersection(
-        {"ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED", "ASE_SUPPORT_UNRESOLVED"}
-    ):
+    if classes.intersection({"ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED", "ASE_SUPPORT_UNRESOLVED"}):
         return "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
     if "ASE_FDR_MODERATE_EFFECT" in classes:
         return "ASE_GENE_FDR_MODERATE"
@@ -344,9 +331,7 @@ def validate_gene_summary(path, expected, errors):
             if expected.get(key) != status:
                 add_error(
                     errors,
-                    "gene_status_mismatch:{}:{}:{}".format(
-                        key, status, expected.get(key)
-                    ),
+                    "gene_status_mismatch:{}:{}:{}".format(key, status, expected.get(key)),
                 )
     for key in set(expected).difference(observed):
         add_error(errors, "missing_gene_summary:{}".format(key))
@@ -356,7 +341,7 @@ def validate_gene_summary(path, expected, errors):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Validate ASE classified-ASE outputs")
+    parser = argparse.ArgumentParser(description="Validate classified ASE outputs")
     parser.add_argument("--out-dir", required=True)
     parser.add_argument("--expect-sample")
     parser.add_argument("--skip-bh-recompute", action="store_true")
@@ -369,7 +354,7 @@ def main(argv=None):
     missing_outputs = [name for name in REQUIRED_OUTPUTS if not (output_dir / name).is_file()]
     if missing_outputs:
         report = {
-            "version": "ase_reclassification",
+            "analysis": "ase_reclassification",
             "status": "FAIL",
             "n_errors": len(missing_outputs),
             "errors_first_100": ["missing_output:{}".format(name) for name in missing_outputs],
@@ -434,7 +419,9 @@ def main(argv=None):
             }
             missing = required.difference(reader.fieldnames or [])
             if missing:
-                add_error(errors, "block_output_missing_fields:{}".format(",".join(sorted(missing))))
+                add_error(
+                    errors, "block_output_missing_fields:{}".format(",".join(sorted(missing)))
+                )
             for row_number, row in enumerate(reader, start=2):
                 n_rows += 1
                 key = block_key(row)
@@ -456,7 +443,10 @@ def main(argv=None):
                 elif total:
                     expected_fraction = max(a_count, b_count) / float(total)
                     observed_fraction = number(row.get("major_haplotype_fraction"))
-                    if observed_fraction is None or abs(observed_fraction - expected_fraction) > 1e-9:
+                    if (
+                        observed_fraction is None
+                        or abs(observed_fraction - expected_fraction) > 1e-9
+                    ):
                         add_error(errors, "major_fraction_mismatch:{}".format(key))
 
                 signal = expected_signal(row, thresholds) if not missing_thresholds else ""
@@ -494,10 +484,7 @@ def main(argv=None):
                             technical,
                         ),
                     )
-                if (
-                    row.get("analysis_set") == "MAIN"
-                    and row.get("ase_test_status") == "TESTED"
-                ):
+                if row.get("analysis_set") == "MAIN" and row.get("ase_test_status") == "TESTED":
                     cursor.execute(
                         "INSERT OR IGNORE INTO measurement_obs VALUES (?,?,?,?,?)",
                         (
@@ -543,9 +530,7 @@ def main(argv=None):
                 "SELECT COUNT(*) FROM measurement_obs"
             ).fetchone()[0]
         else:
-            n_unique_measurements = validate_bh(
-                connection, errors, args.qvalue_tolerance
-            )
+            n_unique_measurements = validate_bh(connection, errors, args.qvalue_tolerance)
 
         expected_genes = calculate_expected_gene_statuses(connection)
         n_genes, gene_status_counts = validate_gene_summary(
@@ -561,16 +546,12 @@ def main(argv=None):
     if n_rows != qc.get("n_block_gene_rows"):
         add_error(
             errors,
-            "qc_block_row_count_mismatch:{}:{}".format(
-                n_rows, qc.get("n_block_gene_rows")
-            ),
+            "qc_block_row_count_mismatch:{}:{}".format(n_rows, qc.get("n_block_gene_rows")),
         )
     if n_genes != qc.get("n_gene_summary_rows"):
         add_error(
             errors,
-            "qc_gene_row_count_mismatch:{}:{}".format(
-                n_genes, qc.get("n_gene_summary_rows")
-            ),
+            "qc_gene_row_count_mismatch:{}:{}".format(n_genes, qc.get("n_gene_summary_rows")),
         )
     if dict(sorted(class_counts.items())) != qc.get("block_evidence_class_counts"):
         add_error(errors, "qc_evidence_class_counts_mismatch")
@@ -578,7 +559,7 @@ def main(argv=None):
         add_error(errors, "qc_gene_status_counts_mismatch")
 
     report = {
-        "version": "ase_reclassification",
+        "analysis": "ase_reclassification",
         "status": "PASS" if not errors else "FAIL",
         "n_errors": len(errors),
         "n_warnings": len(warnings),

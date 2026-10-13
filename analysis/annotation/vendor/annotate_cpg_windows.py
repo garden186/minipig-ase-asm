@@ -15,8 +15,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Iterable, Iterator, Mapping, Sequence
 
-from asm_annotation_common import AnnotationError as CpGKError, VERSION, open_text, write_json
-
+from asm_annotation_common import AnnotationError as CpGKError, ANALYSIS_ID, open_text, write_json
 
 GENE_BIOTYPE = "protein_coding"
 DEFAULT_CANONICAL_TAG = "ensembl_canonical"
@@ -40,29 +39,74 @@ DISPLAY_FEATURE_ORDER = (
 DISPLAY_INDEX = {value: index for index, value in enumerate(DISPLAY_FEATURE_ORDER)}
 
 MEASUREMENT_REQUIRED = {
-    "sample", "tissue", "chrom", "k", "window_id", "first_cpg_index",
-    "last_cpg_index", "cpg_positions_1based", "start0", "end0", "span_bp",
-    "ps", "individual_ASM_call",
+    "sample",
+    "tissue",
+    "chrom",
+    "k",
+    "window_id",
+    "first_cpg_index",
+    "last_cpg_index",
+    "cpg_positions_1based",
+    "start0",
+    "end0",
+    "span_bp",
+    "ps",
+    "individual_ASM_call",
 }
 
 GENE_FIELDS = (
-    "chrom", "k", "window_id", "first_cpg_index", "last_cpg_index",
-    "cpg_positions_1based", "start0", "end0", "span_bp",
-    "annotation_gene_count", "multi_gene_overlap", "gene_id", "gene_name",
-    "gene_biotype", "gene_strand", "gene_relationship", "gene_body_overlap_bp",
-    "canonical_status", "canonical_transcript_ids", "canonical_tss_1based",
-    "primary_feature", "canonical_features", "all_transcript_features",
-    "canonical_promoter_overlap", "any_transcript_promoter_overlap",
-    "include_primary_gene_feature_summary", "has_direct_protein_coding_annotation",
+    "chrom",
+    "k",
+    "window_id",
+    "first_cpg_index",
+    "last_cpg_index",
+    "cpg_positions_1based",
+    "start0",
+    "end0",
+    "span_bp",
+    "annotation_gene_count",
+    "multi_gene_overlap",
+    "gene_id",
+    "gene_name",
+    "gene_biotype",
+    "gene_strand",
+    "gene_relationship",
+    "gene_body_overlap_bp",
+    "canonical_status",
+    "canonical_transcript_ids",
+    "canonical_tss_1based",
+    "primary_feature",
+    "canonical_features",
+    "all_transcript_features",
+    "canonical_promoter_overlap",
+    "any_transcript_promoter_overlap",
+    "include_primary_gene_feature_summary",
+    "has_direct_protein_coding_annotation",
 )
 
 TRANSCRIPT_FIELDS = (
-    "chrom", "k", "window_id", "cpg_positions_1based", "start0", "end0",
-    "gene_id", "gene_name", "gene_strand", "transcript_id", "transcript_name",
-    "transcript_biotype", "is_ensembl_canonical", "transcript_tss_1based",
-    "features", "promoter_overlap_bp", "transcript_body_overlap_bp",
-    "five_prime_utr_overlap_bp", "cds_overlap_bp", "three_prime_utr_overlap_bp",
-    "exon_overlap_bp", "intron_overlap_bp",
+    "chrom",
+    "k",
+    "window_id",
+    "cpg_positions_1based",
+    "start0",
+    "end0",
+    "gene_id",
+    "gene_name",
+    "gene_strand",
+    "transcript_id",
+    "transcript_name",
+    "transcript_biotype",
+    "is_ensembl_canonical",
+    "transcript_tss_1based",
+    "features",
+    "promoter_overlap_bp",
+    "transcript_body_overlap_bp",
+    "five_prime_utr_overlap_bp",
+    "cds_overlap_bp",
+    "three_prime_utr_overlap_bp",
+    "exon_overlap_bp",
+    "intron_overlap_bp",
 )
 
 
@@ -196,7 +240,12 @@ def reject_system_tmp(path: Path) -> None:
 
 
 def cleanup_sqlite(path: Path) -> None:
-    for candidate in (path, Path(str(path) + "-journal"), Path(str(path) + "-wal"), Path(str(path) + "-shm")):
+    for candidate in (
+        path,
+        Path(str(path) + "-journal"),
+        Path(str(path) + "-wal"),
+        Path(str(path) + "-shm"),
+    ):
         try:
             candidate.unlink()
         except FileNotFoundError:
@@ -210,7 +259,9 @@ def atomic_tsv_writer(path: Path, fieldnames: Sequence[str]):
     opener = gzip.open if path.suffix == ".gz" else open
     try:
         with opener(partial, "wt", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fieldnames, delimiter="\t", lineterminator="\n")
+            writer = csv.DictWriter(
+                handle, fieldnames=fieldnames, delimiter="\t", lineterminator="\n"
+            )
             writer.writeheader()
             yield writer
         os.replace(partial, path)
@@ -230,8 +281,7 @@ def validate_measurement_header(fieldnames: Sequence[str] | None, path: Path) ->
 
 
 def load_unique_windows(measurements: Path, connection: sqlite3.Connection) -> dict[str, object]:
-    connection.execute(
-        """
+    connection.execute("""
         CREATE TABLE windows (
           chrom TEXT NOT NULL, k INTEGER NOT NULL, window_id TEXT NOT NULL,
           first_cpg_index INTEGER NOT NULL, last_cpg_index INTEGER NOT NULL,
@@ -239,8 +289,7 @@ def load_unique_windows(measurements: Path, connection: sqlite3.Connection) -> d
           end0 INTEGER NOT NULL, span_bp INTEGER NOT NULL, conflict INTEGER NOT NULL DEFAULT 0,
           PRIMARY KEY (chrom, k, window_id)
         )
-        """
-    )
+        """)
     sql = """
         INSERT INTO windows VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
         ON CONFLICT(chrom, k, window_id) DO UPDATE SET conflict = CASE WHEN
@@ -280,14 +329,28 @@ def load_unique_windows(measurements: Path, connection: sqlite3.Connection) -> d
             asm_rows += call
             units.add((sample, tissue))
             chroms.add(chrom)
-            batch.append((chrom, k, raw["window_id"], first, last, raw["cpg_positions_1based"], start0, end0, span))
+            batch.append(
+                (
+                    chrom,
+                    k,
+                    raw["window_id"],
+                    first,
+                    last,
+                    raw["cpg_positions_1based"],
+                    start0,
+                    end0,
+                    span,
+                )
+            )
             if len(batch) >= 10000:
                 connection.executemany(sql, batch)
                 batch.clear()
         if batch:
             connection.executemany(sql, batch)
     connection.commit()
-    conflict = connection.execute("SELECT window_id FROM windows WHERE conflict=1 LIMIT 1").fetchone()
+    conflict = connection.execute(
+        "SELECT window_id FROM windows WHERE conflict=1 LIMIT 1"
+    ).fetchone()
     if conflict:
         raise CpGKError(f"same exact window has inconsistent coordinates: {conflict[0]}")
     unique_windows = int(connection.execute("SELECT COUNT(*) FROM windows").fetchone()[0])
@@ -319,7 +382,17 @@ def load_gtf(
             if len(fields) != 9:
                 malformed += 1
                 continue
-            chrom, _source, feature, start_text, end_text, _score, strand, _frame, attribute_text = fields
+            (
+                chrom,
+                _source,
+                feature,
+                start_text,
+                end_text,
+                _score,
+                strand,
+                _frame,
+                attribute_text,
+            ) = fields
             chrom = normalize_chrom(chrom)
             if chrom not in requested_chroms or strand not in {"+", "-"}:
                 continue
@@ -357,7 +430,9 @@ def load_gtf(
                 transcript = Transcript(transcript_id, gene_id, chrom, strand)
                 gene.transcripts[transcript_id] = transcript
             transcript.absorb(start0, end0)
-            transcript.transcript_name = transcript.transcript_name or first_attribute(attributes, "transcript_name")
+            transcript.transcript_name = transcript.transcript_name or first_attribute(
+                attributes, "transcript_name"
+            )
             transcript.transcript_biotype = transcript.transcript_biotype or first_attribute(
                 attributes, "transcript_biotype", "transcript_type"
             )
@@ -392,7 +467,8 @@ def load_gtf(
         gene.transcripts = valid
         transcript_count += len(valid)
         canonical = [
-            transcript for transcript in valid.values()
+            transcript
+            for transcript in valid.values()
             if normalized_canonical in {normalize_tag(tag) for tag in transcript.tags}
         ]
         canonical_transcripts += len(canonical)
@@ -407,7 +483,9 @@ def load_gtf(
         gene.relation_start0, gene.relation_end0 = min(starts), max(ends)
         by_chrom.setdefault(gene.chrom, []).append(gene)
     for chrom in by_chrom:
-        by_chrom[chrom].sort(key=lambda gene: (gene.relation_start0 or 0, gene.relation_end0 or 0, gene.gene_id))
+        by_chrom[chrom].sort(
+            key=lambda gene: (gene.relation_start0 or 0, gene.relation_end0 or 0, gene.gene_id)
+        )
     if not by_chrom:
         raise CpGKError(f"no {GENE_BIOTYPE} genes loaded from {path}")
     return by_chrom, {
@@ -499,20 +577,23 @@ def annotate_gene(
     promoter_downstream: int,
 ) -> tuple[dict[str, object] | None, list[dict[str, object]]]:
     tx_rows = [
-        row for transcript in sorted(gene.transcripts.values(), key=lambda value: value.transcript_id)
-        if (row := transcript_relation(
-            window, gene, transcript, canonical_tag, promoter_upstream, promoter_downstream
-        )) is not None
+        row
+        for transcript in sorted(gene.transcripts.values(), key=lambda value: value.transcript_id)
+        if (
+            row := transcript_relation(
+                window, gene, transcript, canonical_tag, promoter_upstream, promoter_downstream
+            )
+        )
+        is not None
     ]
-    gene_body_bp = interval_overlap(
-        window.start0, window.end0, gene.start0 or 0, gene.end0 or 0
-    )
+    gene_body_bp = interval_overlap(window.start0, window.end0, gene.start0 or 0, gene.end0 or 0)
     if not tx_rows and gene_body_bp == 0:
         return None, []
     normalized = normalize_tag(canonical_tag)
     canonical = sorted(
         [
-            transcript for transcript in gene.transcripts.values()
+            transcript
+            for transcript in gene.transcripts.values()
             if normalized in {normalize_tag(tag) for tag in transcript.tags}
         ],
         key=lambda value: value.transcript_id,
@@ -521,11 +602,15 @@ def annotate_gene(
     canonical_rows = [row for row in tx_rows if str(row["transcript_id"]) in canonical_ids]
     alternative_rows = [row for row in tx_rows if str(row["transcript_id"]) not in canonical_ids]
     canonical_features = {
-        feature for row in canonical_rows for feature in str(row["features"]).split(";")
+        feature
+        for row in canonical_rows
+        for feature in str(row["features"]).split(";")
         if feature and feature != "NA"
     }
     related_features = {
-        feature for row in tx_rows for feature in str(row["features"]).split(";")
+        feature
+        for row in tx_rows
+        for feature in str(row["features"]).split(";")
         if feature and feature != "NA"
     }
     chosen = primary_feature(canonical_features, gene_body_bp)
@@ -534,7 +619,9 @@ def annotate_gene(
         relationship = "NO_ENSEMBL_CANONICAL"
         include = 0
     else:
-        canonical_status = "SINGLE_ENSEMBL_CANONICAL" if len(canonical) == 1 else "MULTIPLE_ENSEMBL_CANONICAL"
+        canonical_status = (
+            "SINGLE_ENSEMBL_CANONICAL" if len(canonical) == 1 else "MULTIPLE_ENSEMBL_CANONICAL"
+        )
         if canonical_rows:
             relationship = "CANONICAL_TRANSCRIPT"
             include = int(bool(chosen))
@@ -566,8 +653,10 @@ def annotate_gene(
         "gene_relationship": relationship,
         "gene_body_overlap_bp": gene_body_bp,
         "canonical_status": canonical_status,
-        "canonical_transcript_ids": ";".join(transcript.transcript_id for transcript in canonical) or "NA",
-        "canonical_tss_1based": ";".join(str(transcript.tss0 + 1) for transcript in canonical) or "NA",
+        "canonical_transcript_ids": ";".join(transcript.transcript_id for transcript in canonical)
+        or "NA",
+        "canonical_tss_1based": ";".join(str(transcript.tss0 + 1) for transcript in canonical)
+        or "NA",
         "primary_feature": chosen,
         "canonical_features": ";".join(ordered_features(canonical_features)) or "NA",
         "all_transcript_features": ";".join(ordered_features(related_features)) or "NA",
@@ -581,18 +670,31 @@ def annotate_gene(
 
 def unannotated_row(window: Window) -> dict[str, object]:
     return {
-        "chrom": window.chrom, "k": window.k, "window_id": window.window_id,
-        "first_cpg_index": window.first_cpg_index, "last_cpg_index": window.last_cpg_index,
+        "chrom": window.chrom,
+        "k": window.k,
+        "window_id": window.window_id,
+        "first_cpg_index": window.first_cpg_index,
+        "last_cpg_index": window.last_cpg_index,
         "cpg_positions_1based": window.cpg_positions_1based,
-        "start0": window.start0, "end0": window.end0, "span_bp": window.span_bp,
-        "annotation_gene_count": 0, "multi_gene_overlap": 0,
-        "gene_id": "NA", "gene_name": "NA", "gene_biotype": "NA", "gene_strand": "NA",
+        "start0": window.start0,
+        "end0": window.end0,
+        "span_bp": window.span_bp,
+        "annotation_gene_count": 0,
+        "multi_gene_overlap": 0,
+        "gene_id": "NA",
+        "gene_name": "NA",
+        "gene_biotype": "NA",
+        "gene_strand": "NA",
         "gene_relationship": "NO_DIRECT_PROTEIN_CODING_ANNOTATION",
-        "gene_body_overlap_bp": 0, "canonical_status": "NA",
-        "canonical_transcript_ids": "NA", "canonical_tss_1based": "NA",
+        "gene_body_overlap_bp": 0,
+        "canonical_status": "NA",
+        "canonical_transcript_ids": "NA",
+        "canonical_tss_1based": "NA",
         "primary_feature": "NO_DIRECT_PROTEIN_CODING_ANNOTATION",
-        "canonical_features": "NA", "all_transcript_features": "NA",
-        "canonical_promoter_overlap": 0, "any_transcript_promoter_overlap": 0,
+        "canonical_features": "NA",
+        "all_transcript_features": "NA",
+        "canonical_promoter_overlap": 0,
+        "any_transcript_promoter_overlap": 0,
         "include_primary_gene_feature_summary": 0,
         "has_direct_protein_coding_annotation": 0,
     }
@@ -632,21 +734,27 @@ def main(argv: Sequence[str] | None = None) -> int:
         connection.execute("PRAGMA temp_store=FILE")
         input_qc = load_unique_windows(measurements, connection)
         genes_by_chrom, gtf_qc = load_gtf(
-            gtf, set(input_qc["chromosomes"]), args.canonical_tag,
-            args.promoter_upstream, args.promoter_downstream,
+            gtf,
+            set(input_qc["chromosomes"]),
+            args.canonical_tag,
+            args.promoter_upstream,
+            args.promoter_downstream,
         )
         gene_path = output_root / "exact_window_gene_annotations.tsv.gz"
         transcript_path = output_root / "exact_window_transcript_annotations.tsv.gz"
         qc = {
-            "unique_windows": 0, "gene_annotation_rows": 0, "transcript_annotation_rows": 0,
+            "unique_windows": 0,
+            "gene_annotation_rows": 0,
+            "transcript_annotation_rows": 0,
             "windows_with_direct_protein_coding_annotation": 0,
             "windows_without_direct_protein_coding_annotation": 0,
             "windows_with_multiple_gene_annotations": 0,
             "primary_summary_gene_rows": 0,
         }
-        with atomic_tsv_writer(gene_path, GENE_FIELDS) as gene_writer, atomic_tsv_writer(
-            transcript_path, TRANSCRIPT_FIELDS
-        ) as transcript_writer:
+        with (
+            atomic_tsv_writer(gene_path, GENE_FIELDS) as gene_writer,
+            atomic_tsv_writer(transcript_path, TRANSCRIPT_FIELDS) as transcript_writer,
+        ):
             for chrom in input_qc["chromosomes"]:
                 genes = genes_by_chrom.get(chrom, [])
                 active: list[Gene] = []
@@ -663,7 +771,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     window = Window(*values)
                     qc["unique_windows"] += 1
                     active = [gene for gene in active if (gene.relation_end0 or 0) > window.start0]
-                    while gene_index < len(genes) and (genes[gene_index].relation_start0 or 0) < window.end0:
+                    while (
+                        gene_index < len(genes)
+                        and (genes[gene_index].relation_start0 or 0) < window.end0
+                    ):
                         gene = genes[gene_index]
                         if (gene.relation_end0 or 0) > window.start0:
                             active.append(gene)
@@ -672,8 +783,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                     transcript_rows: list[dict[str, object]] = []
                     for gene in sorted(active, key=lambda value: value.gene_id):
                         gene_row, current_transcripts = annotate_gene(
-                            window, gene, args.canonical_tag,
-                            args.promoter_upstream, args.promoter_downstream,
+                            window,
+                            gene,
+                            args.canonical_tag,
+                            args.promoter_upstream,
+                            args.promoter_downstream,
                         )
                         if gene_row is not None:
                             gene_rows.append(gene_row)
@@ -691,7 +805,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                         row["multi_gene_overlap"] = int(count > 1)
                         gene_writer.writerow(row)
                         qc["gene_annotation_rows"] += 1
-                        qc["primary_summary_gene_rows"] += int(row["include_primary_gene_feature_summary"])
+                        qc["primary_summary_gene_rows"] += int(
+                            row["include_primary_gene_feature_summary"]
+                        )
                     for row in transcript_rows:
                         transcript_writer.writerow(row)
                         qc["transcript_annotation_rows"] += 1
@@ -702,7 +818,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             metadata_path,
             {
                 "program": "annotate_exact_cpgk_windows",
-                "version": VERSION,
+                "analysis": ANALYSIS_ID,
                 "status": "PASS",
                 "inputs": {
                     "measurements": str(measurements),
@@ -716,7 +832,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "gene_assignment": "direct gene-body or transcript-promoter overlap; no nearest-gene assignment",
                     "canonical_tag": args.canonical_tag,
                     "canonical_fallback": "none",
-                    "promoter_relative_to_TSS_inclusive": [-args.promoter_upstream, args.promoter_downstream],
+                    "promoter_relative_to_TSS_inclusive": [
+                        -args.promoter_upstream,
+                        args.promoter_downstream,
+                    ],
                     "primary_feature_hierarchy": list(PRIMARY_FEATURE_ORDER),
                     "all_overlapping_features_retained": True,
                     "alternative_transcripts_retained_in_relational_output": True,

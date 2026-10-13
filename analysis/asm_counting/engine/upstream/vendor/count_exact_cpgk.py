@@ -19,7 +19,7 @@ from cpgk_common import (
     COUNT_FIELDS,
     MAX_K,
     CpGKError,
-    VERSION,
+    ANALYSIS_ID,
     exact_window_id,
     load_reference_cpgs,
     parse_positive_ints,
@@ -33,7 +33,6 @@ from cpgk_scan_helpers import (
     sam_record_lines,
     stream_record_groups,
 )
-
 
 WORKER_BATCH_RECORDS = 4096
 DEFAULT_WORKER_FLUSH_FRAGMENTS = 250_000
@@ -140,9 +139,7 @@ def count_one_fragment(
     qc["phase_assigned_fragments"] += 1
     qc[f"phase_{haplotype}_fragments"] += 1
 
-    raw_calls, cpg_conflicts = merged_calls(
-        core, fragment_records, core.extract_cpg_calls
-    )
+    raw_calls, cpg_conflicts = merged_calls(core, fragment_records, core.extract_cpg_calls)
     qc["overlap_cpg_conflicts"] += cpg_conflicts
     calls_by_index: dict[int, int] = {}
     for pos0, call in raw_calls.items():
@@ -287,7 +284,9 @@ def exact_count_worker(
         result_queue.put(("ERROR", worker_id, traceback.format_exc()))
 
 
-def put_worker_item(input_queue, item, process: mp.Process, drain_results: Callable[[], None]) -> None:
+def put_worker_item(
+    input_queue, item, process: mp.Process, drain_results: Callable[[], None]
+) -> None:
     while True:
         try:
             input_queue.put(item, timeout=0.5)
@@ -415,7 +414,8 @@ def parallel_count_bam(
                 handle_result(result_queue.get(timeout=1.0))
             except queue.Empty:
                 failed = [
-                    process for process in processes
+                    process
+                    for process in processes
                     if process.exitcode is not None and process.exitcode != 0
                 ]
                 if failed:
@@ -589,7 +589,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         metadata_path,
         {
             "program": "count_exact_cpgk",
-            "version": VERSION,
+            "analysis": ANALYSIS_ID,
             "status": "PASS",
             "sample": args.sample,
             "tissue": args.tissue,

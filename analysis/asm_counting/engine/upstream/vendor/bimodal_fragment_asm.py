@@ -34,10 +34,20 @@ import tempfile
 import traceback
 import zlib
 from array import array
-from typing import Dict, Iterable, Iterator, List, Mapping, MutableMapping, Optional, Sequence, Tuple
+from typing import (
+    Dict,
+    Iterable,
+    Iterator,
+    List,
+    Mapping,
+    MutableMapping,
+    NoReturn,
+    Optional,
+    Sequence,
+    Tuple,
+)
 
-
-VERSION = 'vendor'
+ANALYSIS_ID = "bimodal_fragment_asm"
 DEFAULT_FRAGMENT_CPGS = 3
 ALLOWED_FRAGMENT_CPGS = (3,)
 CPG3_PATTERN_LABELS = ("000", "001", "010", "011", "100", "101", "110", "111")
@@ -281,9 +291,7 @@ def extract_cpg_calls(record: SamRecord) -> Dict[int, int]:
     if xm is None or xg not in {"CT", "GA"}:
         return {}
     if len(xm) != len(record.seq):
-        raise ValueError(
-            f"{record.qname}: XM length {len(xm)} != SEQ length {len(record.seq)}"
-        )
+        raise ValueError(f"{record.qname}: XM length {len(xm)} != SEQ length {len(record.seq)}")
     calls: Dict[int, int] = {}
     for qstart, rstart, length in aligned_blocks(record):
         for offset, symbol in enumerate(xm[qstart : qstart + length]):
@@ -825,20 +833,14 @@ def parallel_discovery_pass(
             batches[worker_id].append(line)
             records_dispatched += 1
             if len(batches[worker_id]) >= DISCOVERY_WORKER_BATCH_RECORDS:
-                put_worker_item(
-                    input_queues[worker_id], batches[worker_id], processes[worker_id]
-                )
+                put_worker_item(input_queues[worker_id], batches[worker_id], processes[worker_id])
                 batches[worker_id] = []
             if records_dispatched % 5_000_000 == 0:
                 log(f"parallel discovery dispatch: SAM records={records_dispatched:,}")
         for worker_id in range(workers):
             if batches[worker_id]:
-                put_worker_item(
-                    input_queues[worker_id], batches[worker_id], processes[worker_id]
-                )
-            put_worker_item(
-                input_queues[worker_id], ("END", last_pos0), processes[worker_id]
-            )
+                put_worker_item(input_queues[worker_id], batches[worker_id], processes[worker_id])
+            put_worker_item(input_queues[worker_id], ("END", last_pos0), processes[worker_id])
     except Exception:
         for process in processes:
             if process.is_alive():
@@ -951,10 +953,7 @@ def is_bimodal_candidate(
     pure = u + m
     if total < min_fragments or u < min_mode_count or m < min_mode_count or pure == 0:
         return False
-    return (
-        min(u, m) / pure >= min_minor_mode_fraction
-        and x / total <= max_mixed_fraction
-    )
+    return min(u, m) / pure >= min_minor_mode_fraction and x / total <= max_mixed_fraction
 
 
 def build_candidates(
@@ -1067,12 +1066,17 @@ def fisher_exact_two_sided(a: int, b: int, c: int, d: int) -> float:
         return math.lgamma(n + 1) - math.lgamma(k + 1) - math.lgamma(n - k + 1)
 
     def probability(x: int) -> float:
-        return math.exp(log_choose(col1, x) + log_choose(total - col1, row1 - x) - log_choose(total, row1))
+        return math.exp(
+            log_choose(col1, x) + log_choose(total - col1, row1 - x) - log_choose(total, row1)
+        )
 
     lo = max(0, row1 - (total - col1))
     hi = min(row1, col1)
     observed = probability(a)
-    return min(1.0, sum(probability(x) for x in range(lo, hi + 1) if probability(x) <= observed * (1 + 1e-12)))
+    return min(
+        1.0,
+        sum(probability(x) for x in range(lo, hi + 1) if probability(x) <= observed * (1 + 1e-12)),
+    )
 
 
 def bh_adjust(pvalues: Sequence[float]) -> List[float]:
@@ -1209,7 +1213,6 @@ def collect_haplotype_counts_for_bam(
             )
 
 
-
 def configure_tmp_root(path: str) -> str:
     global ACTIVE_TMP_ROOT
     resolved = os.path.realpath(os.path.abspath(path))
@@ -1230,9 +1233,7 @@ def atomic_text_writer(path: str, gzipped: bool = False):
         die("temporary root is not configured")
     parent = os.path.dirname(os.path.abspath(path))
     os.makedirs(parent, exist_ok=True)
-    fd, temp_path = tempfile.mkstemp(
-        prefix=f".{os.path.basename(path)}.", dir=ACTIVE_TMP_ROOT
-    )
+    fd, temp_path = tempfile.mkstemp(prefix=f".{os.path.basename(path)}.", dir=ACTIVE_TMP_ROOT)
     os.close(fd)
     if gzipped:
         handle = gzip.open(temp_path, "wt", encoding="utf-8", newline="")
@@ -1332,8 +1333,13 @@ def load_candidates(
         header = handle.readline().rstrip("\n").split("\t")
         columns = {name: index for index, name in enumerate(header)}
         required = {
-            "window_index", "region_id", "cpg_positions_1based",
-            "U_fragments", "X_fragments", "M_fragments", *pattern_columns,
+            "window_index",
+            "region_id",
+            "cpg_positions_1based",
+            "U_fragments",
+            "X_fragments",
+            "M_fragments",
+            *pattern_columns,
         }
         missing = required - columns.keys()
         if missing:
@@ -1342,8 +1348,7 @@ def load_candidates(
             fields = line.rstrip("\n").split("\t")
             index = int(fields[columns["window_index"]])
             positions0 = tuple(
-                int(value) - 1
-                for value in fields[columns["cpg_positions_1based"]].split(",")
+                int(value) - 1 for value in fields[columns["cpg_positions_1based"]].split(",")
             )
             expected = tuple(cpg_positions0[index : index + 3])
             if positions0 != expected:
@@ -1457,13 +1462,34 @@ def write_haplotype_stats(
         )
     qvalues = bh_adjust([row["pvalue"] for row in rows])
     header = [
-        "sample", "tissue", "window_index", "region_id", "chrom", "start0", "end0",
-        "cpg_positions_1based", "PS",
-        "H1_U", "H1_X", "H1_M", "H2_U", "H2_X", "H2_M",
-        "H1_pure_U_plus_M", "H2_pure_U_plus_M", "required_pure_per_haplotype",
-        "H1_M_mode_fraction", "H2_M_mode_fraction", "delta_M_mode_fraction_H1_minus_H2",
-        "H1_mean_methylation", "H2_mean_methylation", "delta_mean_methylation_H1_minus_H2",
-        "fisher_p", "BH_q_run", "tested", "testability_reason",
+        "sample",
+        "tissue",
+        "window_index",
+        "region_id",
+        "chrom",
+        "start0",
+        "end0",
+        "cpg_positions_1based",
+        "PS",
+        "H1_U",
+        "H1_X",
+        "H1_M",
+        "H2_U",
+        "H2_X",
+        "H2_M",
+        "H1_pure_U_plus_M",
+        "H2_pure_U_plus_M",
+        "required_pure_per_haplotype",
+        "H1_M_mode_fraction",
+        "H2_M_mode_fraction",
+        "delta_M_mode_fraction_H1_minus_H2",
+        "H1_mean_methylation",
+        "H2_mean_methylation",
+        "delta_mean_methylation_H1_minus_H2",
+        "fisher_p",
+        "BH_q_run",
+        "tested",
+        "testability_reason",
     ]
     with atomic_text_writer(path, gzipped=True) as out:
         out.write("\t".join(header) + "\n")
@@ -1473,24 +1499,40 @@ def write_haplotype_stats(
             h1_mode, h2_mode = row["h1_mode"], row["h2_mode"]
             h1_mean, h2_mean = row["h1_mean"], row["h2_mean"]
             values = [
-                sample, tissue, str(row["window_index"]), window.region_id, contig,
-                str(window.cpg_positions0[0]), str(window.cpg_positions0[-1] + 2),
-                ",".join(str(p + 1) for p in window.cpg_positions0), str(row["ps"]),
+                sample,
+                tissue,
+                str(row["window_index"]),
+                window.region_id,
+                contig,
+                str(window.cpg_positions0[0]),
+                str(window.cpg_positions0[-1] + 2),
+                ",".join(str(p + 1) for p in window.cpg_positions0),
+                str(row["ps"]),
                 *[str(value) for value in counts[:6]],
-                str(row["h1_pure"]), str(row["h2_pure"]),
+                str(row["h1_pure"]),
+                str(row["h2_pure"]),
                 str(REQUIRED_HAPLOTYPE_PURE_FRAGMENTS),
-                format_float(h1_mode), format_float(h2_mode),
-                format_float(h1_mode - h2_mode)
-                if not math.isnan(h1_mode) and not math.isnan(h2_mode) else "NA",
-                format_float(h1_mean), format_float(h2_mean),
-                format_float(h1_mean - h2_mean)
-                if not math.isnan(h1_mean) and not math.isnan(h2_mean) else "NA",
-                format_float(row["pvalue"]), format_float(qvalue),
-                "1" if not math.isnan(row["pvalue"]) else "0", row["reason"],
+                format_float(h1_mode),
+                format_float(h2_mode),
+                (
+                    format_float(h1_mode - h2_mode)
+                    if not math.isnan(h1_mode) and not math.isnan(h2_mode)
+                    else "NA"
+                ),
+                format_float(h1_mean),
+                format_float(h2_mean),
+                (
+                    format_float(h1_mean - h2_mean)
+                    if not math.isnan(h1_mean) and not math.isnan(h2_mean)
+                    else "NA"
+                ),
+                format_float(row["pvalue"]),
+                format_float(qvalue),
+                "1" if not math.isnan(row["pvalue"]) else "0",
+                row["reason"],
             ]
             out.write("\t".join(values) + "\n")
     return path
-
 
 
 def file_fingerprint(path: str) -> Dict[str, object]:
@@ -1503,7 +1545,9 @@ def file_fingerprint(path: str) -> Dict[str, object]:
 
 
 def tool_version(tool: str) -> str:
-    proc = subprocess.run([tool, "--version"], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc = subprocess.run(
+        [tool, "--version"], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
     return (proc.stdout or "").splitlines()[0] if proc.returncode == 0 else "unknown"
 
 
@@ -1546,11 +1590,21 @@ def sample_bam_tags(samtools: str, bam: str, region: Region, n: int = 1000) -> D
     return dict(counts)
 
 
-def preflight(args: argparse.Namespace, region: Region, contig_lengths: Mapping[str, int]) -> Dict[str, object]:
+def preflight(
+    args: argparse.Namespace, region: Region, contig_lengths: Mapping[str, int]
+) -> Dict[str, object]:
     required_paths = [
-        args.reference, f"{args.reference}.fai", args.vcf, args.vcf_index,
-        args.snpsplit_snps, args.unsplit_bam, args.g1_bam, args.g2_bam,
-        args.unsplit_bai, args.g1_bai, args.g2_bai,
+        args.reference,
+        f"{args.reference}.fai",
+        args.vcf,
+        args.vcf_index,
+        args.snpsplit_snps,
+        args.unsplit_bam,
+        args.g1_bam,
+        args.g2_bam,
+        args.unsplit_bai,
+        args.g1_bai,
+        args.g2_bai,
     ]
     for path in required_paths:
         if not os.path.isfile(path):
@@ -1625,7 +1679,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--results-root", required=True)
     parser.add_argument("--tmp-root", required=True)
     parser.add_argument("--stage", choices=("all", "discover", "haplotype"), default="all")
-    parser.add_argument("--candidate-windows", help="Required for --stage haplotype; defaults to OUTPUT_PREFIX.candidate_windows.tsv.gz")
+    parser.add_argument(
+        "--candidate-windows",
+        help="Required for --stage haplotype; defaults to OUTPUT_PREFIX.candidate_windows.tsv.gz",
+    )
     parser.add_argument("--preflight-only", action="store_true")
     parser.add_argument("--samtools", default="samtools")
     parser.add_argument("--bcftools", default="bcftools")
@@ -1679,8 +1736,13 @@ def validate_args(args: argparse.Namespace) -> None:
         if not 0 <= value <= 1:
             die(f"--{name.replace('_', '-')} must be between 0 and 1")
     for name in (
-        "min_fragments", "min_mode_count", "min_link_snps", "min_haplotype_fragments",
-        "pair_wait_bp", "fetch_padding_bp", "fetch_batch_gap_bp",
+        "min_fragments",
+        "min_mode_count",
+        "min_link_snps",
+        "min_haplotype_fragments",
+        "pair_wait_bp",
+        "fetch_padding_bp",
+        "fetch_batch_gap_bp",
     ):
         if getattr(args, name) < 0:
             die(f"--{name.replace('_', '-')} must be non-negative")
@@ -1718,7 +1780,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     contig_lengths = read_fai(fai_path)
     region = parse_region(args.region, contig_lengths)
     log(
-        f"cpg3_strict_bimodal_asm v{VERSION}; sample={args.sample}; tissue={args.tissue}; "
+        f"cpg3_strict_bimodal_asm {ANALYSIS_ID}; sample={args.sample}; tissue={args.tissue}; "
         f"region={region.samtools}; stage={args.stage}; "
         f"fragment_cpgs={args.fragment_cpgs}; workers={args.workers}"
     )
@@ -1726,7 +1788,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     preflight_result = preflight(args, region, contig_lengths)
     metadata: Dict[str, object] = {
         "program": "cpg3_strict_bimodal_asm",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "started_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "sample": args.sample,
         "tissue": args.tissue,
@@ -1826,8 +1888,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     if len(cpg_positions0) < args.fragment_cpgs:
         die(
-            f"fewer than {args.fragment_cpgs} eligible shared reference CpGs "
-            "in requested region"
+            f"fewer than {args.fragment_cpgs} eligible shared reference CpGs " "in requested region"
         )
     log(f"eligible shared reference CpGs={len(cpg_positions0):,}")
 
@@ -1855,9 +1916,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             min_mapq=args.min_mapq,
             pair_wait_bp=args.pair_wait_bp,
         )
-        windows, candidate_regions = build_candidates(
-            cpg_positions0, pattern_counts, args
-        )
+        windows, candidate_regions = build_candidates(cpg_positions0, pattern_counts, args)
         write_candidates(
             prefix, args.sample, args.tissue, region.contig, windows, candidate_regions
         )
@@ -1880,33 +1939,53 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if windows:
             log("collecting H1/genome1 candidate-window fragments")
             collect_haplotype_counts_for_bam(
-                source_haplotype="H1", samtools=args.samtools, bam=args.g1_bam,
-                analysis_region=region, fetch_bounds=extended_region,
+                source_haplotype="H1",
+                samtools=args.samtools,
+                bam=args.g1_bam,
+                analysis_region=region,
+                fetch_bounds=extended_region,
                 candidate_regions=candidate_regions,
-                cpg_positions0=cpg_positions0, fragment_cpgs=args.fragment_cpgs,
-                snp_by_pos0=snp_by_pos0, stats=stats,
-                threads=args.threads, min_mapq=args.min_mapq,
-                pair_wait_bp=args.pair_wait_bp, fetch_padding_bp=args.fetch_padding_bp,
+                cpg_positions0=cpg_positions0,
+                fragment_cpgs=args.fragment_cpgs,
+                snp_by_pos0=snp_by_pos0,
+                stats=stats,
+                threads=args.threads,
+                min_mapq=args.min_mapq,
+                pair_wait_bp=args.pair_wait_bp,
+                fetch_padding_bp=args.fetch_padding_bp,
                 fetch_batch_gap_bp=args.fetch_batch_gap_bp,
-                min_link_snps=args.min_link_snps, qc=hap_qc,
+                min_link_snps=args.min_link_snps,
+                qc=hap_qc,
             )
             log("collecting H2/genome2 candidate-window fragments")
             collect_haplotype_counts_for_bam(
-                source_haplotype="H2", samtools=args.samtools, bam=args.g2_bam,
-                analysis_region=region, fetch_bounds=extended_region,
+                source_haplotype="H2",
+                samtools=args.samtools,
+                bam=args.g2_bam,
+                analysis_region=region,
+                fetch_bounds=extended_region,
                 candidate_regions=candidate_regions,
-                cpg_positions0=cpg_positions0, fragment_cpgs=args.fragment_cpgs,
-                snp_by_pos0=snp_by_pos0, stats=stats,
-                threads=args.threads, min_mapq=args.min_mapq,
-                pair_wait_bp=args.pair_wait_bp, fetch_padding_bp=args.fetch_padding_bp,
+                cpg_positions0=cpg_positions0,
+                fragment_cpgs=args.fragment_cpgs,
+                snp_by_pos0=snp_by_pos0,
+                stats=stats,
+                threads=args.threads,
+                min_mapq=args.min_mapq,
+                pair_wait_bp=args.pair_wait_bp,
+                fetch_padding_bp=args.fetch_padding_bp,
                 fetch_batch_gap_bp=args.fetch_batch_gap_bp,
-                min_link_snps=args.min_link_snps, qc=hap_qc,
+                min_link_snps=args.min_link_snps,
+                qc=hap_qc,
             )
         windows_by_index = {window.index: window for window in windows}
         write_haplotype_stats(
-            prefix=prefix, sample=args.sample, tissue=args.tissue,
-            contig=region.contig, windows_by_index=windows_by_index,
-            stats=stats, min_haplotype_fragments=args.min_haplotype_fragments,
+            prefix=prefix,
+            sample=args.sample,
+            tissue=args.tissue,
+            contig=region.contig,
+            windows_by_index=windows_by_index,
+            stats=stats,
+            min_haplotype_fragments=args.min_haplotype_fragments,
         )
         hap_qc["window_ps_rows"] = len(stats)
         qc_sections["haplotype"] = dict(hap_qc)

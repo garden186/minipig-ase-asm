@@ -13,16 +13,25 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Iterator, Mapping, Sequence, TextIO
 
-
-VERSION = 'vendor'
+ANALYSIS_ID = "cpgk_common"
 MAX_K = 5
 COUNT_FIELDS = (
-    "sample", "tissue", "chrom", "k", "window_id", "first_cpg_index",
-    "last_cpg_index", "cpg_positions_1based", "start0", "end0", "span_bp",
+    "sample",
+    "tissue",
+    "chrom",
+    "k",
+    "window_id",
+    "first_cpg_index",
+    "last_cpg_index",
+    "cpg_positions_1based",
+    "start0",
+    "end0",
+    "span_bp",
     "ps",
     *(f"H1_nM{value}" for value in range(MAX_K + 1)),
     *(f"H2_nM{value}" for value in range(MAX_K + 1)),
-    "H1_all", "H2_all",
+    "H1_all",
+    "H2_all",
 )
 
 
@@ -37,10 +46,7 @@ class TestabilityRule:
     minimum_minor_um: int
 
     def passes(self, h1_um: int, h2_um: int) -> bool:
-        return (
-            h1_um + h2_um >= self.minimum_total_um
-            and min(h1_um, h2_um) >= self.minimum_minor_um
-        )
+        return h1_um + h2_um >= self.minimum_total_um and min(h1_um, h2_um) >= self.minimum_minor_um
 
 
 TESTABILITY_RULES = (
@@ -246,9 +252,7 @@ def fisher_exact_two_sided(a: int, b: int, c: int, d: int) -> float:
 
     def probability(x: int) -> float:
         return math.exp(
-            log_choose(col1, x)
-            + log_choose(total - col1, row1 - x)
-            - log_choose(total, row1)
+            log_choose(col1, x) + log_choose(total - col1, row1 - x) - log_choose(total, row1)
         )
 
     lower = max(0, row1 - (total - col1))

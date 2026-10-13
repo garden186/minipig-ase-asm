@@ -31,8 +31,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, MutableMapping, Sequence, Set, Tuple
 
-
-VERSION = 'ase_recurrence'
+ANALYSIS_ID = "ase_recurrence"
 CORE_SUPPORT_CLASSES = {"MULTI_SNP_LOO_ROBUST", "MULTI_SNP_SUPPORTED"}
 DEFAULT_THRESHOLDS = (15, 20, 30)
 REQUIRED_COLUMNS = {
@@ -334,12 +333,8 @@ def add_block_to_measurement(
     measurement.n_eligible_blocks += 1
     context = row["measurement_id"]
     total = to_int(row["ase_total_count"], "ase_total_count", context)
-    n_snps = to_int(
-        row["n_gene_variants_with_reads"], "n_gene_variants_with_reads", context
-    )
-    measurement.max_eligible_total_fragments = max(
-        measurement.max_eligible_total_fragments, total
-    )
+    n_snps = to_int(row["n_gene_variants_with_reads"], "n_gene_variants_with_reads", context)
+    measurement.max_eligible_total_fragments = max(measurement.max_eligible_total_fragments, total)
     measurement.max_eligible_contributing_snps = max(
         measurement.max_eligible_contributing_snps, n_snps
     )
@@ -392,7 +387,9 @@ def load_sample_measurements(
                     raise AnalysisError(f"inconsistent gene annotation at {context}")
                 q_key = (row["tissue"], context)
                 if q_key not in q_maps[threshold]:
-                    raise AnalysisError(f"missing recomputed q-value at {context}, threshold={threshold}")
+                    raise AnalysisError(
+                        f"missing recomputed q-value at {context}, threshold={threshold}"
+                    )
                 q_value = q_maps[threshold][q_key]
                 is_eligible = eligibility_pass(row, threshold, max_conflict)
                 is_core = core_pass(
@@ -434,7 +431,9 @@ def build_recurrence(
     eligible_measurements: Mapping[Tuple[str, str, str], GeneMeasurement],
     tissue_animals: Mapping[str, Set[str]],
     fdr: float,
-) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]]:
+) -> Tuple[
+    List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]
+]:
     eligible_by_gt: MutableMapping[Tuple[str, str], Set[str]] = defaultdict(set)
     core_by_gt: MutableMapping[Tuple[str, str], Set[str]] = defaultdict(set)
     st_eligible: Counter = Counter()
@@ -504,9 +503,11 @@ def build_recurrence(
         row["replication_support"] = (
             "AT_LEAST_THREE_CORE_ANIMALS"
             if int(row["n_samples_core"]) >= 3
-            else "TWO_CORE_ANIMALS"
-            if int(row["n_samples_core"]) == 2
-            else "FEWER_THAN_TWO_CORE_ANIMALS"
+            else (
+                "TWO_CORE_ANIMALS"
+                if int(row["n_samples_core"]) == 2
+                else "FEWER_THAN_TWO_CORE_ANIMALS"
+            )
         )
         if flag:
             recurrent.append(dict(row))
@@ -586,10 +587,12 @@ def build_matched_analysis(
     fdr: float,
     n_permutations: int,
     seed: int,
-) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]]:
-    groups: MutableMapping[
-        Tuple[str, str, str, str, str], List[Tuple[str, str, str]]
-    ] = defaultdict(list)
+) -> Tuple[
+    List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], Dict[str, object]
+]:
+    groups: MutableMapping[Tuple[str, str, str, str, str], List[Tuple[str, str, str]]] = (
+        defaultdict(list)
+    )
     for key, measurement in measurements.items():
         bbin, cbin, sbin = opportunity_stratum(measurement)
         groups[(measurement.sample, measurement.tissue, bbin, cbin, sbin)].append(key)
@@ -634,8 +637,7 @@ def build_matched_analysis(
         gene_id, tissue = gene_tissue
         core_samples = core_by_gt.get(gene_tissue, set()) & eligible_samples
         probabilities = [
-            group_probability[(sample, tissue, gene_id)]
-            for sample in sorted(eligible_samples)
+            group_probability[(sample, tissue, gene_id)] for sample in sorted(eligible_samples)
         ]
         p_value = poisson_binomial_tail(probabilities, len(core_samples))
         name, biotype = annotations[gene_id]
@@ -706,9 +708,7 @@ def build_matched_analysis(
                     selected = np.broadcast_to(member_indices, (batch, n_members))
                 else:
                     scores = rng.random((batch, n_members))
-                    selected_positions = np.argpartition(
-                        scores, n_core - 1, axis=1
-                    )[:, :n_core]
+                    selected_positions = np.argpartition(scores, n_core - 1, axis=1)[:, :n_core]
                     selected = member_indices[selected_positions]
                 row_indices = np.broadcast_to(batch_rows, selected.shape)
                 mask = selected >= 0
@@ -721,13 +721,9 @@ def build_matched_analysis(
         empirical = (exceed + 1) / (n_permutations + 1)
         for row, value in zip(raw, empirical.tolist()):
             row["matched_permutation_p_count_tail"] = value
-        recurrent_keys = {
-            (str(row["gene_id"]), str(row["tissue"])) for row in recurrent
-        }
+        recurrent_keys = {(str(row["gene_id"]), str(row["tissue"])) for row in recurrent}
         recurrent = [
-            dict(row)
-            for row in raw
-            if (str(row["gene_id"]), str(row["tissue"])) in recurrent_keys
+            dict(row) for row in raw if (str(row["gene_id"]), str(row["tissue"])) in recurrent_keys
         ]
         permutation_summary.update(
             {
@@ -765,7 +761,7 @@ def build_matched_analysis(
 
 
 def measurement_rows(
-    measurements: Mapping[Tuple[str, str, str], GeneMeasurement]
+    measurements: Mapping[Tuple[str, str, str], GeneMeasurement],
 ) -> Iterable[Dict[str, object]]:
     for key in sorted(measurements):
         measurement = measurements[key]
@@ -803,9 +799,13 @@ def output_comparison(
         in_canonical = (gene_id, tissue) in canonical_keys
         in_refined = (gene_id, tissue) in refined_keys
         status = (
-            "RETAINED" if in_canonical and in_refined else
-            "LOST_AFTER_ELIGIBILITY_REFINEMENT" if in_canonical else
-            "NEW_AFTER_ELIGIBILITY_REFINEMENT"
+            "RETAINED"
+            if in_canonical and in_refined
+            else (
+                "LOST_AFTER_ELIGIBILITY_REFINEMENT"
+                if in_canonical
+                else "NEW_AFTER_ELIGIBILITY_REFINEMENT"
+            )
         )
         rows.append(
             {
@@ -927,9 +927,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise AnalysisError(f"output directory is not empty: {args.out_dir}; use --force")
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    measurements_by_threshold: Dict[
-        int, Dict[Tuple[str, str, str], GeneMeasurement]
-    ] = {threshold: {} for threshold in thresholds}
+    measurements_by_threshold: Dict[int, Dict[Tuple[str, str, str], GeneMeasurement]] = {
+        threshold: {} for threshold in thresholds
+    }
     tissue_animals: MutableMapping[str, Set[str]] = defaultdict(set)
     input_qc: Dict[str, object] = {}
     q_qc = Counter()
@@ -1071,7 +1071,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     qc = {
         "status": "PASS",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "definition": {
             "binomial_testable": "analysis_set MAIN and total fragments >= threshold",
             "high_confidence_eligible": (
@@ -1119,7 +1119,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     with (args.out_dir / "analysis_qc.json").open("w", encoding="utf-8") as handle:
         json.dump(qc, handle, indent=2, sort_keys=True)
         handle.write("\n")
-    print(json.dumps({"status": "PASS", "thresholds": threshold_summaries, "matched": matched_summary}, sort_keys=True), flush=True)
+    print(
+        json.dumps(
+            {"status": "PASS", "thresholds": threshold_summaries, "matched": matched_summary},
+            sort_keys=True,
+        ),
+        flush=True,
+    )
     return 0
 
 

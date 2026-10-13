@@ -2,24 +2,47 @@
 
 Inputs: promoter CpGs, ASE blocks, RNA coverage, gene calls and annotation index.
 """
-import argparse,json,sys
+
+import argparse, json, sys
 from pathlib import Path
 import phase_helpers as L
 from link_engine import join
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'annotation'))
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "annotation"))
 from reference import Index
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__)
-    for name in ['cpgs','blocks','genes','annotation-index','output']:p.add_argument('--'+name,type=Path,required=True)
-    p.add_argument('--sites',type=Path,required=True,help='RNA SNP coverage and parent-block membership table for transcript support; no SNP-level ASE tests are required.')
-    a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);L.self_test()
-    cpgs=list(L.rows(a.cpgs));blocks=list(L.rows(a.blocks));sites=list(L.rows(a.sites))
-    genes={(r['sample'],r['tissue'],r['gene_id']):r for r in L.rows(a.genes)}
-    index=Index(a.annotation_index,verify=True)
-    try:bp,audit,attempts=join(cpgs,blocks,sites,index,genes)
-    finally:index.close()
+    p = argparse.ArgumentParser(description=__doc__)
+    for name in ["cpgs", "blocks", "genes", "annotation-index", "output"]:
+        p.add_argument("--" + name, type=Path, required=True)
+    p.add_argument(
+        "--sites",
+        type=Path,
+        required=True,
+        help="RNA SNP coverage and parent-block membership table for transcript support; no SNP-level ASE tests are required.",
+    )
+    a = p.parse_args()
+    a.output.mkdir(parents=True, exist_ok=False)
+    cpgs = list(L.rows(a.cpgs))
+    blocks = list(L.rows(a.blocks))
+    sites = list(L.rows(a.sites))
+    genes = {(r["sample"], r["tissue"], r["gene_id"]): r for r in L.rows(a.genes)}
+    index = Index(a.annotation_index, verify=True)
+    try:
+        bp, audit, attempts = join(cpgs, blocks, sites, index, genes)
+    finally:
+        index.close()
     # Record input provenance for each linked block.
-    for row in bp:row['phase_evidence']='INPUT_CLASSIFIED_BLOCK; SEE_INPUT_HASHES'
-    for name,data in [('block_links',bp),('cpg_audit',audit),('block_attempts',attempts)]:L.write_rows(a.output/(name+'.tsv'),data)
-    L.save_json(a.output/'input_hashes.json',{name:L.sha(getattr(a,name)) for name in ['cpgs','blocks','sites','genes']})
-if __name__=='__main__':main()
+    for row in bp:
+        row["phase_evidence"] = "INPUT_CLASSIFIED_BLOCK; SEE_INPUT_HASHES"
+    for name, data in [("block_links", bp), ("cpg_audit", audit), ("block_attempts", attempts)]:
+        L.write_rows(a.output / (name + ".tsv"), data)
+    L.save_json(
+        a.output / "input_hashes.json",
+        {name: L.sha(getattr(a, name)) for name in ["cpgs", "blocks", "sites", "genes"]},
+    )
+
+
+if __name__ == "__main__":
+    main()

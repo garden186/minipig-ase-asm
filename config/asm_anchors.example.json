@@ -36,7 +36,7 @@
     17,
     18
   ],
-  "pilot_per_stratum": 20,
+  "anchor_qc_per_stratum": 20,
   "units": [
     {
       "sample": "S01",

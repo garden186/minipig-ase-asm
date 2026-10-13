@@ -7,5 +7,7 @@
   "phaser_threads": 2,
   "bismark_parallel": 4,
   "deepvariant_image": "google/deepvariant:1.10.0",
-  "tools": {"python": "python3"}
+  "tools": {
+    "python": "python3"
+  }
 }

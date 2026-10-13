@@ -12,7 +12,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Iterable, Iterator, Mapping, Sequence
 
-VERSION = 'vendor'
+ANALYSIS_ID = "asm_annotation_common"
 NO_DIRECT_FEATURE = "NO_DIRECT_PROTEIN_CODING_ANNOTATION"
 PRIMARY_FEATURE_ORDER = (
     "PROMOTER",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild and exactly validate ASE classified-ASE cohort recurrence outputs."""
+"""Rebuild and exactly validate classified ASE cohort recurrence outputs."""
 
 from __future__ import annotations
 
@@ -20,8 +20,7 @@ from build_ase_cohort import (
     parse_tissue_aliases,
 )
 
-
-VERSION = 'ase_cohort'
+ANALYSIS_ID = "ase_cohort"
 
 
 def compare_tsv(
@@ -39,12 +38,8 @@ def compare_tsv(
                 f"expected={list(header)}, observed={reader.fieldnames}"
             )
         count = 0
-        for count, (observed, expected_row) in enumerate(
-            zip(reader, expected), start=1
-        ):
-            canonical_expected = {
-                field: str(expected_row.get(field, "")) for field in header
-            }
+        for count, (observed, expected_row) in enumerate(zip(reader, expected), start=1):
+            canonical_expected = {field: str(expected_row.get(field, "")) for field in header}
             if observed != canonical_expected:
                 raise CohortError(
                     f"{path.name}: row {count} differs; "
@@ -53,13 +48,10 @@ def compare_tsv(
         else:
             observed_extra = next(reader, None)
             if observed_extra is not None:
-                raise CohortError(
-                    f"{path.name}: observed output has extra rows after {count}"
-                )
+                raise CohortError(f"{path.name}: observed output has extra rows after {count}")
         if count != len(expected):
             raise CohortError(
-                f"{path.name}: row count differs; observed={count}, "
-                f"expected={len(expected)}"
+                f"{path.name}: row count differs; observed={count}, " f"expected={len(expected)}"
             )
     return count
 
@@ -96,9 +88,7 @@ def validate_recurrence_invariants(
         if flag:
             expected_recurrent.append(dict(row))
     if list(recurrent) != expected_recurrent:
-        raise CohortError(
-            "statistically recurrent table is not the exact recurrence=1 subset"
-        )
+        raise CohortError("statistically recurrent table is not the exact recurrence=1 subset")
     for row in ordered_by_p:
         p_value = float(row["recurrence_p"])
         q_value = float(row["recurrence_q_bh"])
@@ -109,16 +99,16 @@ def validate_recurrence_invariants(
 
 
 def parse_args(argv=None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate ASE classified-ASE cohort")
+    parser = argparse.ArgumentParser(description="Validate classified ASE cohort")
     parser.add_argument("--input-root", required=True, type=Path)
     parser.add_argument("--out-dir", required=True, type=Path)
-    parser.add_argument("--samples", required=True, help="Comma-separated sample IDs in analysis order")
+    parser.add_argument(
+        "--samples", required=True, help="Comma-separated sample IDs in analysis order"
+    )
     parser.add_argument("--exclude-tissues", default="Cranial")
     parser.add_argument(
         "--tissue-aliases",
-        default=",".join(
-            f"{source}={target}" for source, target in DEFAULT_TISSUE_ALIASES.items()
-        ),
+        default=",".join(f"{source}={target}" for source, target in DEFAULT_TISSUE_ALIASES.items()),
     )
     parser.add_argument("--expect-sample-tissue-combinations", type=int, default=0)
     parser.add_argument("--expect-tissues", type=int, default=0)
@@ -131,11 +121,10 @@ def main(argv=None) -> int:
     samples = parse_csv_list(args.samples)
     aliases = parse_tissue_aliases(args.tissue_aliases)
     excluded = {
-        normalize_tissue(tissue, aliases)
-        for tissue in parse_csv_list(args.exclude_tissues)
+        normalize_tissue(tissue, aliases) for tissue in parse_csv_list(args.exclude_tissues)
     }
     report = {
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "status": "FAIL",
         "input_root": str(args.input_root.resolve()),
         "out_dir": str(args.out_dir.resolve()),
@@ -155,9 +144,7 @@ def main(argv=None) -> int:
         )
         observed_counts = {}
         for name, header in OUTPUT_SPECS:
-            observed_counts[name] = compare_tsv(
-                args.out_dir / name, header, expected[name]
-            )
+            observed_counts[name] = compare_tsv(args.out_dir / name, header, expected[name])
         qc_path = args.out_dir / "cohort_qc.json"
         if not qc_path.is_file():
             raise CohortError(f"missing cohort QC: {qc_path}")
@@ -180,17 +167,14 @@ def main(argv=None) -> int:
         ]
         if warning_samples:
             report["warnings"] = [
-                "source validation warnings retained for: "
-                + ",".join(warning_samples)
+                "source validation warnings retained for: " + ",".join(warning_samples)
             ]
     except Exception as exc:
         report["errors"] = [str(exc)]
     report["n_errors"] = len(report["errors"])
     report["n_warnings"] = len(report["warnings"])
     args.out_dir.mkdir(parents=True, exist_ok=True)
-    with (args.out_dir / "cohort_validation.json").open(
-        "w", encoding="utf-8"
-    ) as handle:
+    with (args.out_dir / "cohort_validation.json").open("w", encoding="utf-8") as handle:
         json.dump(report, handle, indent=2, sort_keys=True)
         handle.write("\n")
     print(json.dumps(report, indent=2, sort_keys=True))

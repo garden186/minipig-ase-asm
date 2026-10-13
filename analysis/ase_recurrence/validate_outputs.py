@@ -13,8 +13,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Dict, Iterable, Mapping, Set, Tuple
 
-
-VERSION = 'ase_recurrence'
+ANALYSIS_ID = "ase_recurrence"
 
 
 def normalize_tissue(tissue: str) -> str:
@@ -49,9 +48,11 @@ def count_and_keys(
     for row in rows(path):
         count += 1
         key = tuple(
-            normalize_tissue(row[field])
-            if normalize_tissue_field and field == "tissue"
-            else row[field]
+            (
+                normalize_tissue(row[field])
+                if normalize_tissue_field and field == "tissue"
+                else row[field]
+            )
             for field in fields
         )
         if key in keys:
@@ -74,15 +75,14 @@ def main() -> int:
         qc = json.loads((args.out_dir / "analysis_qc.json").read_text(encoding="utf-8"))
         if qc.get("status") != "PASS":
             errors.append("analysis_qc status is not PASS")
-        if qc.get("version") != VERSION:
-            errors.append(f"unexpected analysis version: {qc.get('version')}")
+        if qc.get("analysis", qc.get("version")) != ANALYSIS_ID:
+            errors.append(f"unexpected analysis version: {qc.get("analysis", qc.get('version'))}")
     except Exception as exc:
         errors.append(f"cannot read analysis_qc.json: {exc}")
         qc = {}
 
     summary_rows = {
-        int(row["fragment_threshold"]): row
-        for row in rows(args.out_dir / "threshold_summary.tsv")
+        int(row["fragment_threshold"]): row for row in rows(args.out_dir / "threshold_summary.tsv")
     }
     for threshold in (15, 20, 30):
         prefix = f"threshold_{threshold}"
@@ -109,12 +109,8 @@ def main() -> int:
                 if int(row["is_core_ase"]) and int(row["n_core_blocks"]) < 1:
                     errors.append(f"{prefix}: core flag without a core block")
                     break
-            n_hypotheses, all_keys = count_and_keys(
-                recurrence_path, ("gene_id", "tissue")
-            )
-            n_recurrent, recurrent_keys = count_and_keys(
-                recurrent_path, ("gene_id", "tissue")
-            )
+            n_hypotheses, all_keys = count_and_keys(recurrence_path, ("gene_id", "tissue"))
+            n_recurrent, recurrent_keys = count_and_keys(recurrent_path, ("gene_id", "tissue"))
             if not recurrent_keys.issubset(all_keys):
                 errors.append(f"{prefix}: recurrent table is not a subset of all hypotheses")
             flagged_keys = set()
@@ -150,9 +146,7 @@ def main() -> int:
             }
             for field, observed in comparisons.items():
                 if int(summary[field]) != observed:
-                    errors.append(
-                        f"{prefix}: {field} summary={summary[field]} observed={observed}"
-                    )
+                    errors.append(f"{prefix}: {field} summary={summary[field]} observed={observed}")
             if burden_eligible != n_measurements or burden_core != n_core:
                 errors.append(
                     f"{prefix}: burden totals ({burden_eligible},{burden_core}) "
@@ -227,7 +221,7 @@ def main() -> int:
 
     report = {
         "status": "PASS" if not errors else "FAIL",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "checks": checks,
         "errors": errors,
     }

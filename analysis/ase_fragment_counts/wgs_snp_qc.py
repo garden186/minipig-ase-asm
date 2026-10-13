@@ -56,15 +56,19 @@ def load_phaser_wgs_counts(path, requested):
     with open_text(path) as handle:
         reader = csv.DictReader(handle, delimiter="\t")
         required = {
-            "contig", "position", "variantID", "refAllele", "altAllele",
-            "refCount", "altCount", "totalCount",
+            "contig",
+            "position",
+            "variantID",
+            "refAllele",
+            "altAllele",
+            "refCount",
+            "altCount",
+            "totalCount",
         }
         missing = required.difference(reader.fieldnames or [])
         if missing:
             raise ValueError(
-                "phASER-WGS count table missing columns: {}".format(
-                    ",".join(sorted(missing))
-                )
+                "phASER-WGS count table missing columns: {}".format(",".join(sorted(missing)))
             )
         for row in reader:
             variant_id = row["variantID"]
@@ -79,13 +83,12 @@ def load_phaser_wgs_counts(path, requested):
             )
             if observed != parsed:
                 raise ValueError(
-                    "phASER-WGS allele mismatch for {}: expected={} observed={}"
-                    .format(variant_id, parsed, observed)
+                    "phASER-WGS allele mismatch for {}: expected={} observed={}".format(
+                        variant_id, parsed, observed
+                    )
                 )
             if variant_id in found:
-                raise ValueError(
-                    "Duplicate phASER-WGS row: {}".format(variant_id)
-                )
+                raise ValueError("Duplicate phASER-WGS row: {}".format(variant_id))
             found[variant_id] = dict(row)
     return found
 
@@ -102,9 +105,7 @@ def load_phased_wgs_vcf(path, sample, requested):
                 header = line.rstrip("\n").split("\t")
                 samples = header[9:]
                 if sample not in samples:
-                    raise ValueError(
-                        "Sample {} not found in phased WGS VCF".format(sample)
-                    )
+                    raise ValueError("Sample {} not found in phased WGS VCF".format(sample))
                 sample_index = 9 + samples.index(sample)
                 continue
             if line.startswith("#"):
@@ -116,10 +117,7 @@ def load_phased_wgs_vcf(path, sample, requested):
                 continue
             chrom, pos, _, ref, alts, _, filt, _, fmt = fields[:9]
             alt_values = alts.split(",")
-            candidate_ids = [
-                "{}_{}_{}_{}".format(chrom, pos, ref, alt)
-                for alt in alt_values
-            ]
+            candidate_ids = ["{}_{}_{}_{}".format(chrom, pos, ref, alt) for alt in alt_values]
             matching = [
                 (index, variant_id)
                 for index, variant_id in enumerate(candidate_ids, start=1)
@@ -138,8 +136,7 @@ def load_phased_wgs_vcf(path, sample, requested):
                     alleles = gt.replace("|", "/").split("/")
                     if set(alleles) == {"0", str(alt_index)}:
                         gt = separator.join(
-                            "1" if allele == str(alt_index) else "0"
-                            for allele in alleles
+                            "1" if allele == str(alt_index) else "0" for allele in alleles
                         )
                 row = {
                     "variant_id": variant_id,
@@ -153,9 +150,7 @@ def load_phased_wgs_vcf(path, sample, requested):
                     "ps": sample_data.get("PS", ""),
                 }
                 if variant_id in found:
-                    raise ValueError(
-                        "Duplicate phased WGS VCF row: {}".format(variant_id)
-                    )
+                    raise ValueError("Duplicate phased WGS VCF row: {}".format(variant_id))
                 found[variant_id] = row
     return found
 
@@ -175,9 +170,7 @@ def evaluate_wgs_snps(
     balanced = set()
     for variant_id in sorted(
         requested,
-        key=lambda item: (
-            requested[item][0], requested[item][1], item
-        ),
+        key=lambda item: (requested[item][0], requested[item][1], item),
     ):
         contig, position, ref, alt = requested[variant_id]
         vcf = vcf_rows.get(variant_id)
@@ -201,13 +194,12 @@ def evaluate_wgs_snps(
         total_count = _int(counts.get("totalCount")) if counts else None
         alt_fraction = (
             alt_count / float(total_count)
-            if alt_count is not None and total_count is not None
-            and total_count > 0 else None
+            if alt_count is not None and total_count is not None and total_count > 0
+            else None
         )
         genotype_ok = (
             is_snv
-            and
-            vcf is not None
+            and vcf is not None
             and vcf["filter"] == "PASS"
             and is_biallelic_het(vcf["gt"])
             and vcf["gq"] is not None
@@ -218,10 +210,7 @@ def evaluate_wgs_snps(
         else:
             if total_count is None or total_count < min_total:
                 reasons.append("WGS_TOTAL_LOW")
-            if (
-                ref_count is None or alt_count is None
-                or min(ref_count, alt_count) < min_each
-            ):
+            if ref_count is None or alt_count is None or min(ref_count, alt_count) < min_each:
                 reasons.append("WGS_ALLELE_COUNT_LOW")
             if (
                 alt_fraction is None
@@ -231,13 +220,14 @@ def evaluate_wgs_snps(
                 reasons.append("WGS_ALT_FRACTION_IMBALANCED")
         coverage_ok = (
             counts is not None
-            and total_count is not None and total_count >= min_total
-            and ref_count is not None and alt_count is not None
+            and total_count is not None
+            and total_count >= min_total
+            and ref_count is not None
+            and alt_count is not None
             and min(ref_count, alt_count) >= min_each
         )
         balance_ok = (
-            alt_fraction is not None
-            and min_alt_fraction <= alt_fraction <= max_alt_fraction
+            alt_fraction is not None and min_alt_fraction <= alt_fraction <= max_alt_fraction
         )
         if genotype_ok and coverage_ok and balance_ok:
             status = "WGS_BALANCED"
@@ -246,31 +236,31 @@ def evaluate_wgs_snps(
             status = "WGS_UNBALANCED"
         else:
             status = "WGS_INSUFFICIENT"
-        rows.append({
-            "variant_id": variant_id,
-            "contig": contig,
-            "position": position,
-            "ref": ref,
-            "alt": alt,
-            "vcf_filter": vcf["filter"] if vcf else "",
-            "vcf_gt": vcf["gt"] if vcf else "",
-            "vcf_gq": vcf["gq"] if vcf else None,
-            "vcf_phase_set": vcf["ps"] if vcf else "",
-            "wgs_ref_count": ref_count,
-            "wgs_alt_count": alt_count,
-            "wgs_total_count": total_count,
-            "wgs_alt_fraction": alt_fraction,
-            "wgs_snp_status": status,
-            "wgs_snp_reason": ",".join(reasons) if reasons else "PASS",
-        })
+        rows.append(
+            {
+                "variant_id": variant_id,
+                "contig": contig,
+                "position": position,
+                "ref": ref,
+                "alt": alt,
+                "vcf_filter": vcf["filter"] if vcf else "",
+                "vcf_gt": vcf["gt"] if vcf else "",
+                "vcf_gq": vcf["gq"] if vcf else None,
+                "vcf_phase_set": vcf["ps"] if vcf else "",
+                "wgs_ref_count": ref_count,
+                "wgs_alt_count": alt_count,
+                "wgs_total_count": total_count,
+                "wgs_alt_fraction": alt_fraction,
+                "wgs_snp_status": status,
+                "wgs_snp_reason": ",".join(reasons) if reasons else "PASS",
+            }
+        )
     return rows, balanced
 
 
 def phase_agreement(component, variant_ids, vcf_rows):
     """Map phASER Hap A/B to one WGS phase-set orientation."""
-    by_variant = {
-        row["variant_id"]: row for row in component["parsed_variants"]
-    }
+    by_variant = {row["variant_id"]: row for row in component["parsed_variants"]}
     details = []
     phase_sets = set()
     for variant_id in sorted(set(variant_ids)):
@@ -291,11 +281,13 @@ def phase_agreement(component, variant_ids, vcf_rows):
             orientation = "ALLELE_MISMATCH"
         if vcf.get("ps") not in ("", ".", None):
             phase_sets.add(str(vcf["ps"]))
-        details.append({
-            "variant_id": variant_id,
-            "orientation": orientation,
-            "phase_set": str(vcf.get("ps") or ""),
-        })
+        details.append(
+            {
+                "variant_id": variant_id,
+                "orientation": orientation,
+                "phase_set": str(vcf.get("ps") or ""),
+            }
+        )
 
     counts = Counter(row["orientation"] for row in details)
     comparable = counts["DIRECT"] + counts["FLIPPED"]

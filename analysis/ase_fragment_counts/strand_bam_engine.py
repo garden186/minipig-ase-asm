@@ -60,17 +60,14 @@ def open_text(path, mode="rt"):
 def split_csv(value):
     if value is None:
         return []
-    return [
-        item for item in str(value).split(",")
-        if item not in ("", ".", "NA")
-    ]
+    return [item for item in str(value).split(",") if item not in ("", ".", "NA")]
 
 
 def normalize_bam(value):
     name = os.path.basename(str(value or ""))
     for suffix in (".bam", ".cram"):
         if name.endswith(suffix):
-            name = name[:-len(suffix)]
+            name = name[: -len(suffix)]
     return name
 
 
@@ -92,9 +89,7 @@ def load_bam_manifest(path):
                 "path": row.get("path", ""),
                 "tissue": row.get("tissue", ""),
                 "min_as": (
-                    None
-                    if row.get("min_as", "") in ("", ".", "NA")
-                    else float(row["min_as"])
+                    None if row.get("min_as", "") in ("", ".", "NA") else float(row["min_as"])
                 ),
             }
     return manifest
@@ -107,9 +102,7 @@ def load_phaser_as_cutoffs(path):
         return cutoffs
     current_bam = None
     file_pattern = re.compile(r"^\s*file:\s+(.+?)\s*$")
-    cutoff_pattern = re.compile(
-        r"using alignment score cutoff of\s+(-?[0-9]+(?:\.[0-9]+)?)"
-    )
+    cutoff_pattern = re.compile(r"using alignment score cutoff of\s+(-?[0-9]+(?:\.[0-9]+)?)")
     with open_text(path) as handle:
         for line in handle:
             file_match = file_pattern.search(line)
@@ -143,8 +136,7 @@ def resolve_bam(
         return path, tissue, min_as
     if not bam_root:
         raise ValueError(
-            "BAM {} is not in --bam-manifest and --bam-root was not given"
-            .format(label)
+            "BAM {} is not in --bam-manifest and --bam-root was not given".format(label)
         )
     tissue = measurement["tissue"]
     path = os.path.join(bam_root, tissue, sample, label + ".bam")
@@ -196,10 +188,7 @@ def read_passes_filters(read, options, min_as):
         return False, "NOT_PROPER_PAIR"
     if read.mapping_quality < options.min_mapq:
         return False, "LOW_MAPQ"
-    if (
-        options.max_isize > 0
-        and abs(int(read.template_length)) > options.max_isize
-    ):
+    if options.max_isize > 0 and abs(int(read.template_length)) > options.max_isize:
         return False, "ISIZE"
     if min_as is not None:
         try:
@@ -294,19 +283,14 @@ def build_target_interval_index(measurements, components, merge_gap=0):
 
     loci = []
     for contig, items in sorted(by_contig.items()):
-        unique = {
-            component["component_id"]: component for component in items
-        }
+        unique = {component["component_id"]: component for component in items}
         ordered = sorted(
             unique.values(),
             key=lambda x: (x["start"], x["end"], x["component_id"]),
         )
         current = None
         for component in ordered:
-            if (
-                current is None
-                or component["start"] > current["end"] + max(0, merge_gap)
-            ):
+            if current is None or component["start"] > current["end"] + max(0, merge_gap):
                 if current is not None:
                     loci.append(current)
                 current = {
@@ -333,13 +317,9 @@ def _check_bam_and_index(bam_path, allow_stale_index):
     if not indexes:
         raise FileNotFoundError("BAM index not found for {}".format(bam_path))
     index_path = indexes[0]
-    if (
-        not allow_stale_index
-        and os.path.getmtime(index_path) < os.path.getmtime(bam_path)
-    ):
+    if not allow_stale_index and os.path.getmtime(index_path) < os.path.getmtime(bam_path):
         raise RuntimeError(
-            "BAM index is older than BAM; reindex before analysis: {}"
-            .format(bam_path)
+            "BAM index is older than BAM; reindex before analysis: {}".format(bam_path)
         )
     return index_path
 
@@ -391,9 +371,7 @@ def finalize_fragment_assignment(
         gene_id = ""
         gene_status = "NO_GENE_EVIDENCE"
 
-    mismatch_gene_ids = sorted(
-        fragment["exon_strand_mismatch_gene_evidence"]
-    )
+    mismatch_gene_ids = sorted(fragment["exon_strand_mismatch_gene_evidence"])
     assignment_method = ""
     if gene_id:
         has_unique = gene_id in fragment["unique_gene_evidence"]
@@ -410,9 +388,7 @@ def finalize_fragment_assignment(
     elif mismatch_gene_ids:
         assignment_method = "ANNOTATED_EXON_STRAND_MISMATCH"
 
-    strict_assigned = bool(
-        hap_assignment and gene_id and strand_status == "CONSISTENT"
-    )
+    strict_assigned = bool(hap_assignment and gene_id and strand_status == "CONSISTENT")
     if strict_assigned:
         final_status = "ASSIGNED"
     elif hap_status == "CONFLICTING_HAPLOTYPE":
@@ -429,12 +405,10 @@ def finalize_fragment_assignment(
         final_status = "UNRESOLVED"
 
     strand_resolution_required = bool(
-        final_status == "ASSIGNED"
-        and assignment_method == "STRAND_RESOLVED"
+        final_status == "ASSIGNED" and assignment_method == "STRAND_RESOLVED"
     )
     gene_supported = (
-        sorted(fragment["gene_variant_evidence"].get(gene_id, set()))
-        if gene_id else []
+        sorted(fragment["gene_variant_evidence"].get(gene_id, set())) if gene_id else []
     )
     row = {
         "sample": measurement["sample"],
@@ -447,20 +421,15 @@ def finalize_fragment_assignment(
         "gene_name": genes.get(gene_id, {}).get("gene_name", gene_id),
         "strand_mismatch_gene_ids": ",".join(mismatch_gene_ids),
         "strand_mismatch_gene_names": ",".join(
-            genes.get(item, {}).get("gene_name", item)
-            for item in mismatch_gene_ids
+            genes.get(item, {}).get("gene_name", item) for item in mismatch_gene_ids
         ),
         "haplotype": hap_assignment,
         "gene_assignment_method": assignment_method,
         "strand_resolution_required": int(strand_resolution_required),
         "final_status": final_status,
-        "supported_variants": ",".join(
-            sorted(fragment["supported_variants"])
-        ),
+        "supported_variants": ",".join(sorted(fragment["supported_variants"])),
         "gene_supported_variants": ",".join(gene_supported),
-        "ambiguous_supported_variants": ",".join(
-            sorted(fragment["ambiguous_supported_variants"])
-        ),
+        "ambiguous_supported_variants": ",".join(sorted(fragment["ambiguous_supported_variants"])),
         "observations": ";".join(fragment["observation_strings"]),
     }
     return row, gene_supported
@@ -507,15 +476,11 @@ def aggregate_strict_gene_component_counts(
         for variant_id in gene_supported:
             counts["variant_qnames"][hap][variant_id].add(qname)
             if row["strand_resolution_required"]:
-                counts["strand_resolved_variant_qnames"][hap][
-                    variant_id
-                ].add(qname)
+                counts["strand_resolved_variant_qnames"][hap][variant_id].add(qname)
 
     n_supported = len(fragments)
     n_hap_conflict = status_counts["HAPLOTYPE_CONFLICT"]
-    conflict_fraction = (
-        n_hap_conflict / float(n_supported) if n_supported else 0.0
-    )
+    conflict_fraction = n_hap_conflict / float(n_supported) if n_supported else 0.0
     reported_a = int(measurement.get("reported_a", 0))
     reported_b = int(measurement.get("reported_b", 0))
     comparison = {
@@ -532,32 +497,22 @@ def aggregate_strict_gene_component_counts(
         "reported_total": reported_a + reported_b,
         "reconstructed_phaserlike_a": len(phaserlike_a),
         "reconstructed_phaserlike_b": len(phaserlike_b),
-        "reconstructed_phaserlike_total": (
-            len(phaserlike_a) + len(phaserlike_b)
-        ),
+        "reconstructed_phaserlike_total": (len(phaserlike_a) + len(phaserlike_b)),
         "delta_a": len(phaserlike_a) - reported_a,
         "delta_b": len(phaserlike_b) - reported_b,
-        "count_match_exact": (
-            len(phaserlike_a) == reported_a
-            and len(phaserlike_b) == reported_b
-        ),
+        "count_match_exact": (len(phaserlike_a) == reported_a and len(phaserlike_b) == reported_b),
         "n_qnames_with_variant_support": n_supported,
         "n_qnames_assigned": status_counts["ASSIGNED"],
-        "n_qnames_with_strand_resolution_evidence": (
-            n_strand_resolution_evidence
-        ),
+        "n_qnames_with_strand_resolution_evidence": (n_strand_resolution_evidence),
         "n_qnames_strand_resolved": sum(
-            len(rec["strand_resolved"]["A"])
-            + len(rec["strand_resolved"]["B"])
+            len(rec["strand_resolved"]["A"]) + len(rec["strand_resolved"]["B"])
             for rec in gene_counts.values()
         ),
         "n_haplotype_conflict": n_hap_conflict,
         "fragment_hap_conflict_fraction": conflict_fraction,
         "n_gene_conflict": status_counts["GENE_CONFLICT"],
         "n_strand_conflict": status_counts["STRAND_CONFLICT"],
-        "n_annotated_exon_strand_mismatch": status_counts[
-            "ANNOTATED_EXON_STRAND_MISMATCH"
-        ],
+        "n_annotated_exon_strand_mismatch": status_counts["ANNOTATED_EXON_STRAND_MISMATCH"],
         "n_no_gene": status_counts["NO_GENE"],
         "n_unresolved": status_counts["UNRESOLVED"],
     }
@@ -577,14 +532,9 @@ def stream_bam_fragment_evidence(
 ):
     """Yield all-SNP audit and WGS-eligible analysis counts per measurement."""
     if pysam is None:
-        raise ImportError(
-            "pysam is required for fragment-count BAM fragment reconstruction"
-        )
+        raise ImportError("pysam is required for fragment-count BAM fragment reconstruction")
     _check_bam_and_index(bam_path, options.allow_stale_index)
-    by_component = {
-        measurement["component_id"]: measurement
-        for measurement in measurements
-    }
+    by_component = {measurement["component_id"]: measurement for measurement in measurements}
     loci = build_target_interval_index(
         measurements,
         components,
@@ -612,11 +562,7 @@ def stream_bam_fragment_evidence(
             n_allele_observations = 0
             bam_contig = resolve_bam_contig(bam, locus["contig"])
             if bam_contig is None:
-                raise ValueError(
-                    "Contig {} absent from {}".format(
-                        locus["contig"], bam_path
-                    )
-                )
+                raise ValueError("Contig {} absent from {}".format(locus["contig"], bam_path))
             for read in bam.fetch(
                 bam_contig,
                 max(0, locus["start"] - 1),
@@ -632,34 +578,24 @@ def stream_bam_fragment_evidence(
                     filter_counts["NO_SEQUENCE"] += 1
                     continue
                 qualities = read.query_qualities
-                transcript_strand = inferred_transcript_strand(
-                    read, options.library_strand
-                )
+                transcript_strand = inferred_transcript_strand(read, options.library_strand)
                 if transcript_strand is None:
                     filter_counts["NO_TRANSCRIPT_STRAND"] += 1
                     continue
 
-                for query_pos, reference_pos in read.get_aligned_pairs(
-                    matches_only=True
-                ):
+                for query_pos, reference_pos in read.get_aligned_pairs(matches_only=True):
                     if query_pos is None or reference_pos is None:
                         continue
                     position = reference_pos + 1
                     local_targets = targets.get(position)
                     if not local_targets:
                         continue
-                    if (
-                        qualities is not None
-                        and qualities[query_pos] < options.min_baseq
-                    ):
+                    if qualities is not None and qualities[query_pos] < options.min_baseq:
                         filter_counts["LOW_BASEQ_OBSERVATION"] += 1
                         continue
                     base = sequence[query_pos].upper()
                     for component_id, variant in local_targets:
-                        if (
-                            len(variant["hapA"]) != 1
-                            or len(variant["hapB"]) != 1
-                        ):
+                        if len(variant["hapA"]) != 1 or len(variant["hapB"]) != 1:
                             filter_counts["NON_SNP_VARIANT"] += 1
                             continue
                         if base == variant["hapA"] == variant["hapB"]:
@@ -680,25 +616,14 @@ def stream_bam_fragment_evidence(
                                 "gene_ids": [],
                             },
                         )
-                        targets_to_update = [
-                            all_fragments[component_id][read.query_name]
-                        ]
-                        if (
-                            eligible_variants is None
-                            or variant["variant_id"] in eligible_variants
-                        ):
+                        targets_to_update = [all_fragments[component_id][read.query_name]]
+                        if eligible_variants is None or variant["variant_id"] in eligible_variants:
                             targets_to_update.append(
-                                analysis_fragments[component_id][
-                                    read.query_name
-                                ]
+                                analysis_fragments[component_id][read.query_name]
                             )
                         for fragment in targets_to_update:
-                            fragment["supported_variants"].add(
-                                variant["variant_id"]
-                            )
-                            fragment["transcript_strands"].add(
-                                transcript_strand
-                            )
+                            fragment["supported_variants"].add(variant["variant_id"])
+                            fragment["transcript_strands"].add(transcript_strand)
                             if hap in ("A", "B"):
                                 fragment["hap_support"].add(hap)
                             gene_id, source = add_gene_evidence(
@@ -721,50 +646,34 @@ def stream_bam_fragment_evidence(
             for component_id in locus["component_ids"]:
                 measurement = by_component[component_id]
                 component = components[component_id]
-                _, comparison = (
-                    aggregate_strict_gene_component_counts(
-                        measurement,
-                        component,
-                        all_fragments[component_id],
-                        genes,
-                        fragment_writer=None,
-                    )
+                _, comparison = aggregate_strict_gene_component_counts(
+                    measurement,
+                    component,
+                    all_fragments[component_id],
+                    genes,
+                    fragment_writer=None,
                 )
-                gene_counts, analysis_comparison = (
-                    aggregate_strict_gene_component_counts(
-                        measurement,
-                        component,
-                        analysis_fragments[component_id],
-                        genes,
-                        fragment_writer=fragment_writer,
-                    )
+                gene_counts, analysis_comparison = aggregate_strict_gene_component_counts(
+                    measurement,
+                    component,
+                    analysis_fragments[component_id],
+                    genes,
+                    fragment_writer=fragment_writer,
                 )
                 comparison.update(
                     {
                         "bam_path": bam_path,
-                        "n_alignments_examined_in_locus": (
-                            n_alignments_examined
-                        ),
-                        "n_allele_observations_in_locus": (
-                            n_allele_observations
-                        ),
+                        "n_alignments_examined_in_locus": (n_alignments_examined),
+                        "n_allele_observations_in_locus": (n_allele_observations),
                         "min_as_applied": min_as,
                         "filter_counts": dict(filter_counts),
                         "analysis_qnames_with_variant_support": (
-                            analysis_comparison[
-                                "n_qnames_with_variant_support"
-                            ]
+                            analysis_comparison["n_qnames_with_variant_support"]
                         ),
-                        "analysis_qnames_assigned": analysis_comparison[
-                            "n_qnames_assigned"
-                        ],
-                        "analysis_haplotype_conflict": analysis_comparison[
-                            "n_haplotype_conflict"
-                        ],
+                        "analysis_qnames_assigned": analysis_comparison["n_qnames_assigned"],
+                        "analysis_haplotype_conflict": analysis_comparison["n_haplotype_conflict"],
                         "analysis_fragment_hap_conflict_fraction": (
-                            analysis_comparison[
-                                "fragment_hap_conflict_fraction"
-                            ]
+                            analysis_comparison["fragment_hap_conflict_fraction"]
                         ),
                     }
                 )
@@ -779,7 +688,5 @@ def stream_bam_fragment_evidence(
     missing = set(by_component).difference(yielded)
     if missing:
         raise RuntimeError(
-            "BAM scan did not yield components: {}".format(
-                ",".join(sorted(missing))
-            )
+            "BAM scan did not yield components: {}".format(",".join(sorted(missing)))
         )

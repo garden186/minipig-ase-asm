@@ -137,7 +137,7 @@ def validate(out_dir: Path) -> Dict[str, object]:
         errors.append("analysis_qc status is not PASS")
     return {
         "status": "PASS" if not errors else "FAIL",
-        "version": "piggtex",
+        "analysis": "piggtex",
         "errors": errors,
         "checks": {
             "n_tissue_mapping_rows": len(mapping),

@@ -15,8 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, MutableMapping, Sequence, Tuple
 
-
-VERSION = 'ase_cohort'
+ANALYSIS_ID = "ase_cohort"
 
 DEFAULT_TISSUE_ALIASES = {"L-blood": "Blood", "blood": "Blood"}
 
@@ -32,85 +31,140 @@ SENSITIVITY_STATUSES = {
     "ASE_GENE_STATISTICAL_SMALL_EFFECT",
 }
 NEGATIVE_STATUSES = {"NOT_ASE_GENE", "UNTESTABLE"}
-ALLOWED_STATUSES = (
-    {CORE_STATUS} | SUPPORTED_STATUSES | SENSITIVITY_STATUSES | NEGATIVE_STATUSES
-)
+ALLOWED_STATUSES = {CORE_STATUS} | SUPPORTED_STATUSES | SENSITIVITY_STATUSES | NEGATIVE_STATUSES
 SELECTED_STATUSES = {CORE_STATUS} | SUPPORTED_STATUSES | SENSITIVITY_STATUSES
 
 GENE_HEADER = [
-    "sample", "tissue", "gene_id", "gene_name", "gene_biotype",
-    "n_informative_haplotype_blocks", "n_testable_haplotype_blocks",
-    "n_fdr_strong_blocks", "n_core_robust_blocks",
-    "n_core_supported_blocks", "n_supported_single_snp_blocks",
-    "n_phase_unresolved_blocks", "n_support_unresolved_blocks",
-    "n_fdr_moderate_effect_blocks", "n_near_fdr_blocks",
-    "n_nominal_directional_blocks", "n_statistical_small_effect_blocks",
-    "n_monoallelic_like_blocks", "n_low_minor_blocks",
-    "n_two_haplotype_supported_blocks", "gene_phase_scope",
-    "gene_ase_status_classified", "top_haplotype_block_id", "top_measurement_id",
-    "top_evidence_class_classified", "top_statistical_signal_classified",
-    "top_imbalance_shape_classified", "top_snp_support_class_classified",
-    "top_phase_qc_status_classified", "top_assignment_dependency_classified",
-    "top_asm_integration_readiness_classified", "top_ase_direction_classified",
-    "top_ase_q_bh", "top_major_haplotype_fraction", "top_total_count",
-    "core_haplotype_block_ids", "supported_haplotype_block_ids",
+    "sample",
+    "tissue",
+    "gene_id",
+    "gene_name",
+    "gene_biotype",
+    "n_informative_haplotype_blocks",
+    "n_testable_haplotype_blocks",
+    "n_fdr_strong_blocks",
+    "n_core_robust_blocks",
+    "n_core_supported_blocks",
+    "n_supported_single_snp_blocks",
+    "n_phase_unresolved_blocks",
+    "n_support_unresolved_blocks",
+    "n_fdr_moderate_effect_blocks",
+    "n_near_fdr_blocks",
+    "n_nominal_directional_blocks",
+    "n_statistical_small_effect_blocks",
+    "n_monoallelic_like_blocks",
+    "n_low_minor_blocks",
+    "n_two_haplotype_supported_blocks",
+    "gene_phase_scope",
+    "gene_ase_status_classified",
+    "top_haplotype_block_id",
+    "top_measurement_id",
+    "top_evidence_class_classified",
+    "top_statistical_signal_classified",
+    "top_imbalance_shape_classified",
+    "top_snp_support_class_classified",
+    "top_phase_qc_status_classified",
+    "top_assignment_dependency_classified",
+    "top_asm_integration_readiness_classified",
+    "top_ase_direction_classified",
+    "top_ase_q_bh",
+    "top_major_haplotype_fraction",
+    "top_total_count",
+    "core_haplotype_block_ids",
+    "supported_haplotype_block_ids",
     "sensitivity_haplotype_block_ids",
 ]
 
 RECURRENCE_HEADER = [
-    "gene_id", "gene_name", "gene_biotype", "tissue",
-    "n_samples_testable", "n_samples_core", "samples_core",
-    "expected_core_under_null", "recurrence_p", "recurrence_q_bh",
+    "gene_id",
+    "gene_name",
+    "gene_biotype",
+    "tissue",
+    "n_samples_testable",
+    "n_samples_core",
+    "samples_core",
+    "expected_core_under_null",
+    "recurrence_p",
+    "recurrence_q_bh",
     "is_statistically_recurrent_core",
 ]
 
 STATUS_COUNT_HEADER = [
-    "gene_id", "gene_name", "gene_biotype", "tissue",
+    "gene_id",
+    "gene_name",
+    "gene_biotype",
+    "tissue",
     "n_samples_testable",
-    "n_samples_core", "samples_core",
-    "n_samples_supported_single_snp", "samples_supported_single_snp",
+    "n_samples_core",
+    "samples_core",
+    "n_samples_supported_single_snp",
+    "samples_supported_single_snp",
     "n_samples_phase_or_support_unresolved",
     "samples_phase_or_support_unresolved",
-    "n_samples_fdr_moderate", "samples_fdr_moderate",
-    "n_samples_near_fdr", "samples_near_fdr",
-    "n_samples_nominal", "samples_nominal",
+    "n_samples_fdr_moderate",
+    "samples_fdr_moderate",
+    "n_samples_near_fdr",
+    "samples_near_fdr",
+    "n_samples_nominal",
+    "samples_nominal",
     "n_samples_statistical_small_effect",
     "samples_statistical_small_effect",
 ]
 
 GENE_OVERVIEW_HEADER = [
-    "gene_id", "gene_name", "gene_biotype",
-    "n_selected_measurements", "n_core_measurements",
+    "gene_id",
+    "gene_name",
+    "gene_biotype",
+    "n_selected_measurements",
+    "n_core_measurements",
     "n_supported_single_snp_measurements",
     "n_phase_or_support_unresolved_measurements",
-    "n_fdr_moderate_measurements", "n_near_fdr_measurements",
-    "n_nominal_measurements", "n_statistical_small_effect_measurements",
-    "n_samples_any_selected_tissue", "samples_any_selected_tissue",
-    "n_tissues_with_selected_ase", "tissues_with_selected_ase",
-    "n_samples_any_core_tissue", "samples_any_core_tissue",
-    "n_tissues_with_core_ase", "tissues_with_core_ase",
+    "n_fdr_moderate_measurements",
+    "n_near_fdr_measurements",
+    "n_nominal_measurements",
+    "n_statistical_small_effect_measurements",
+    "n_samples_any_selected_tissue",
+    "samples_any_selected_tissue",
+    "n_tissues_with_selected_ase",
+    "tissues_with_selected_ase",
+    "n_samples_any_core_tissue",
+    "samples_any_core_tissue",
+    "n_tissues_with_core_ase",
+    "tissues_with_core_ase",
     "n_tested_gene_tissue_pairs",
     "n_statistically_recurrent_core_gene_tissue_pairs",
-    "min_core_recurrence_q_bh", "statistically_recurrent_core_tissues",
+    "min_core_recurrence_q_bh",
+    "statistically_recurrent_core_tissues",
 ]
 
 BURDEN_HEADER = [
-    "sample", "tissue", "n_testable_genes", "n_core_genes",
-    "core_null_probability", "n_supported_single_snp_genes",
-    "n_phase_or_support_unresolved_genes", "n_fdr_moderate_genes",
-    "n_near_fdr_genes", "n_nominal_genes",
+    "sample",
+    "tissue",
+    "n_testable_genes",
+    "n_core_genes",
+    "core_null_probability",
+    "n_supported_single_snp_genes",
+    "n_phase_or_support_unresolved_genes",
+    "n_fdr_moderate_genes",
+    "n_near_fdr_genes",
+    "n_nominal_genes",
     "n_statistical_small_effect_genes",
 ]
 
 TISSUE_SUMMARY_HEADER = [
-    "tissue", "n_samples_available", "sample_ids_available",
-    "n_testable_gene_measurements", "n_core_gene_measurements",
+    "tissue",
+    "n_samples_available",
+    "sample_ids_available",
+    "n_testable_gene_measurements",
+    "n_core_gene_measurements",
     "n_supported_single_snp_gene_measurements",
     "n_phase_or_support_unresolved_gene_measurements",
-    "n_fdr_moderate_gene_measurements", "n_near_fdr_gene_measurements",
+    "n_fdr_moderate_gene_measurements",
+    "n_near_fdr_gene_measurements",
     "n_nominal_gene_measurements",
     "n_statistical_small_effect_gene_measurements",
-    "n_unique_core_genes", "n_recurrence_hypotheses",
+    "n_unique_core_genes",
+    "n_recurrence_hypotheses",
     "n_statistically_recurrent_core_genes",
 ]
 
@@ -139,9 +193,7 @@ def parse_tissue_aliases(text: str) -> Dict[str, str]:
     aliases: Dict[str, str] = {}
     for item in parse_csv_list(text):
         if "=" not in item:
-            raise CohortError(
-                f"invalid tissue alias {item!r}; expected source=canonical"
-            )
+            raise CohortError(f"invalid tissue alias {item!r}; expected source=canonical")
         source, target = (part.strip() for part in item.split("=", 1))
         if not source or not target or source == target:
             raise CohortError(f"invalid tissue alias: {item!r}")
@@ -251,14 +303,10 @@ def canonical_annotation(
     field: str,
 ) -> str:
     values = {
-        value
-        for value in annotations.get(gene_id, {}).get(field, set())
-        if value not in {"", "."}
+        value for value in annotations.get(gene_id, {}).get(field, set()) if value not in {"", "."}
     }
     if len(values) > 1:
-        raise CohortError(
-            f"inconsistent {field} for gene_id={gene_id}: {sorted(values)}"
-        )
+        raise CohortError(f"inconsistent {field} for gene_id={gene_id}: {sorted(values)}")
     return next(iter(values)) if values else ""
 
 
@@ -276,11 +324,11 @@ def validate_source_jsons(
     validation = read_json(sample_dir / "ase_classified_validation.json")
     qc = read_json(sample_dir / "ase_classified_qc.json")
     if validation.get("status") != "PASS" or int(validation.get("n_errors", -1)) != 0:
-        raise CohortError(f"{sample}: ASE classified-ASE validation did not PASS")
-    if str(validation.get("version")) != "ase_reclassification":
-        raise CohortError(f"{sample}: unexpected validation version")
-    if str(qc.get("version")) != "ase_reclassification":
-        raise CohortError(f"{sample}: unexpected QC version")
+        raise CohortError(f"{sample}: classified ASE validation did not PASS")
+    if str(validation.get("analysis", validation.get("version"))) != "ase_reclassification":
+        raise CohortError(f"{sample}: unexpected validation analysis")
+    if str(qc.get("analysis", qc.get("version"))) != "ase_reclassification":
+        raise CohortError(f"{sample}: unexpected QC analysis")
     if qc.get("source_validation_status") != "PASS":
         raise CohortError(f"{sample}: source fragment-count validation was not PASS")
     if qc.get("source_qc_loaded") is not True:
@@ -298,13 +346,20 @@ def validate_gene_row(row: Mapping[str, str], sample: str) -> None:
     if status not in ALLOWED_STATUSES:
         raise CohortError(f"invalid classified-ASE gene status {status!r} at {context}")
     numeric_fields = [
-        "n_informative_haplotype_blocks", "n_testable_haplotype_blocks",
-        "n_fdr_strong_blocks", "n_core_robust_blocks",
-        "n_core_supported_blocks", "n_supported_single_snp_blocks",
-        "n_phase_unresolved_blocks", "n_support_unresolved_blocks",
-        "n_fdr_moderate_effect_blocks", "n_near_fdr_blocks",
-        "n_nominal_directional_blocks", "n_statistical_small_effect_blocks",
-        "n_monoallelic_like_blocks", "n_low_minor_blocks",
+        "n_informative_haplotype_blocks",
+        "n_testable_haplotype_blocks",
+        "n_fdr_strong_blocks",
+        "n_core_robust_blocks",
+        "n_core_supported_blocks",
+        "n_supported_single_snp_blocks",
+        "n_phase_unresolved_blocks",
+        "n_support_unresolved_blocks",
+        "n_fdr_moderate_effect_blocks",
+        "n_near_fdr_blocks",
+        "n_nominal_directional_blocks",
+        "n_statistical_small_effect_blocks",
+        "n_monoallelic_like_blocks",
+        "n_low_minor_blocks",
         "n_two_haplotype_supported_blocks",
     ]
     parsed = {field: to_int(row[field], field, context) for field in numeric_fields}
@@ -316,9 +371,7 @@ def validate_gene_row(row: Mapping[str, str], sample: str) -> None:
         parsed["n_core_robust_blocks"] + parsed["n_core_supported_blocks"] < 1
     ):
         raise CohortError(f"core gene has no core block at {context}")
-    if status == "ASE_GENE_SUPPORTED_SINGLE_SNP" and parsed[
-        "n_supported_single_snp_blocks"
-    ] < 1:
+    if status == "ASE_GENE_SUPPORTED_SINGLE_SNP" and parsed["n_supported_single_snp_blocks"] < 1:
         raise CohortError(f"single-SNP supported gene lacks supporting block at {context}")
     if status == "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED" and (
         parsed["n_phase_unresolved_blocks"] + parsed["n_support_unresolved_blocks"] < 1
@@ -333,7 +386,9 @@ def exact_subset(
     label: str,
     sample: str,
 ) -> None:
-    expected = {row_key(row): dict(row) for row in summary if row["gene_ase_status_classified"] in statuses}
+    expected = {
+        row_key(row): dict(row) for row in summary if row["gene_ase_status_classified"] in statuses
+    }
     observed = {row_key(row): dict(row) for row in subset}
     if len(observed) != len(subset):
         raise CohortError(f"{sample}: duplicate rows in {label}")
@@ -341,9 +396,7 @@ def exact_subset(
         missing = sorted(set(expected) - set(observed))[:10]
         extra = sorted(set(observed) - set(expected))[:10]
         changed = sorted(
-            key
-            for key in set(expected) & set(observed)
-            if expected[key] != observed[key]
+            key for key in set(expected) & set(observed) if expected[key] != observed[key]
         )[:10]
         raise CohortError(
             f"{sample}: {label} is not exact status subset; "
@@ -400,14 +453,12 @@ def load_inputs(
         if int(validation.get("n_gene_summary_rows", -1)) != len(summary_source):
             raise CohortError(f"{sample}: gene summary row count differs from validation")
         expected_status = {
-            str(key): int(value)
-            for key, value in validation.get("gene_status_counts", {}).items()
+            str(key): int(value) for key, value in validation.get("gene_status_counts", {}).items()
         }
         if dict(sorted(observed_status.items())) != dict(sorted(expected_status.items())):
             raise CohortError(f"{sample}: gene status counts differ from validation")
         qc_status = {
-            str(key): int(value)
-            for key, value in qc.get("gene_status_counts", {}).items()
+            str(key): int(value) for key, value in qc.get("gene_status_counts", {}).items()
         }
         if dict(sorted(observed_status.items())) != dict(sorted(qc_status.items())):
             raise CohortError(f"{sample}: gene status counts differ from QC")
@@ -471,11 +522,14 @@ def load_inputs(
         raise CohortError("classified-ASE threshold sets differ among samples")
 
     for row in core_rows:
-        if to_int(
-            row["n_testable_haplotype_blocks"],
-            "n_testable_haplotype_blocks",
-            "|".join(row_key(row)),
-        ) < 1:
+        if (
+            to_int(
+                row["n_testable_haplotype_blocks"],
+                "n_testable_haplotype_blocks",
+                "|".join(row_key(row)),
+            )
+            < 1
+        ):
             raise CohortError(f"core gene is not testable: {row_key(row)}")
 
     return {
@@ -508,7 +562,9 @@ def status_sample_set(
 def build_recurrence(
     loaded: Mapping[str, object],
     q_threshold: float,
-) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], Dict[Tuple[str, str], Dict[str, object]]]:
+) -> Tuple[
+    List[Dict[str, object]], List[Dict[str, object]], Dict[Tuple[str, str], Dict[str, object]]
+]:
     if not 0.0 < q_threshold <= 1.0:
         raise CohortError(f"recurrence q threshold must be in (0,1]: {q_threshold}")
     testable_samples = loaded["testable_samples"]
@@ -571,9 +627,7 @@ def build_recurrence(
             "n_samples_testable": entry["n_samples_testable"],
             "n_samples_core": entry["n_samples_core"],
             "samples_core": entry["samples_core"],
-            "expected_core_under_null": fmt_fraction(
-                float(entry["expected_core_under_null"])
-            ),
+            "expected_core_under_null": fmt_fraction(float(entry["expected_core_under_null"])),
             "recurrence_p": fmt_probability(float(entry["recurrence_p"])),
             "recurrence_q_bh": fmt_probability(q_value),
             "is_statistically_recurrent_core": flag,
@@ -596,9 +650,11 @@ def build_status_count_rows(loaded: Mapping[str, object]) -> List[Dict[str, obje
         }
         if not any(sets.values()):
             continue
+
         def values(status: str) -> Tuple[int, str]:
             sample_set = sets[status]
             return len(sample_set), ",".join(sorted(sample_set))
+
         core_n, core_s = values(CORE_STATUS)
         single_n, single_s = values("ASE_GENE_SUPPORTED_SINGLE_SNP")
         unresolved_n, unresolved_s = values("ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED")
@@ -606,27 +662,29 @@ def build_status_count_rows(loaded: Mapping[str, object]) -> List[Dict[str, obje
         near_n, near_s = values("ASE_GENE_NEAR_FDR")
         nominal_n, nominal_s = values("ASE_GENE_NOMINAL")
         small_n, small_s = values("ASE_GENE_STATISTICAL_SMALL_EFFECT")
-        output.append({
-            "gene_id": gene_id,
-            "gene_name": canonical_annotation(gene_id, annotations, "gene_name"),
-            "gene_biotype": canonical_annotation(gene_id, annotations, "gene_biotype"),
-            "tissue": tissue,
-            "n_samples_testable": len(testable_set),
-            "n_samples_core": core_n,
-            "samples_core": core_s,
-            "n_samples_supported_single_snp": single_n,
-            "samples_supported_single_snp": single_s,
-            "n_samples_phase_or_support_unresolved": unresolved_n,
-            "samples_phase_or_support_unresolved": unresolved_s,
-            "n_samples_fdr_moderate": moderate_n,
-            "samples_fdr_moderate": moderate_s,
-            "n_samples_near_fdr": near_n,
-            "samples_near_fdr": near_s,
-            "n_samples_nominal": nominal_n,
-            "samples_nominal": nominal_s,
-            "n_samples_statistical_small_effect": small_n,
-            "samples_statistical_small_effect": small_s,
-        })
+        output.append(
+            {
+                "gene_id": gene_id,
+                "gene_name": canonical_annotation(gene_id, annotations, "gene_name"),
+                "gene_biotype": canonical_annotation(gene_id, annotations, "gene_biotype"),
+                "tissue": tissue,
+                "n_samples_testable": len(testable_set),
+                "n_samples_core": core_n,
+                "samples_core": core_s,
+                "n_samples_supported_single_snp": single_n,
+                "samples_supported_single_snp": single_s,
+                "n_samples_phase_or_support_unresolved": unresolved_n,
+                "samples_phase_or_support_unresolved": unresolved_s,
+                "n_samples_fdr_moderate": moderate_n,
+                "samples_fdr_moderate": moderate_s,
+                "n_samples_near_fdr": near_n,
+                "samples_near_fdr": near_s,
+                "n_samples_nominal": nominal_n,
+                "samples_nominal": nominal_s,
+                "n_samples_statistical_small_effect": small_n,
+                "samples_statistical_small_effect": small_s,
+            }
+        )
     return output
 
 
@@ -646,51 +704,45 @@ def build_gene_overview(
         statuses = Counter(row["gene_ase_status_classified"] for row in rows)
         core_rows = [row for row in rows if row["gene_ase_status_classified"] == CORE_STATUS]
         recurrence = recurrence_by_gene.get(gene_id, [])
-        recurrent = [
-            row
-            for row in recurrence
-            if int(row["is_statistically_recurrent_core"]) == 1
-        ]
+        recurrent = [row for row in recurrence if int(row["is_statistically_recurrent_core"]) == 1]
         q_values = [float(row["recurrence_q_bh"]) for row in recurrence]
         samples_selected = sorted({row["sample"] for row in rows})
         tissues_selected = sorted({row["tissue"] for row in rows})
         samples_core = sorted({row["sample"] for row in core_rows})
         tissues_core = sorted({row["tissue"] for row in core_rows})
-        output.append({
-            "gene_id": gene_id,
-            "gene_name": canonical_annotation(gene_id, annotations, "gene_name"),
-            "gene_biotype": canonical_annotation(gene_id, annotations, "gene_biotype"),
-            "n_selected_measurements": len(rows),
-            "n_core_measurements": statuses[CORE_STATUS],
-            "n_supported_single_snp_measurements": statuses[
-                "ASE_GENE_SUPPORTED_SINGLE_SNP"
-            ],
-            "n_phase_or_support_unresolved_measurements": statuses[
-                "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
-            ],
-            "n_fdr_moderate_measurements": statuses["ASE_GENE_FDR_MODERATE"],
-            "n_near_fdr_measurements": statuses["ASE_GENE_NEAR_FDR"],
-            "n_nominal_measurements": statuses["ASE_GENE_NOMINAL"],
-            "n_statistical_small_effect_measurements": statuses[
-                "ASE_GENE_STATISTICAL_SMALL_EFFECT"
-            ],
-            "n_samples_any_selected_tissue": len(samples_selected),
-            "samples_any_selected_tissue": ",".join(samples_selected),
-            "n_tissues_with_selected_ase": len(tissues_selected),
-            "tissues_with_selected_ase": ",".join(tissues_selected),
-            "n_samples_any_core_tissue": len(samples_core),
-            "samples_any_core_tissue": ",".join(samples_core),
-            "n_tissues_with_core_ase": len(tissues_core),
-            "tissues_with_core_ase": ",".join(tissues_core),
-            "n_tested_gene_tissue_pairs": len(recurrence),
-            "n_statistically_recurrent_core_gene_tissue_pairs": len(recurrent),
-            "min_core_recurrence_q_bh": (
-                fmt_probability(min(q_values)) if q_values else ""
-            ),
-            "statistically_recurrent_core_tissues": ",".join(
-                sorted(str(row["tissue"]) for row in recurrent)
-            ),
-        })
+        output.append(
+            {
+                "gene_id": gene_id,
+                "gene_name": canonical_annotation(gene_id, annotations, "gene_name"),
+                "gene_biotype": canonical_annotation(gene_id, annotations, "gene_biotype"),
+                "n_selected_measurements": len(rows),
+                "n_core_measurements": statuses[CORE_STATUS],
+                "n_supported_single_snp_measurements": statuses["ASE_GENE_SUPPORTED_SINGLE_SNP"],
+                "n_phase_or_support_unresolved_measurements": statuses[
+                    "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
+                ],
+                "n_fdr_moderate_measurements": statuses["ASE_GENE_FDR_MODERATE"],
+                "n_near_fdr_measurements": statuses["ASE_GENE_NEAR_FDR"],
+                "n_nominal_measurements": statuses["ASE_GENE_NOMINAL"],
+                "n_statistical_small_effect_measurements": statuses[
+                    "ASE_GENE_STATISTICAL_SMALL_EFFECT"
+                ],
+                "n_samples_any_selected_tissue": len(samples_selected),
+                "samples_any_selected_tissue": ",".join(samples_selected),
+                "n_tissues_with_selected_ase": len(tissues_selected),
+                "tissues_with_selected_ase": ",".join(tissues_selected),
+                "n_samples_any_core_tissue": len(samples_core),
+                "samples_any_core_tissue": ",".join(samples_core),
+                "n_tissues_with_core_ase": len(tissues_core),
+                "tissues_with_core_ase": ",".join(tissues_core),
+                "n_tested_gene_tissue_pairs": len(recurrence),
+                "n_statistically_recurrent_core_gene_tissue_pairs": len(recurrent),
+                "min_core_recurrence_q_bh": (fmt_probability(min(q_values)) if q_values else ""),
+                "statistically_recurrent_core_tissues": ",".join(
+                    sorted(str(row["tissue"]) for row in recurrent)
+                ),
+            }
+        )
     return output
 
 
@@ -703,27 +755,25 @@ def build_burden_rows(
         sample, tissue = sample_tissue
         counts = loaded["sample_tissue_counts"][sample_tissue]
         null = null_by_sample_tissue.get(sample_tissue)
-        output.append({
-            "sample": sample,
-            "tissue": tissue,
-            "n_testable_genes": counts["TESTABLE"],
-            "n_core_genes": counts[CORE_STATUS],
-            "core_null_probability": (
-                fmt_fraction(float(null["core_probability"])) if null else ""
-            ),
-            "n_supported_single_snp_genes": counts[
-                "ASE_GENE_SUPPORTED_SINGLE_SNP"
-            ],
-            "n_phase_or_support_unresolved_genes": counts[
-                "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
-            ],
-            "n_fdr_moderate_genes": counts["ASE_GENE_FDR_MODERATE"],
-            "n_near_fdr_genes": counts["ASE_GENE_NEAR_FDR"],
-            "n_nominal_genes": counts["ASE_GENE_NOMINAL"],
-            "n_statistical_small_effect_genes": counts[
-                "ASE_GENE_STATISTICAL_SMALL_EFFECT"
-            ],
-        })
+        output.append(
+            {
+                "sample": sample,
+                "tissue": tissue,
+                "n_testable_genes": counts["TESTABLE"],
+                "n_core_genes": counts[CORE_STATUS],
+                "core_null_probability": (
+                    fmt_fraction(float(null["core_probability"])) if null else ""
+                ),
+                "n_supported_single_snp_genes": counts["ASE_GENE_SUPPORTED_SINGLE_SNP"],
+                "n_phase_or_support_unresolved_genes": counts[
+                    "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
+                ],
+                "n_fdr_moderate_genes": counts["ASE_GENE_FDR_MODERATE"],
+                "n_near_fdr_genes": counts["ASE_GENE_NEAR_FDR"],
+                "n_nominal_genes": counts["ASE_GENE_NOMINAL"],
+                "n_statistical_small_effect_genes": counts["ASE_GENE_STATISTICAL_SMALL_EFFECT"],
+            }
+        )
     return output
 
 
@@ -745,31 +795,30 @@ def build_tissue_summary(
             if row["tissue"] == tissue:
                 core_genes.add(row["gene_id"])
         recurrence = recurrence_by_tissue.get(tissue, [])
-        output.append({
-            "tissue": tissue,
-            "n_samples_available": len(samples),
-            "sample_ids_available": ",".join(sorted(samples)),
-            "n_testable_gene_measurements": counts["TESTABLE"],
-            "n_core_gene_measurements": counts[CORE_STATUS],
-            "n_supported_single_snp_gene_measurements": counts[
-                "ASE_GENE_SUPPORTED_SINGLE_SNP"
-            ],
-            "n_phase_or_support_unresolved_gene_measurements": counts[
-                "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
-            ],
-            "n_fdr_moderate_gene_measurements": counts["ASE_GENE_FDR_MODERATE"],
-            "n_near_fdr_gene_measurements": counts["ASE_GENE_NEAR_FDR"],
-            "n_nominal_gene_measurements": counts["ASE_GENE_NOMINAL"],
-            "n_statistical_small_effect_gene_measurements": counts[
-                "ASE_GENE_STATISTICAL_SMALL_EFFECT"
-            ],
-            "n_unique_core_genes": len(core_genes),
-            "n_recurrence_hypotheses": len(recurrence),
-            "n_statistically_recurrent_core_genes": sum(
-                int(row["is_statistically_recurrent_core"]) == 1
-                for row in recurrence
-            ),
-        })
+        output.append(
+            {
+                "tissue": tissue,
+                "n_samples_available": len(samples),
+                "sample_ids_available": ",".join(sorted(samples)),
+                "n_testable_gene_measurements": counts["TESTABLE"],
+                "n_core_gene_measurements": counts[CORE_STATUS],
+                "n_supported_single_snp_gene_measurements": counts["ASE_GENE_SUPPORTED_SINGLE_SNP"],
+                "n_phase_or_support_unresolved_gene_measurements": counts[
+                    "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
+                ],
+                "n_fdr_moderate_gene_measurements": counts["ASE_GENE_FDR_MODERATE"],
+                "n_near_fdr_gene_measurements": counts["ASE_GENE_NEAR_FDR"],
+                "n_nominal_gene_measurements": counts["ASE_GENE_NOMINAL"],
+                "n_statistical_small_effect_gene_measurements": counts[
+                    "ASE_GENE_STATISTICAL_SMALL_EFFECT"
+                ],
+                "n_unique_core_genes": len(core_genes),
+                "n_recurrence_hypotheses": len(recurrence),
+                "n_statistically_recurrent_core_genes": sum(
+                    int(row["is_statistically_recurrent_core"]) == 1 for row in recurrence
+                ),
+            }
+        )
     return output
 
 
@@ -783,12 +832,13 @@ def build_expected(
     recurrence_q_threshold: float = 0.05,
 ) -> Tuple[Dict[str, List[Dict[str, object]]], Dict[str, object]]:
     tissue_aliases = dict(tissue_aliases or {})
-    excluded_tissues = {
-        normalize_tissue(tissue, tissue_aliases) for tissue in excluded_tissues
-    }
+    excluded_tissues = {normalize_tissue(tissue, tissue_aliases) for tissue in excluded_tissues}
     loaded = load_inputs(input_root, samples, excluded_tissues, tissue_aliases)
     observed_combinations = len(loaded["sample_tissue_combinations"])
-    if expect_sample_tissue_combinations and observed_combinations != expect_sample_tissue_combinations:
+    if (
+        expect_sample_tissue_combinations
+        and observed_combinations != expect_sample_tissue_combinations
+    ):
         raise CohortError(
             "nonexcluded sample-tissue denominator mismatch: "
             f"observed={observed_combinations}, expected={expect_sample_tissue_combinations}"
@@ -823,7 +873,7 @@ def build_expected(
     unique_core_genes = {row["gene_id"] for row in loaded["core_rows"]}
     recurrent_genes = {row["gene_id"] for row in recurrent_rows}
     metadata = {
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "input_root": str(input_root.resolve()),
         "samples": list(samples),
         "excluded_tissues": sorted(excluded_tissues),
@@ -833,9 +883,7 @@ def build_expected(
                 "n_samples": len(sample_set),
                 "samples": sorted(sample_set),
             }
-            for (source, target), sample_set in sorted(
-                loaded["normalized_tissue_samples"].items()
-            )
+            for (source, target), sample_set in sorted(loaded["normalized_tissue_samples"].items())
         },
         "n_sample_tissue_combinations": observed_combinations,
         "n_tissues": len(loaded["available_samples_by_tissue"]),
@@ -843,16 +891,20 @@ def build_expected(
         "n_core_gene_measurements": len(loaded["core_rows"]),
         "n_supported_gene_measurements": len(loaded["supported_rows"]),
         "n_sensitivity_gene_measurements": len(loaded["sensitivity_rows"]),
-        "n_core_gene_tissue_pairs": len({
-            (row["gene_id"], row["tissue"]) for row in loaded["core_rows"]
-        }),
+        "n_core_gene_tissue_pairs": len(
+            {(row["gene_id"], row["tissue"]) for row in loaded["core_rows"]}
+        ),
         "n_statistical_recurrence_hypotheses": len(recurrence_rows),
         "n_statistically_recurrent_core_gene_tissue_pairs": len(recurrent_rows),
         "n_genes_with_statistically_recurrent_core": len(recurrent_genes),
         "row_counts": {name: len(rows) for name, rows in outputs.items()},
-        "gene_status_measurement_counts": dict(sorted(Counter(
-            row["gene_ase_status_classified"] for row in loaded["selected_rows"]
-        ).items())),
+        "gene_status_measurement_counts": dict(
+            sorted(
+                Counter(
+                    row["gene_ase_status_classified"] for row in loaded["selected_rows"]
+                ).items()
+            )
+        ),
         "classified_thresholds": loaded["thresholds"],
         "statistical_recurrence": {
             "main_label": CORE_STATUS,
@@ -864,8 +916,7 @@ def build_expected(
             "minimum_testable_samples": 2,
             "minimum_core_samples_for_recurrence_call": 2,
             "bh_scope": (
-                "global across all gene-tissue hypotheses with at least "
-                "2 testable samples"
+                "global across all gene-tissue hypotheses with at least " "2 testable samples"
             ),
             "q_threshold": recurrence_q_threshold,
             "supported_and_sensitivity_policy": (
@@ -929,9 +980,7 @@ def materialize_outputs(
         backup = None
         if out_dir.exists():
             if not force:
-                raise CohortError(
-                    f"output directory already exists: {out_dir}; use --force 1"
-                )
+                raise CohortError(f"output directory already exists: {out_dir}; use --force 1")
             backup = make_backup_path(out_dir)
             out_dir.rename(backup)
         out_dir.parent.mkdir(parents=True, exist_ok=True)
@@ -945,18 +994,18 @@ def materialize_outputs(
 
 def parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Build ASE classified-ASE core cohort recurrence tables"
+        description="Build classified ASE core cohort recurrence tables"
     )
     parser.add_argument("--input-root", required=True, type=Path)
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--project-tmp", required=True, type=Path)
-    parser.add_argument("--samples", required=True, help="Comma-separated sample IDs in analysis order")
+    parser.add_argument(
+        "--samples", required=True, help="Comma-separated sample IDs in analysis order"
+    )
     parser.add_argument("--exclude-tissues", default="Cranial")
     parser.add_argument(
         "--tissue-aliases",
-        default=",".join(
-            f"{source}={target}" for source, target in DEFAULT_TISSUE_ALIASES.items()
-        ),
+        default=",".join(f"{source}={target}" for source, target in DEFAULT_TISSUE_ALIASES.items()),
     )
     parser.add_argument("--expect-sample-tissue-combinations", type=int, default=0)
     parser.add_argument("--expect-tissues", type=int, default=0)
@@ -972,8 +1021,7 @@ def main(argv=None) -> int:
         raise CohortError(f"duplicate samples: {samples}")
     tissue_aliases = parse_tissue_aliases(args.tissue_aliases)
     excluded = {
-        normalize_tissue(tissue, tissue_aliases)
-        for tissue in parse_csv_list(args.exclude_tissues)
+        normalize_tissue(tissue, tissue_aliases) for tissue in parse_csv_list(args.exclude_tissues)
     }
     outputs, metadata = build_expected(
         args.input_root,
@@ -991,7 +1039,7 @@ def main(argv=None) -> int:
         args.project_tmp,
         force=bool(args.force),
     )
-    print(f"[PASS] built ASE classified-ASE cohort: {args.out_dir}")
+    print(f"[PASS] built classified ASE cohort: {args.out_dir}")
     if backup:
         print(f"[BACKUP] {backup}")
     print(

@@ -18,7 +18,7 @@
   "locations": {
     "units": {},
     "phase_index": {},
-    "pilot": {},
+    "anchor_qc": {},
     "variant_sources": {}
   },
   "registry": {},
@@ -60,7 +60,7 @@
       17,
       18
     ],
-    "pilot_per_stratum": 20,
+    "anchor_qc_per_stratum": 20,
     "units": [
       {
         "sample": "S01",
@@ -114,6 +114,6 @@
     }
   },
   "tile_bp": 1000000,
-  "expected_pilot_sites": 0,
-  "expected_pilot_profiles": 0
+  "expected_anchor_qc_sites": 0,
+  "expected_anchor_qc_profiles": 0
 }

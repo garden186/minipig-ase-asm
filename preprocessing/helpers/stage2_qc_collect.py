@@ -36,7 +36,6 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
-
 TRIM_FIELDS = [
     "sample",
     "tissue",
@@ -120,10 +119,7 @@ def parse_args() -> argparse.Namespace:
         "--outdir",
         type=Path,
         default=None,
-        help=(
-            "Output directory (default: "
-            "<project>/results/qc/rnaseq/stage2_qc/<sample>)"
-        ),
+        help=("Output directory (default: " "<project>/results/qc/rnaseq/stage2_qc/<sample>)"),
     )
     parser.add_argument(
         "--scan-vw",
@@ -399,7 +395,9 @@ def parse_star_log(path: Path, sample: str) -> Optional[Dict[str, object]]:
     }
 
 
-def discover_star_logs(project: Path, sample: str) -> Tuple[Dict[str, Dict[str, object]], List[str]]:
+def discover_star_logs(
+    project: Path, sample: str
+) -> Tuple[Dict[str, Dict[str, object]], List[str]]:
     roots = [
         project / "results" / "qc" / "rnaseq" / "align",
         project / "results" / "rnaseq" / "align",
@@ -431,9 +429,7 @@ def discover_star_logs(project: Path, sample: str) -> Tuple[Dict[str, Dict[str, 
         items.sort(key=lambda item: (item[0], item[1].stat().st_mtime), reverse=True)
         selected[tissue] = items[0][2]
         if len(items) > 1:
-            warnings.append(
-                f"Multiple final STAR logs found for {tissue}; selected {items[0][1]}"
-            )
+            warnings.append(f"Multiple final STAR logs found for {tissue}; selected {items[0][1]}")
     return selected, warnings
 
 
@@ -470,9 +466,7 @@ def parse_picard_metrics(path: Path, sample: str) -> Optional[Dict[str, object]]
         "duplicate_metrics": str(path),
         "read_pairs_examined": int_clean(values.get("READ_PAIRS_EXAMINED", "")),
         "read_pair_duplicates": int_clean(values.get("READ_PAIR_DUPLICATES", "")),
-        "optical_duplicate_pairs": int_clean(
-            values.get("READ_PAIR_OPTICAL_DUPLICATES", "")
-        ),
+        "optical_duplicate_pairs": int_clean(values.get("READ_PAIR_OPTICAL_DUPLICATES", "")),
         "percent_duplication": float_clean(values.get("PERCENT_DUPLICATION", "")),
         "estimated_library_size": int_clean(values.get("ESTIMATED_LIBRARY_SIZE", "")),
     }
@@ -511,9 +505,11 @@ def discover_picard_metrics(
 
 
 def load_alignment_summary(project: Path, sample: str) -> Dict[str, Dict[str, object]]:
-    candidates = list(
-        (project / "results").rglob(f"{sample}.alignment_summary.tsv")
-    ) if (project / "results").is_dir() else []
+    candidates = (
+        list((project / "results").rglob(f"{sample}.alignment_summary.tsv"))
+        if (project / "results").is_dir()
+        else []
+    )
     if not candidates:
         return {}
     # Prefer the canonical QC path, otherwise newest.
@@ -547,9 +543,7 @@ def discover_dedup_bams(project: Path, sample: str) -> Dict[str, Path]:
     return output
 
 
-def scan_vw_tags(
-    bam: Path, samtools: str, threads: int
-) -> Dict[str, object]:
+def scan_vw_tags(bam: Path, samtools: str, threads: int) -> Dict[str, object]:
     counts = defaultdict(int)
     command = [samtools, "view", "-@", str(max(1, threads)), str(bam)]
     process = subprocess.Popen(
@@ -588,9 +582,7 @@ def scan_vw_tags(
     stderr = process.stderr.read() if process.stderr else ""
     return_code = process.wait()
     if return_code != 0:
-        raise RuntimeError(
-            f"samtools failed for {bam} (exit {return_code}): {stderr.strip()}"
-        )
+        raise RuntimeError(f"samtools failed for {bam} (exit {return_code}): {stderr.strip()}")
     return {
         "vw_bam": str(bam),
         "vw_total_alignments": counts["total"],
@@ -627,9 +619,7 @@ def build_report(
     warnings: List[str],
     scan_vw: bool,
 ) -> str:
-    tissues = sorted(
-        {str(row["tissue"]) for row in trim_rows + align_rows if row.get("tissue")}
-    )
+    tissues = sorted({str(row["tissue"]) for row in trim_rows + align_rows if row.get("tissue")})
     mates: Dict[str, set] = defaultdict(set)
     for row in trim_rows:
         mates[str(row["tissue"])].add(str(row["mate"]))
@@ -709,9 +699,7 @@ def build_report(
     if low_base_retention:
         observations.append("Base retention below 95%: " + ", ".join(low_base_retention))
     overlap_one = [
-        f"{row['tissue']}-R{row['mate']}"
-        for row in trim_rows
-        if row.get("adapter_overlap_bp") == 1
+        f"{row['tissue']}-R{row['mate']}" for row in trim_rows if row.get("adapter_overlap_bp") == 1
     ]
     if overlap_one:
         observations.append(
@@ -739,9 +727,7 @@ def build_report(
             + ". phASER removes reads flagged as duplicate by default."
         )
     missing_star = [str(row["tissue"]) for row in align_rows if not row.get("star_log")]
-    missing_dup = [
-        str(row["tissue"]) for row in align_rows if not row.get("duplicate_metrics")
-    ]
+    missing_dup = [str(row["tissue"]) for row in align_rows if not row.get("duplicate_metrics")]
     if missing_star:
         observations.append("Missing final STAR log: " + ", ".join(missing_star))
     if missing_dup:
@@ -822,7 +808,9 @@ def main() -> int:
     report_path = outdir / f"{args.sample}.stage2_qc_report.md"
     manifest_path = outdir / f"{args.sample}.stage2_qc_manifest.tsv"
 
-    write_tsv(trim_path, TRIM_FIELDS, sorted(trim_rows, key=lambda r: (str(r["tissue"]), str(r["mate"]))))
+    write_tsv(
+        trim_path, TRIM_FIELDS, sorted(trim_rows, key=lambda r: (str(r["tissue"]), str(r["mate"])))
+    )
     write_tsv(align_path, ALIGN_FIELDS, sorted(align_rows, key=lambda r: str(r["tissue"])))
     report_path.write_text(
         build_report(args.sample, trim_rows, align_rows, warnings, args.scan_vw),
@@ -831,7 +819,9 @@ def main() -> int:
 
     manifest_rows = []
     for row in trim_rows:
-        manifest_rows.append({"type": "trim_report", "tissue": row["tissue"], "path": row["report"]})
+        manifest_rows.append(
+            {"type": "trim_report", "tissue": row["tissue"], "path": row["report"]}
+        )
     for row in align_rows:
         for field, file_type in [
             ("star_log", "star_log"),
@@ -839,7 +829,9 @@ def main() -> int:
             ("vw_bam", "vw_bam"),
         ]:
             if row.get(field):
-                manifest_rows.append({"type": file_type, "tissue": row["tissue"], "path": row[field]})
+                manifest_rows.append(
+                    {"type": file_type, "tissue": row["tissue"], "path": row[field]}
+                )
     write_tsv(manifest_path, ["type", "tissue", "path"], manifest_rows)
 
     print("Stage 2 QC collection complete")

@@ -29,8 +29,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, MutableMapping, Sequence, Set, Tuple
 
-
-VERSION = 'ase_tissue_enrichment'
+ANALYSIS_ID = "ase_tissue_enrichment"
 DEFAULT_THRESHOLDS = (15, 20, 30)
 PROFILE_LR_95 = 3.841458820694124
 
@@ -220,8 +219,7 @@ def solve_beta(
     for _ in range(200):
         midpoint = (lower + upper) / 2.0
         fitted = math.fsum(
-            logistic_from_offset(math.log(p / (1.0 - p)), midpoint)
-            for p in baseline_probabilities
+            logistic_from_offset(math.log(p / (1.0 - p)), midpoint) for p in baseline_probabilities
         )
         if fitted < target_sum:
             lower = midpoint
@@ -253,10 +251,11 @@ def profile_log_odds_ratio(
         max_likelihood = conditional_log_likelihood(outcomes, baseline_probabilities, beta_hat)
 
     def objective(beta: float) -> float:
-        return 2.0 * (
-            max_likelihood
-            - conditional_log_likelihood(outcomes, baseline_probabilities, beta)
-        ) - PROFILE_LR_95
+        return (
+            2.0
+            * (max_likelihood - conditional_log_likelihood(outcomes, baseline_probabilities, beta))
+            - PROFILE_LR_95
+        )
 
     def root(left: float, right: float) -> float:
         left_value = objective(left)
@@ -532,15 +531,17 @@ def analyze_threshold(
                 / tissue_eligible[target_tissue],
                 "n_other_eligible_measurements_total": other_eligible,
                 "n_other_core_measurements_total": other_core,
-                "other_core_fraction_total": other_core / other_eligible if other_eligible else math.nan,
+                "other_core_fraction_total": (
+                    other_core / other_eligible if other_eligible else math.nan
+                ),
                 "n_informative_animals": len(entries),
                 "informative_animals": ",".join(entry[0] for entry in entries),
                 "n_target_core_informative": observed,
                 "expected_target_core_conditional_null": expected,
                 "conditional_core_excess": observed - expected,
-                "conditional_observed_to_expected_ratio": observed / expected
-                if expected > 0.0
-                else math.inf,
+                "conditional_observed_to_expected_ratio": (
+                    observed / expected if expected > 0.0 else math.inf
+                ),
                 "conditional_common_odds_ratio": odds_ratio,
                 "conditional_common_odds_ratio_CI95_lower": ci_lower,
                 "conditional_common_odds_ratio_CI95_upper": ci_upper,
@@ -556,9 +557,11 @@ def analyze_threshold(
                 "primary_recurrence_pattern": (
                     "ONE_RECURRENT_TISSUE"
                     if len(gene_recurrent_tissues) == 1
-                    else "MULTIPLE_RECURRENT_TISSUES"
-                    if len(gene_recurrent_tissues) > 1
-                    else "NOT_PRIMARY_RECURRENT"
+                    else (
+                        "MULTIPLE_RECURRENT_TISSUES"
+                        if len(gene_recurrent_tissues) > 1
+                        else "NOT_PRIMARY_RECURRENT"
+                    )
                 ),
                 "is_formally_tissue_enriched_ase": 0,
                 "is_formally_tissue_restricted_recurrence": 0,
@@ -571,7 +574,10 @@ def analyze_threshold(
                 gene_contrast_indices[gene_id].append(index)
 
     contrast_q = bh_values(
-        [float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"]) for index in evaluable_indices]
+        [
+            float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"])
+            for index in evaluable_indices
+        ]
     )
     for index, q_value in zip(evaluable_indices, contrast_q):
         contrast_rows[index]["tissue_enrichment_q_global_BH"] = q_value
@@ -579,11 +585,16 @@ def analyze_threshold(
     omnibus_rows: List[Dict[str, object]] = []
     for gene_id in sorted(gene_contrast_indices):
         indices = gene_contrast_indices[gene_id]
-        p_values = [float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"]) for index in indices]
-        minimum_index = min(indices, key=lambda index: (
-            float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"]),
-            str(contrast_rows[index]["target_tissue"]),
-        ))
+        p_values = [
+            float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"]) for index in indices
+        ]
+        minimum_index = min(
+            indices,
+            key=lambda index: (
+                float(contrast_rows[index]["tissue_enrichment_exact_p_one_sided"]),
+                str(contrast_rows[index]["target_tissue"]),
+            ),
+        )
         omnibus_p = min(1.0, min(p_values) * len(p_values))
         source = contrast_rows[indices[0]]
         omnibus_rows.append(
@@ -602,9 +613,7 @@ def analyze_threshold(
                 "n_primary_recurrent_tissues_for_gene": source[
                     "n_primary_recurrent_tissues_for_gene"
                 ],
-                "primary_recurrent_tissues_for_gene": source[
-                    "primary_recurrent_tissues_for_gene"
-                ],
+                "primary_recurrent_tissues_for_gene": source["primary_recurrent_tissues_for_gene"],
                 "n_formally_tissue_enriched_tissues": 0,
                 "formally_tissue_enriched_tissues": "",
             }
@@ -699,7 +708,9 @@ def analyze_threshold(
             status.update(
                 {
                     "specificity_test_status": (
-                        "TESTED" if int(contrast["is_contrast_evaluable"]) else "NOT_EVALUABLE_MIN_INFORMATIVE_ANIMALS"
+                        "TESTED"
+                        if int(contrast["is_contrast_evaluable"])
+                        else "NOT_EVALUABLE_MIN_INFORMATIVE_ANIMALS"
                     ),
                     **{
                         field: contrast[field]
@@ -722,7 +733,9 @@ def analyze_threshold(
     prefix = f"threshold_{threshold}"
     write_tsv(out_dir / f"{prefix}_tissue_contrasts_all.tsv.gz", ALL_CONTRAST_FIELDS, contrast_rows)
     write_tsv(out_dir / f"{prefix}_gene_omnibus.tsv.gz", OMNIBUS_FIELDS, omnibus_rows)
-    write_tsv(out_dir / f"{prefix}_formal_tissue_enriched_ase.tsv", ALL_CONTRAST_FIELDS, formal_rows)
+    write_tsv(
+        out_dir / f"{prefix}_formal_tissue_enriched_ase.tsv", ALL_CONTRAST_FIELDS, formal_rows
+    )
     write_tsv(
         out_dir / f"{prefix}_recurrent_specificity_status.tsv",
         RECURRENT_STATUS_FIELDS,
@@ -731,9 +744,7 @@ def analyze_threshold(
 
     tested_contrasts = [row for row in contrast_rows if int(row["is_contrast_evaluable"])]
     tested_recurrent = [
-        row
-        for row in recurrent_status
-        if row["specificity_test_status"] == "TESTED"
+        row for row in recurrent_status if row["specificity_test_status"] == "TESTED"
     ]
     formal_genes = {str(row["gene_id"]) for row in formal_rows}
     summary: Dict[str, object] = {
@@ -817,7 +828,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     extras_by_threshold: Dict[int, Dict[str, object]] = {}
     source_files = []
     for threshold in thresholds:
-        measurement_path = args.recurrence_dir / f"threshold_{threshold}_eligible_gene_measurements.tsv.gz"
+        measurement_path = (
+            args.recurrence_dir / f"threshold_{threshold}_eligible_gene_measurements.tsv.gz"
+        )
         burden_path = args.recurrence_dir / f"threshold_{threshold}_sample_tissue_burden.tsv"
         recurrent_path = args.recurrence_dir / f"threshold_{threshold}_statistically_recurrent.tsv"
         for path in (measurement_path, burden_path, recurrent_path):
@@ -867,11 +880,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "THRESHOLD_15_20_30"
                     if key in formal_keys_by_threshold.get(20, set())
                     and key in formal_keys_by_threshold.get(30, set())
-                    else "THRESHOLD_15_20"
-                    if key in formal_keys_by_threshold.get(20, set())
-                    else "THRESHOLD_15_30"
-                    if key in formal_keys_by_threshold.get(30, set())
-                    else "THRESHOLD_15_ONLY"
+                    else (
+                        "THRESHOLD_15_20"
+                        if key in formal_keys_by_threshold.get(20, set())
+                        else (
+                            "THRESHOLD_15_30"
+                            if key in formal_keys_by_threshold.get(30, set())
+                            else "THRESHOLD_15_ONLY"
+                        )
+                    )
                 ),
             }
         )
@@ -884,7 +901,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     metadata = {
         "status": "PASS",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "method": {
             "outcome": "binary core ASE among high-confidence-eligible animal-tissue-gene measurements",
             "repeated_measure_control": (

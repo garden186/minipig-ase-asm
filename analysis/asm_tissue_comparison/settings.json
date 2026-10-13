@@ -1,0 +1,30 @@
+{
+  "minimum_paired_N": 2,
+  "r": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "eligibility": "aligned_paired_anchor_ps",
+  "minimum_haplotype_depth": 3,
+  "minimum_total_depth": 10,
+  "sign_filter": false,
+  "individual_test": "two_sided_exact_equal_OR",
+  "probability_ordering": true,
+  "support": "full_fixed_margin",
+  "pseudocount": 0,
+  "mid_p": false,
+  "recurrence": "fisher_partial_conjunction",
+  "primary_q": "BH",
+  "sensitivity_q": "BY",
+  "family": "tissue_pair_by_r",
+  "effect": "ALT_minus_REF_first_minus_second",
+  "missing": "unavailable",
+  "pool_phase_sets": false
+}

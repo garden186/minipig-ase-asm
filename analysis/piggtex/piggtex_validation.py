@@ -34,8 +34,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, MutableMapping, Sequence, Tuple
 
-
-VERSION = 'piggtex'
+ANALYSIS_ID = "piggtex"
 THRESHOLDS = (15, 20, 30)
 TISSUE_MAP = {
     "Backfat": "Adipose",
@@ -89,9 +88,7 @@ def write_tsv(
     else:
         handle = path.open("w", encoding="utf-8", newline="")
     try:
-        writer = csv.DictWriter(
-            handle, fieldnames=fields, delimiter="\t", lineterminator="\n"
-        )
+        writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
         writer.writeheader()
         for source in rows:
             row = {}
@@ -216,15 +213,11 @@ def stratified_exact_tail(strata: Sequence[Tuple[int, int, int, int]]) -> float:
         if draws == 0:
             continue
         observed_total += a
-        distribution = convolve(
-            distribution, hypergeom_pmf(population, successes, draws)
-        )
+        distribution = convolve(distribution, hypergeom_pmf(population, successes, draws))
     return min(
         1.0,
         math.fsum(
-            probability
-            for count, probability in distribution.items()
-            if count >= observed_total
+            probability for count, probability in distribution.items() if count >= observed_total
         ),
     )
 
@@ -771,11 +764,11 @@ def formal_external_rows(
         support = (
             "MATCHED_ASE_AND_CIS_EGENE"
             if ase_observed and is_egene
-            else "MATCHED_ASE_ONLY"
-            if ase_observed
-            else "CIS_EGENE_ONLY"
-            if is_egene
-            else "NO_EXTERNAL_SUPPORT_OBSERVED"
+            else (
+                "MATCHED_ASE_ONLY"
+                if ase_observed
+                else "CIS_EGENE_ONLY" if is_egene else "NO_EXTERNAL_SUPPORT_OBSERVED"
+            )
         )
         effects = list(ase.get("formal_effects", []))
         totals = list(ase.get("formal_totals", []))
@@ -797,7 +790,9 @@ def formal_external_rows(
                 "piggtex_ase_observed_significant_only": int(ase_observed),
                 "piggtex_ase_significant_samples": len(ase.get("formal_samples", set())),
                 "piggtex_ase_breeds": len(ase.get("formal_breeds", set())),
-                "piggtex_ase_median_abs_log2_aFC": statistics.median(effects) if effects else math.nan,
+                "piggtex_ase_median_abs_log2_aFC": (
+                    statistics.median(effects) if effects else math.nan
+                ),
                 "piggtex_ase_median_total_count": statistics.median(totals) if totals else math.nan,
                 "piggtex_eqtl_tested": int(eqtl is not None),
                 "piggtex_is_eGene": int(is_egene),
@@ -852,8 +847,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         external_gene_ids,
     )
     mapping_status = {
-        str(row["internal_gene_id"]): str(row["mapping_status"])
-        for row in crosswalk_rows
+        str(row["internal_gene_id"]): str(row["mapping_status"]) for row in crosswalk_rows
     }
 
     formal_external_keys = {
@@ -874,19 +868,37 @@ def main(argv: Sequence[str] | None = None) -> int:
     all_strata = []
     all_enrichment = []
     source_files = [
-        {"role": "formal_tissue_enrichment", "path": str(formal_path.resolve()), "sha256": sha256(formal_path)},
-        {"role": "piggtex_ase_significant_only", "path": str(ase_path.resolve()), "sha256": sha256(ase_path)},
+        {
+            "role": "formal_tissue_enrichment",
+            "path": str(formal_path.resolve()),
+            "sha256": sha256(formal_path),
+        },
+        {
+            "role": "piggtex_ase_significant_only",
+            "path": str(ase_path.resolve()),
+            "sha256": sha256(ase_path),
+        },
         {"role": "piggtex_gtf_v100", "path": str(gtf_path.resolve()), "sha256": sha256(gtf_path)},
     ]
 
     print("[4/6] tissue-stratified enrichment at thresholds 15/20/30", flush=True)
     for threshold in THRESHOLDS:
         recurrence_path = args.recurrence_dir / f"threshold_{threshold}_recurrence_all.tsv.gz"
-        opportunity_path = args.recurrence_dir / f"threshold_{threshold}_eligible_gene_measurements.tsv.gz"
+        opportunity_path = (
+            args.recurrence_dir / f"threshold_{threshold}_eligible_gene_measurements.tsv.gz"
+        )
         source_files.extend(
             [
-                {"role": f"threshold_{threshold}_recurrence", "path": str(recurrence_path.resolve()), "sha256": sha256(recurrence_path)},
-                {"role": f"threshold_{threshold}_opportunity", "path": str(opportunity_path.resolve()), "sha256": sha256(opportunity_path)},
+                {
+                    "role": f"threshold_{threshold}_recurrence",
+                    "path": str(recurrence_path.resolve()),
+                    "sha256": sha256(recurrence_path),
+                },
+                {
+                    "role": f"threshold_{threshold}_opportunity",
+                    "path": str(opportunity_path.resolve()),
+                    "sha256": sha256(opportunity_path),
+                },
             ]
         )
         recurrence_rows = load_recurrence_rows(recurrence_path)
@@ -908,7 +920,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         if threshold == 15:
             matched_path = args.recurrence_dir / "opportunity_matched_recurrence_all.tsv.gz"
             source_files.append(
-                {"role": "opportunity_matched_recurrence_labels", "path": str(matched_path.resolve()), "sha256": sha256(matched_path)}
+                {
+                    "role": "opportunity_matched_recurrence_labels",
+                    "path": str(matched_path.resolve()),
+                    "sha256": sha256(matched_path),
+                }
             )
             matched_labels = load_matched_labels(matched_path)
             universe, strata, enrichment = analyze_mode(
@@ -927,9 +943,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             all_enrichment.extend(enrichment)
 
     print("[5/6] writing candidate and cohort validation tables", flush=True)
-    formal_rows = formal_external_rows(
-        formal, mapping, mapping_status, eqtl_tables, ase_summary
-    )
+    formal_rows = formal_external_rows(formal, mapping, mapping_status, eqtl_tables, ase_summary)
     write_tsv(
         args.out_dir / "tissue_mapping.tsv",
         ["internal_tissue", "piggtex_tissue", "mapping_role"],
@@ -972,9 +986,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
 
     mapping_counts = Counter(row["mapping_status"] for row in crosswalk_rows)
-    primary_15 = [
-        row for row in all_enrichment if row["analysis_mode"] == "PRIMARY_THRESHOLD_15"
-    ]
+    primary_15 = [row for row in all_enrichment if row["analysis_mode"] == "PRIMARY_THRESHOLD_15"]
     both_pass = [
         row
         for row in primary_15
@@ -983,7 +995,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     candidate_counts = Counter(row["external_support_class"] for row in formal_rows)
     qc = {
         "status": "PASS",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "definitions": {
             "piggtex_ase": "descriptive significant-only matched-tissue support; absence is not non-ASE",
             "formal_external_test": "one-sided enrichment of PigGTEx cis-eGenes among internal recurrent versus eligible non-recurrent gene-tissue hypotheses",
@@ -1026,9 +1038,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             {
                 "status": "PASS",
                 "formal_support": dict(candidate_counts),
-                "threshold15_both_pass_tissues": [
-                    row["internal_tissue"] for row in both_pass
-                ],
+                "threshold15_both_pass_tissues": [row["internal_tissue"] for row in both_pass],
             },
             sort_keys=True,
         ),

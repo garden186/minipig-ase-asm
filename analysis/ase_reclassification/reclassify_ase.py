@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reclassify validated ASE fragment-count block results without recounting reads.
 
-ASE classified-ASE deliberately keeps the fragment-count measurement and multiple-testing
+classified ASE deliberately keeps the fragment-count measurement and multiple-testing
 universe fixed.  It separates statistical signal, imbalance shape, SNP
 support, local-phase confidence, assignment dependency, and technical QC,
 then derives transparent reporting classes from those independent axes.
@@ -22,8 +22,7 @@ import tempfile
 from collections import Counter
 from pathlib import Path
 
-
-VERSION = 'ase_reclassification'
+ANALYSIS_ID = "ase_reclassification"
 
 DEFAULT_THRESHOLDS = {
     "fdr": 0.05,
@@ -235,9 +234,7 @@ def resolve_input_file(input_dir, explicit, names, required=True):
                 return path
     if required:
         raise FileNotFoundError(
-            "none of the required inputs were found: {}".format(
-                ", ".join(names)
-            )
+            "none of the required inputs were found: {}".format(", ".join(names))
         )
     return None
 
@@ -247,9 +244,7 @@ def prepare_output_dir(path, force=False):
     if path.exists() and any(path.iterdir()):
         if not force:
             raise RuntimeError(
-                "output directory is not empty; use --force to replace it: {}".format(
-                    path
-                )
+                "output directory is not empty; use --force to replace it: {}".format(path)
             )
         shutil.rmtree(str(path))
     path.mkdir(parents=True, exist_ok=True)
@@ -263,19 +258,15 @@ def validate_source(validation_path, qc_path, allow_unvalidated=False):
     qc = None
     if validation_path is None:
         if not allow_unvalidated:
-            raise RuntimeError(
-                "ase_counted_validation.json is required in production mode"
-            )
+            raise RuntimeError("ase_counted_validation.json is required in production mode")
         warnings.append("SOURCE_VALIDATION_NOT_PROVIDED")
     else:
         validation = load_json(validation_path)
         if validation.get("status") != "PASS" or validation.get("n_errors", 0) != 0:
             raise RuntimeError(
-                "source ASE fragment-count validation did not PASS: {}".format(
-                    validation_path
-                )
+                "source ASE fragment-count validation did not PASS: {}".format(validation_path)
             )
-        if str(validation.get("version")) != "ase_fragment_counts":
+        if str(validation.get("analysis", validation.get("version"))) != "ase_fragment_counts":
             warnings.append("SOURCE_VALIDATION_SCHEMA_NOT_FRAGMENT_COUNTS")
     if qc_path is None:
         if not allow_unvalidated:
@@ -303,9 +294,7 @@ def load_assignment_audit(path):
         missing = required.difference(reader.fieldnames or [])
         if missing:
             raise ValueError(
-                "assignment audit missing fields: {}".format(
-                    ",".join(sorted(missing))
-                )
+                "assignment audit missing fields: {}".format(",".join(sorted(missing)))
             )
         for row in reader:
             measurement_id = row["measurement_id"]
@@ -317,9 +306,7 @@ def load_assignment_audit(path):
             )
             previous = result.get(measurement_id)
             if previous is not None and previous != value:
-                warnings.append(
-                    "ASSIGNMENT_AUDIT_CONFLICT:{}".format(measurement_id)
-                )
+                warnings.append("ASSIGNMENT_AUDIT_CONFLICT:{}".format(measurement_id))
             result[measurement_id] = value
     return result, warnings
 
@@ -359,10 +346,7 @@ def statistical_signal(row, thresholds):
         if effect >= thresholds["moderate_major_fraction"]:
             return "FDR_MODERATE_EFFECT"
         return "FDR_SMALL_EFFECT"
-    if (
-        qvalue <= thresholds["near_fdr"]
-        and effect >= thresholds["strong_major_fraction"]
-    ):
+    if qvalue <= thresholds["near_fdr"] and effect >= thresholds["strong_major_fraction"]:
         return "NEAR_FDR_STRONG_EFFECT"
     if (
         pvalue is not None
@@ -410,9 +394,7 @@ def technical_qc(row, thresholds):
 def asm_readiness(row):
     status = row.get("wgs_phase_status", "")
     phase_set = row.get("wgs_phase_set", "").strip()
-    phase_set_present = bool(phase_set) and phase_set.upper() not in {
-        "NA", "NAN", "NONE", "."
-    }
+    phase_set_present = bool(phase_set) and phase_set.upper() not in {"NA", "NAN", "NONE", "."}
     if status == "CONCORDANT" and phase_set_present:
         return "READY_SINGLE_WGS_PS"
     if status == "MULTI_PHASE_SET":
@@ -474,9 +456,7 @@ def reclassification_reasons(row, signal, shape, support, phase, technical_reaso
         reasons.append(support)
     if phase and phase != "PASS":
         reasons.append("LOCAL_PHASE_{}".format(phase))
-    old_reasons = set(
-        item for item in row.get("exclusion_reasons", "").split(",") if item
-    )
+    old_reasons = set(item for item in row.get("exclusion_reasons", "").split(",") if item)
     if old_reasons.intersection({"EXTREME_MINOR", "LOW_MINOR"}):
         reasons.append("FRAGMENT_COUNT_MINOR_HARD_FAILURE_REMOVED")
     return ",".join(dict.fromkeys(reasons))
@@ -493,9 +473,7 @@ def validate_numeric_invariants(row, row_number):
     observed = parse_float(row.get("major_haplotype_fraction"))
     expected = max(a_count, b_count) / float(total) if total else None
     if observed is not None and expected is not None and abs(observed - expected) > 1e-9:
-        raise ValueError(
-            "row {} has inconsistent major_haplotype_fraction".format(row_number)
-        )
+        raise ValueError("row {} has inconsistent major_haplotype_fraction".format(row_number))
 
 
 def classify_row(row, thresholds, assignment_index):
@@ -522,9 +500,7 @@ def classify_row(row, thresholds, assignment_index):
             "classified_asm_integration_readiness": asm_readiness(row),
             "classified_ase_direction": ase_direction(row),
             "classified_evidence_class": evidence,
-            "classified_is_fdr_strong_signal": bool_text(
-                signal == "FDR_STRONG_EFFECT"
-            ),
+            "classified_is_fdr_strong_signal": bool_text(signal == "FDR_STRONG_EFFECT"),
             "classified_is_core_ase": bool_text(evidence in CORE_CLASSES),
             "classified_reclassification_reasons": reclassification_reasons(
                 row,
@@ -544,8 +520,7 @@ def create_gene_db(path):
     connection.execute("PRAGMA journal_mode=OFF")
     connection.execute("PRAGMA synchronous=OFF")
     connection.execute("PRAGMA temp_store=FILE")
-    connection.execute(
-        """
+    connection.execute("""
         CREATE TABLE block_gene (
             sample TEXT NOT NULL,
             tissue TEXT NOT NULL,
@@ -568,8 +543,7 @@ def create_gene_db(path):
             ase_direction TEXT,
             technical_status TEXT
         )
-        """
-    )
+        """)
     return connection
 
 
@@ -625,9 +599,7 @@ def gene_status(rows):
         return "ASE_GENE_CORE"
     if "ASE_SUPPORTED_SINGLE_SNP" in classes:
         return "ASE_GENE_SUPPORTED_SINGLE_SNP"
-    if classes.intersection(
-        {"ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED", "ASE_SUPPORT_UNRESOLVED"}
-    ):
+    if classes.intersection({"ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED", "ASE_SUPPORT_UNRESOLVED"}):
         return "ASE_GENE_PHASE_OR_SUPPORT_UNRESOLVED"
     if "ASE_FDR_MODERATE_EFFECT" in classes:
         return "ASE_GENE_FDR_MODERATE"
@@ -648,12 +620,8 @@ def summarize_gene(rows):
     shape_counts = Counter(row[13] for row in rows)
     blocks = sorted({row[5] for row in rows if (row[7] or 0) > 0})
     core_blocks = sorted({row[5] for row in rows if row[11] in CORE_CLASSES})
-    supported_blocks = sorted(
-        {row[5] for row in rows if row[11] in SUPPORTED_CLASSES}
-    )
-    sensitivity_blocks = sorted(
-        {row[5] for row in rows if row[11] in SENSITIVITY_CLASSES}
-    )
+    supported_blocks = sorted({row[5] for row in rows if row[11] in SUPPORTED_CLASSES})
+    sensitivity_blocks = sorted({row[5] for row in rows if row[11] in SENSITIVITY_CLASSES})
     top = min(rows, key=top_sort_key)
     phase_scope = "SINGLE_BLOCK" if len(blocks) <= 1 else "MULTI_BLOCK_UNRESOLVED"
     return {
@@ -664,27 +632,19 @@ def summarize_gene(rows):
         "gene_biotype": first[4],
         "n_informative_haplotype_blocks": len(blocks),
         "n_testable_haplotype_blocks": sum(row[10] == "TESTED" for row in rows),
-        "n_fdr_strong_blocks": sum(
-            row[12] == "FDR_STRONG_EFFECT" for row in rows
-        ),
+        "n_fdr_strong_blocks": sum(row[12] == "FDR_STRONG_EFFECT" for row in rows),
         "n_core_robust_blocks": counts["ASE_CORE_ROBUST"],
         "n_core_supported_blocks": counts["ASE_CORE_SUPPORTED"],
         "n_supported_single_snp_blocks": counts["ASE_SUPPORTED_SINGLE_SNP"],
-        "n_phase_unresolved_blocks": counts[
-            "ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED"
-        ],
+        "n_phase_unresolved_blocks": counts["ASE_LOCAL_SIGNAL_PHASE_UNRESOLVED"],
         "n_support_unresolved_blocks": counts["ASE_SUPPORT_UNRESOLVED"],
         "n_fdr_moderate_effect_blocks": counts["ASE_FDR_MODERATE_EFFECT"],
         "n_near_fdr_blocks": counts["ASE_NEAR_FDR"],
         "n_nominal_directional_blocks": counts["ASE_NOMINAL_DIRECTIONAL"],
-        "n_statistical_small_effect_blocks": counts[
-            "ASE_STATISTICAL_SMALL_EFFECT"
-        ],
+        "n_statistical_small_effect_blocks": counts["ASE_STATISTICAL_SMALL_EFFECT"],
         "n_monoallelic_like_blocks": shape_counts["MONOALLELIC_LIKE"],
         "n_low_minor_blocks": shape_counts["LOW_MINOR"],
-        "n_two_haplotype_supported_blocks": shape_counts[
-            "TWO_HAPLOTYPE_SUPPORTED"
-        ],
+        "n_two_haplotype_supported_blocks": shape_counts["TWO_HAPLOTYPE_SUPPORTED"],
         "gene_phase_scope": phase_scope,
         "gene_ase_status_classified": gene_status(rows),
         "top_haplotype_block_id": top[5],
@@ -722,15 +682,15 @@ def write_gene_outputs(connection, output_dir):
     sensitivity_path = output_dir / "ase_sensitivity_genes.tsv"
     status_counts = Counter()
     n_genes = 0
-    with open(summary_path, "w", encoding="utf-8", newline="") as summary_handle, \
-            open(core_path, "w", encoding="utf-8", newline="") as core_handle, \
-            open(supported_path, "w", encoding="utf-8", newline="") as supported_handle, \
-            open(sensitivity_path, "w", encoding="utf-8", newline="") as sensitivity_handle:
+    with (
+        open(summary_path, "w", encoding="utf-8", newline="") as summary_handle,
+        open(core_path, "w", encoding="utf-8", newline="") as core_handle,
+        open(supported_path, "w", encoding="utf-8", newline="") as supported_handle,
+        open(sensitivity_path, "w", encoding="utf-8", newline="") as sensitivity_handle,
+    ):
         summary_writer = csv.DictWriter(summary_handle, fieldnames=GENE_FIELDS, delimiter="\t")
         core_writer = csv.DictWriter(core_handle, fieldnames=GENE_FIELDS, delimiter="\t")
-        supported_writer = csv.DictWriter(
-            supported_handle, fieldnames=GENE_FIELDS, delimiter="\t"
-        )
+        supported_writer = csv.DictWriter(supported_handle, fieldnames=GENE_FIELDS, delimiter="\t")
         sensitivity_writer = csv.DictWriter(
             sensitivity_handle, fieldnames=GENE_FIELDS, delimiter="\t"
         )
@@ -815,7 +775,10 @@ def run_reclassification(args):
     assignment_path = resolve_input_file(
         args.input_dir,
         args.assignment_audit,
-        [os.path.join("audit", "ase_measurement_unique.tsv"), os.path.join("audit", "ase_measurement_unique.tsv.gz")],
+        [
+            os.path.join("audit", "ase_measurement_unique.tsv"),
+            os.path.join("audit", "ase_measurement_unique.tsv.gz"),
+        ],
         required=False,
     )
     source_validation, source_qc, warnings = validate_source(
@@ -849,21 +812,19 @@ def run_reclassification(args):
     n_rows = 0
 
     try:
-        with open_text(block_path, "rt") as input_handle, \
-                open(block_output, "w", encoding="utf-8", newline="") as block_handle, \
-                open(core_output, "w", encoding="utf-8", newline="") as core_handle, \
-                open(supported_output, "w", encoding="utf-8", newline="") as supported_handle, \
-                open(sensitivity_output, "w", encoding="utf-8", newline="") as sensitivity_handle, \
-                open(transition_output, "w", encoding="utf-8", newline="") as transition_handle:
+        with (
+            open_text(block_path, "rt") as input_handle,
+            open(block_output, "w", encoding="utf-8", newline="") as block_handle,
+            open(core_output, "w", encoding="utf-8", newline="") as core_handle,
+            open(supported_output, "w", encoding="utf-8", newline="") as supported_handle,
+            open(sensitivity_output, "w", encoding="utf-8", newline="") as sensitivity_handle,
+            open(transition_output, "w", encoding="utf-8", newline="") as transition_handle,
+        ):
             reader = csv.DictReader(input_handle, delimiter="\t")
             source_fields = reader.fieldnames or []
             missing = REQUIRED_BLOCK_FIELDS.difference(source_fields)
             if missing:
-                raise ValueError(
-                    "block input missing fields: {}".format(
-                        ",".join(sorted(missing))
-                    )
-                )
+                raise ValueError("block input missing fields: {}".format(",".join(sorted(missing))))
             output_fields = list(source_fields)
             for field in CLASSIFIED_FIELDS:
                 if field not in output_fields:
@@ -871,8 +832,12 @@ def run_reclassification(args):
             writers = {
                 "all": csv.DictWriter(block_handle, fieldnames=output_fields, delimiter="\t"),
                 "core": csv.DictWriter(core_handle, fieldnames=output_fields, delimiter="\t"),
-                "supported": csv.DictWriter(supported_handle, fieldnames=output_fields, delimiter="\t"),
-                "sensitivity": csv.DictWriter(sensitivity_handle, fieldnames=output_fields, delimiter="\t"),
+                "supported": csv.DictWriter(
+                    supported_handle, fieldnames=output_fields, delimiter="\t"
+                ),
+                "sensitivity": csv.DictWriter(
+                    sensitivity_handle, fieldnames=output_fields, delimiter="\t"
+                ),
             }
             transition_writer = csv.DictWriter(
                 transition_handle, fieldnames=TRANSITION_FIELDS, delimiter="\t"
@@ -913,15 +878,9 @@ def run_reclassification(args):
                         "classified_statistical_signal": classified[
                             "classified_statistical_signal"
                         ],
-                        "classified_imbalance_shape": classified[
-                            "classified_imbalance_shape"
-                        ],
-                        "classified_snp_support_class": classified[
-                            "classified_snp_support_class"
-                        ],
-                        "classified_phase_qc_status": classified[
-                            "classified_phase_qc_status"
-                        ],
+                        "classified_imbalance_shape": classified["classified_imbalance_shape"],
+                        "classified_snp_support_class": classified["classified_snp_support_class"],
+                        "classified_phase_qc_status": classified["classified_phase_qc_status"],
                         "classified_technical_qc_status": classified[
                             "classified_technical_qc_status"
                         ],
@@ -969,7 +928,7 @@ def run_reclassification(args):
             writer.writerow([old_class, new_class, count])
 
     metadata = {
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "started_at": started_at,
         "completed_at": utc_now(),
         "source_block_results": str(block_path.resolve()),
@@ -1005,7 +964,7 @@ def run_reclassification(args):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        description="Reclassify ASE fragment-count block results as ASE classified-ASE"
+        description="Reclassify ASE fragment-count block results as classified ASE"
     )
     parser.add_argument("--input-dir")
     parser.add_argument("--block-results")
@@ -1021,9 +980,7 @@ def build_parser():
     parser.add_argument("--nominal-p", type=float, default=0.05)
     parser.add_argument("--strong-major-fraction", type=float, default=0.65)
     parser.add_argument("--moderate-major-fraction", type=float, default=0.60)
-    parser.add_argument(
-        "--max-fragment-hap-conflict-fraction", type=float, default=0.10
-    )
+    parser.add_argument("--max-fragment-hap-conflict-fraction", type=float, default=0.10)
     return parser
 
 

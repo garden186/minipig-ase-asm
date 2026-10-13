@@ -12,8 +12,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, Sequence, Set, Tuple
 
-
-VERSION = 'ase_tissue_enrichment'
+ANALYSIS_ID = "ase_tissue_enrichment"
 
 
 def open_text(path: Path):
@@ -51,15 +50,17 @@ def main() -> int:
     errors: List[str] = []
     checks: Dict[str, object] = {}
     metadata = json.loads((args.out_dir / "analysis_metadata.json").read_text(encoding="utf-8"))
-    if metadata.get("status") != "PASS" or metadata.get("version") != VERSION:
+    if (
+        metadata.get("status") != "PASS"
+        or metadata.get("analysis", metadata.get("version")) != ANALYSIS_ID
+    ):
         errors.append("analysis metadata status/version mismatch")
     parameters = metadata.get("parameters", {})
     fdr = float(parameters.get("fdr", 0.05))
     min_animals = int(parameters.get("min_informative_animals", 3))
     min_target_core = int(parameters.get("min_informative_target_core", 2))
     summary_rows = {
-        int(row["fragment_threshold"]): row
-        for row in rows(args.out_dir / "threshold_summary.tsv")
+        int(row["fragment_threshold"]): row for row in rows(args.out_dir / "threshold_summary.tsv")
     }
 
     for threshold in (15, 20, 30):
@@ -153,8 +154,7 @@ def main() -> int:
             "n_formal_tissue_enriched_recurrent_pairs": len(formal_rows),
             "n_formal_tissue_enriched_genes": len({row["gene_id"] for row in formal_rows}),
             "n_formal_tissue_restricted_recurrence_pairs": sum(
-                row["is_formally_tissue_restricted_recurrence"] == "1"
-                for row in formal_rows
+                row["is_formally_tissue_restricted_recurrence"] == "1" for row in formal_rows
             ),
         }
         for field, value in observed.items():
@@ -172,7 +172,7 @@ def main() -> int:
 
     report = {
         "status": "PASS" if not errors else "FAIL",
-        "version": VERSION,
+        "analysis": ANALYSIS_ID,
         "checks": checks,
         "errors": errors,
     }

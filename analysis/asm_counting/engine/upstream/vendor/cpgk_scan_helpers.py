@@ -25,7 +25,10 @@ def load_core(path: Path):
 
     def managed_stream(command: Sequence[str]) -> Iterator[str]:
         process = subprocess.Popen(
-            list(command), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            list(command),
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             bufsize=1024 * 1024,
         )
         assert process.stdout is not None
@@ -61,7 +64,12 @@ def called_nonreference_allele_indices(gt_text: str) -> list[int]:
 
 
 def disrupted_reference_cpgs(
-    *, core, bcftools: str, genotype_vcf: str, sample: str, region,
+    *,
+    core,
+    bcftools: str,
+    genotype_vcf: str,
+    sample: str,
+    region,
     cpg_positions0: Sequence[int],
 ) -> tuple[bytearray, dict[str, int]]:
     samples = core.read_vcf_samples(genotype_vcf)
@@ -102,7 +110,12 @@ def disrupted_reference_cpgs(
 
 
 def sam_record_lines(
-    *, core, samtools: str, bam: str, region, threads: int,
+    *,
+    core,
+    samtools: str,
+    bam: str,
+    region,
+    threads: int,
 ) -> Iterator[str]:
     command = [samtools, "view", "-@", str(threads), bam, region.samtools]
     for line in core.stream_command(command):
@@ -111,7 +124,11 @@ def sam_record_lines(
 
 
 def stream_record_groups(
-    *, core, records: Iterable[object], min_mapq: int, pair_wait_bp: int,
+    *,
+    core,
+    records: Iterable[object],
+    min_mapq: int,
+    pair_wait_bp: int,
     qc: MutableMapping[str, int],
 ) -> Iterator[tuple[object, ...]]:
     active: dict[str, tuple[object, int, int]] = {}

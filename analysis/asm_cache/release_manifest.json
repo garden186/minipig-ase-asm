@@ -1,8 +1,0 @@
-{
-  "version": "current",
-  "sha256": {
-    "cache.py": "84d1b76c089e1e7b2fb32de1f7a9ccd221268a84186bfbd16bb68d9534c6b55b",
-    "common.py": "c8b4ef899aa4c0531bbf70b5daaedf24771dc649fa6cd72bed3ff1355418f6e2",
-    "run.py": "67db51feefc0336b7438a2d83b5905dcecd91dca0344b65a18995955f7f276f3"
-  }
-}
